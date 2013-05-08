@@ -545,7 +545,7 @@
 
 \def\ppgcc@makedocdescription{%
   \begin{minipage}{\ppgcc@docdescriptionwidth}
-    \ppgcc@docdescription
+    %\ppgcc@docdescription
   \end{minipage}%
 }
 

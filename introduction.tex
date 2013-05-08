@@ -1,0 +1,58 @@
+% !TEX root = pfc.tex
+
+O tráfego urbano brasileiro representa um fenômeno de grande importância socioeconômica, principalmente nos grandes centros urbanos onde o deslocamento de um ponto a outro, no menor tempo possível, é uma necessidade cotidiana. Projetar sistemas viários que absorvam toda a frota veicular desses grandes centros e minimizam os congestionamentos exige ferramentas cujo desenvolvimento ainda representa objeto de estudo para diversos grupos de pesquisadores, que por meio de métodos matemáticos e computacionais, vêm contribuindo para o desenvolvimento da área.
+
+Vários fatores interferem na qualidade do tráfego. Um deles é o crescente número de veículos nos centros urbanos. Segundo \citeauthor{fenabrave:2013:online}, Federação Nacional da Distribuição de Veículos Automotores, as vendas de veículos cresceram cerca de 381\% entre janeiro de 2003 e janeiro de 2011, como mostra a Figura \ref{fig:fenabreve}. A facilitação ao crédito pessoal, os longos financiamentos oferecidos pelas concessionárias e a redução do IPI (Imposto sobre Produtos Industrializados) incentivaram o consumo de carros no Brasil, o que explica essa tendência ascendente no número de automóveis.
+
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[scale=0.8]{imgs/emplacamentos.png}
+  \end{center}
+  \caption{Crescimento mensal no número de emplacamentos de veículos comerciais leves no período 1997 a 2011. \cite{fenabrave:2013:online}} 
+  \label{fig:fenabreve}
+\end{figure}
+
+A falta de planejamento urbano e o crescente aumento de veículos, a péssima qualidade do transporte público no Brasil e o excessivo número de acidentes de trânsito são umas das principais causas de congestionamentos. Nos últimos anos, milhões de pessoas perderam tempo e dinheiro devido a problemas relacionados ao trânsito. Diante desse fato, a administração pública deve priorizar o assunto mobilidade, como tem sido feito nas principais regiões metropolitanas brasileiras. Através de pesquisas pode-se levantar dados que contribuem para análise e simulação do tráfego. Informações como fluxo de veículos, volume de tráfego e matriz O/D (origem/destino) são de grande relevância no estudo dessa área, formando uma base teórica sólida para ser utilizada na resolução de problemas dessa natureza.
+
+Na área de simulação do tráfego existem várias empresas atuantes: \cite{vissim:2013:online} é atualmente a líder mundial de mercado em simulação de fluxo de tráfego multi-modal de microregiões; outras companhias \citep{arcady:2013:online, citilabs:2013:online} também fornecem produtos com capacidades de predição, simulação de congestionamentos, atrasos, acidentes, além de gerar relatórios detalhados e animações 2D e 3D. \cite{SUMO2011} se diferencia das outras por ser uma alternativa \textit{open source} e gratuita para simulação do tráfego.
+
+Para que as simulações desses sistemas aproximem o comportamento do tráfego no mundo real é necessário que uma das entradas de dados seja uma matriz de demandas origem-destino, a qual indica a quantidade de pessoas ou veículos trafegando entre pares de pontos origem-destino de uma rota. \citep{iran:2003:masther} A geração dessa matriz é realizada pela contagem de veículos, a qual pode ser classificada como volumétrica, obtendo apenas o número de veículos que transitaram em determinado trecho num intervalo de tempo definido, ou classificatória, a qual é mais detalhada e complexa de ser realizada pois discrimina os veículos em classes de tamanho como caminhão, ônibus, carro de passeio, entre outros.
+
+Existem métodos manuais e automáticos para realização das contagens volumétrica e classificatória, que normalmente são de alto custo financeiro. De acordo com a forma de instalação dos equipamentos de contagem, tais métodos podem ser invasivos ou não-invasivos. Os métodos invasivos necessitam de instalações junto ou sob a camada asfáltica. Já os métodos não-invasivos normalmente utilizam câmeras, sensores ou instalações sobre o solo.
+
+Este trabalho tem como propósito desenvolver um método computacional de simples implementação, configuração, instalação e operação, capaz de realizar a contagem volumétrica de veículos de forma não-invasiva e que possa ser utilizado como uma alternativa de baixo custo financeiro, se comparado aos sitemas de contagem volumétrica convencionais.
+
+\section{Objetivos} % (fold)
+\label{sec:objetivos}
+
+O objetivo principal do trabalho é desenvolver um sistema de visão computacional que auxilie na análise das condições do tráfego urbano. Sendo assim, os objetivos específicos são:
+\begin{itemize}
+  \item Entender a utilização de um sistema de visão para problemas de transporte;
+  \item Realizar a contagem volumétrica dos veículos através de um método não-invasivo;
+  \item Analisar as condições do tráfego urbano através de imagens cedidas pela BHTRANS e coletadas por uma câmera pessoal, comparando resultados;
+  \item Desenvolver um sistema de baixo custo e simples implementação se comparado a outros já existentes.
+\end{itemize}
+
+% section objetivos (end)
+
+\section{Apresentação da Empresa} % (fold)
+\label{sec:apresenta_o_da_empresa}
+
+% section apresenta_o_da_empresa (end)
+
+\section{Organização do Texto} % (fold)
+\label{sec:organiza_o_do_texto}
+
+A monografia está dividida em seis capítulos:
+
+\begin{itemize}
+  \item Capítulo 1: é o capítulo introdutório da monografia. São apresentados alguns pontos que motivam e justificam o desenvolvimento do projeto, além de uma listagem dos objetivos específicos que definem o escopo do mesmo.
+  \item Capítulo 2: este capítulo introduz a teoria de visão computacional, contextualizando o leitor. Trata-se de uma apresentação da tecnologia com foco em conceitos e técnicas de processamento de imagens.
+  \item Capítulo 3: um estudo das tecnologias de contagem volumétrica e classificatória existentes são aqui apresentados. É também apresentado uma pesquisa bibliográfica sobre sistemas de visão computacional inseridos no contexto da Engenharia de Transporte.
+  \item Capítulo 4: a metodologia para contagem volumétrica automática de veículos que foi utilizada. As técnicas utilizadas, a sequência de operações, as imagens de processamento e a estrutura do software são mostrados e explicados.
+  \item Capítulo 5: os resultados de contagem são apresentados e validados. Além disso, uma análise comparativa entre os resultados obtidos pelas imagens fornecidas pela BHTRANS e capturadas por uma câmera doméstica.
+  \item Capítulo 6: são feitas as conclusões e as considerações finais do trabalho, bem como recomendações para trabalhos futuros.
+\end{itemize}
+
+
+% section organiza_o_do_texto (end)
