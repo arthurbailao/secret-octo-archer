@@ -1,3 +1,143 @@
 % !TEX root = pfc.tex
 
 Visão computacional, em linhas gerais, é a tecnologia capaz de transformar imagens do mundo real em uma representação que computadores são capazes de interpretar e processar. Muitos definem visão computacional como a ciência das máquinas que enxergam. É uma base teórica e tecnológica para a construção de sistemas artificiais que obtém informações de imagens ou quaisquer dados multidimensionais. Mas como os computadores podem entender o mundo visual dos humanos? Quais vantagens e quais tipos de aplicações podem existir a partir desse conceito?
+
+O ser humano é perfeitamente capaz de perceber a estrutura tridimensional do mundo ao seu redor. Ao visualizar a Figura \ref{fig:flower}, percebe-se que a visão humana interpreta variações de transparência e sombra, além de diferenciar o objeto do \textit{backgroud} com facilidade. \cite{szeliski:2010:book} Isso acontece porque o cérebro humano divide o sinal de visão em muitos canais, gerando um fluxo de diferentes tipos de informação. Ele é capaz de identificar quais são as partes importantes de uma imagem a serem examinadas e ao mesmo tempo suprimir a atenção para regiões menos importantes. Além disso, o cérebro possui um sistema de realimentação poderoso que implementa um controle em malha fechada, composto por sensores (visão, audição, olfato, tato e paladar) e atuadores (íris para controlar a entrada de luminosidade nos olhos). \cite{opencv:2008:book}
+
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics{imgs/flower.png}
+  \end{center}
+  \caption{O ser humano é capaz de determinar a forma e a transparência de cada pétala de uma flor. \cite{szeliski:2010:book}}
+  \label{fig:flower}
+\end{figure}
+
+Diante dessa facilidade com que o ser humano enxerga o mundo ao seu redor, é intuitivo pensar que o processamento de imagens por visão computacional é simples. Mas isso não é verdade. Em um sistema de visão, o computador recebe, na maioria das vezes, apenas uma matriz de números inteiros, em que cada posição é denominada pixel, como mostrado na Figura \ref{fig:opencv_car}. E nada mais! Todos aqueles padrões de interpretação de informação presentes no cérebro não existem aqui. Além disso, deve-se considerar os ruídos existentes no sistema que diminuem ainda mais a quantidade de informação dos dados. Esse tipo de problema pode ser causado devido a variações no ambiente (luminosidade, clima, reflexos, movimentações), imperfeições na captura de imagem (lente, configuração mecânica), ruídos elétricos no sensor óptico da câmera e compressão das imagens após a captura. \cite{opencv:2008:book}
+
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics{imgs/opencv_car.png}
+  \end{center}
+  \caption{Para um computador, o retrovisor de um carro é apenas uma matriz composta por pixeis. \cite{opencv:2008:book}}
+  \label{fig:opencv_car}
+\end{figure}
+
+Mesmo com todos esses desafios, por incrível que pareça, é possível desenvolver sistemas baseados em visão computacional bastante robustos e com alto grau de confiabilidade. Isso começa a se tornar possível quando as imagens capturadas estão inseridas no contexto de uma determinada aplicação. Por exemplo: se um sistema de visão computacional tem por objetivo rastrear carros, não faz nenhum sentindo buscar os veículos em áreas que não sejam as ruas, avenidas e rodovias. Caso um objeto seja encontrado em uma área verde ou no azul do céu, a probabilidade de que esse objeto seja um carro é muito baixa. É uma análise óbvia mas de suma importância no processamento de imagens.
+
+O uso de métodos estatísticos em visão computacional também são primordiais, indo de encontro ao problema de ruídos discutido anteriormente. Considerar a média dos pixeis no tempo é uma abordagem estatística, que pode vir a ser uma solução para problemas que envolvem imagens ruidosas. Outra técnica bastante comum é a construção de modelos das câmeras, capazes de caracterizá-las matematicamente através de seus parâmetros intrínsecos e extrínsecos. Os parâmetros internos da câmera como distância focal, distorções de lente e tamanho do pixel correspondem aos parâmetros intrínsecos. Os parâmetros extrínsecos estão relacionados à orientação e posição da câmera em relação a um sistema de referência no mundo. Com esses parâmetros fica simples corrigir imperfeições nas imagens, que podem ocorrer devido a lente ou alguma configuração mecânica.
+
+Essas e mais uma série de técnicas são objetos de estudo no campo de visão computacional. Elas em conjunto são combinadas e organizadas de maneira a transformar quaisquer dados multidimensionais em informações de alto nível, como por exemplo ausência e presença de um componente, dimensão e cor de objetos. Como regra geral: quanto mais restrito é o escopo de uma aplicação de visão computacional, mais o problema pode ser simplificado e mais confiável será a solução final. \cite{opencv:2008:book}
+
+A seguir é realizado uma breve revisão bibliográfica sobre conceitos, técnicas e métodos de processamento de imagens digitais aplicados ao campo da visão computacional.
+
+\section{Imagem digital} % (fold)
+\label{sec:imagem_digital}
+
+% section imagem_digital (end)
+
+\section{Espaços de cor} % (fold)
+\label{sec:espa_os_de_cor}
+
+% section espa_os_de_cor (end)
+
+\section{Escala de cinza} % (fold)
+\label{sec:escala_de_cinza}
+
+% section escala_de_cinza (end)
+
+\section{Filtros} % (fold)
+\label{sec:filtros}
+
+% section filtros (end)
+
+\section{Limiarização} % (fold)
+\label{sec:limiariza_o}
+
+% section limiariza_o (end)
+
+\section{Subtração de fundo} % (fold)
+\label{sec:subtra_o_de_background}
+
+% section subtra_o_de_background (end)
+
+\section{Operações morfológicas} % (fold)
+\label{sec:opera_es_morfol_gicas}
+
+\subsection{Erosão} % (fold)
+\label{sub:eros_o}
+
+\subsection{Dilatação} % (fold)
+\label{sub:dilata_o}
+
+\subsection{Abertura e fechamento} % (fold)
+\label{sub:abertura_e_fechamento}
+
+% subsection abertura_e_fechamento (end)
+
+% subsection dilata_o (end)
+
+% subsection eros_o (end)
+
+% section opera_es_morfol_gicas (end)
+
+\section{Detecção de características relevantes} % (fold)
+\label{sec:detec_o_de_caracter_sticas_relevantes}
+
+% section detec_o_de_caracter_sticas_relevantes (end)
+
+\section{Biblioteca OpenCV} % (fold)
+\label{sec:biblioteca_opencv}
+
+\cite{opencv_library}
+
+% section biblioteca_opencv (end)
+
+\section{Aplicações existentes} % (fold)
+\label{sec:aplica_es_existentes}
+
+Diversos tipos de aplicação podem ser concebidas utilizando os conhecimentos de visão computacional. O fato dessa tecnologia ser não intrusiva, ou seja, não altera em nada o meio em que está sendo utilizada, torna os sistemas de visão realizáveis em grande parte dos processos industriais, urbanos e ambientais. \cite{ivision:2013:online}
+
+\subsection{Análise dimensional} % (fold)
+\label{sub:an_lise_dimensional}
+
+As aplicações em análise dimensional se caracterizam por efetuarem medidas em objetos, sendo elas lineares e/ou angulares. A análise dimensional por imagem é vantajosa pois possibilita que as medidas sejam feitas à distância, quando não é possível ou desejável o contato direto com o objeto. Câmeras de alta resolução se aplicam nesses projetos, garantindo medições precisas e com repetibilidade. Muito comum na siderurgia, esse tipo de aplicação possibilita a medição em objetos que se encontram em altas temperaturas. As câmeras infravermelho tem sido utilizadas nesse tipo de aplicação.
+
+% subsection an_lise_dimensional (end)
+
+\subsection{Reconhecimento de padrões} % (fold)
+\label{sub:reconhecimento_de_padr_es}
+
+O uso de reconhecimento de padrões permite a identificação de características de um produto comparando-o com um modelo predeterminado. Essas características a serem inspecionadas são escolhidas de modo a identificar e diferenciar um tipo de modelo de outro. Assim é possível dizer se um objeto está conforme um padrão ou não.
+
+% subsection reconhecimento_de_padr_es (end)
+
+\subsection{Inspeção de nível} % (fold)
+\label{sub:inspe_o_de_n_vel}
+
+Esse tipo de aplicação é bastante comum na indústria de bebidas e na indústria farmacêutica para inspeção de enchimento de ampolas, vidros de medicamentos ou qualquer recipiente translúcido que contenha líquido.
+
+% subsection inspe_o_de_n_vel (end)
+
+\subsection{Inspeção por análise de cores} % (fold)
+\label{sub:inspe_o_por_an_lise_de_cores}
+
+Possibilita a criação de soluções para separar produtos por cor ou verificar se a tonalidade está igual a uma amostra. Tem a vantagem de ser um método determinístico em relação a uma inspeção de cores realizada por seres humanos, onde pode existir subjetividade. No entanto, variações de luminosidade podem dificultar a realização desse tipo de inspeção.
+
+% subsection inspe_o_por_an_lise_de_cores (end)
+
+\subsection{Rastreabilidade} % (fold)
+\label{sub:rastreabilidade}
+
+São aplicações de leituras de códigos de barras ou de códigos bidimensionais como \textit{Data Matrix} e o \textit{QR Code}. Permitem identificar e rastrear os produtos, bem como armazenar grandes quantidades de dado. São sistemas frequentemente utilizados na indústria automobilística mas são aplicáveis em qualquer projeto que necessite de controle de produção.
+
+% subsection rastreabilidade (end)
+
+\subsection{Contagem, Seleção e Classificação} % (fold)
+\label{sub:contagem_sele_o_e_classifica_o}
+
+As aplicações para contagem, seleção e classificação podem instrumentar diversas indústrias, como por exemplo a indústria farmacêutica para contagem de medicamentos. Também é comum na produção de componentes eletrônicos para verificação de pinos e conectores. Na engenharia de transporte podem contribuir na análise do tráfego realizando contagem volumétrica de veículos e pessoas.
+
+% subsection contagem_sele_o_e_classifica_o (end)
+
+% section aplica_es_existentes (end)
+
