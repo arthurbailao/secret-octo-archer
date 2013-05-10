@@ -2,23 +2,23 @@
 
 Visão computacional, em linhas gerais, é a tecnologia capaz de transformar imagens do mundo real em uma representação que computadores são capazes de interpretar e processar. Muitos definem visão computacional como a ciência das máquinas que enxergam. É uma base teórica e tecnológica para a construção de sistemas artificiais que obtém informações de imagens ou quaisquer dados multidimensionais. Mas como os computadores podem entender o mundo visual dos humanos? Quais vantagens e quais tipos de aplicações podem existir a partir desse conceito?
 
-O ser humano é perfeitamente capaz de perceber a estrutura tridimensional do mundo ao seu redor. Ao visualizar a Figura \ref{fig:flower}, percebe-se que a visão humana interpreta variações de transparência e sombra, além de diferenciar o objeto do \textit{backgroud} com facilidade. \cite{szeliski:2010:book} Isso acontece porque o cérebro humano divide o sinal de visão em muitos canais, gerando um fluxo de diferentes tipos de informação. Ele é capaz de identificar quais são as partes importantes de uma imagem a serem examinadas e ao mesmo tempo suprimir a atenção para regiões menos importantes. Além disso, o cérebro possui um sistema de realimentação poderoso que implementa um controle em malha fechada, composto por sensores (visão, audição, olfato, tato e paladar) e atuadores (íris para controlar a entrada de luminosidade nos olhos). \cite{opencv:2008:book}
+O ser humano é perfeitamente capaz de perceber a estrutura tridimensional do mundo ao seu redor. Ao visualizar a Figura \ref{fig:flower}, percebe-se que a visão humana interpreta variações de transparência e sombra, além de diferenciar o objeto do \textit{backgroud}\footnote{Segundo plano ou plano de fundo} com facilidade \citep{szeliski:2010:book}. Isso acontece porque o cérebro humano divide o sinal de visão em muitos canais, gerando um fluxo de diferentes tipos de informação. Ele é capaz de identificar quais são as partes importantes de uma imagem a serem examinadas e ao mesmo tempo suprimir a atenção para regiões menos importantes. Além disso, o cérebro possui um sistema de realimentação poderoso que implementa um controle em malha fechada, composto por sensores (visão, audição, olfato, tato e paladar) e atuadores (íris para controlar a entrada de luminosidade nos olhos) \citep{opencv:2008:book}.
 
 \begin{figure}[tb]
   \begin{center}
     \includegraphics{imgs/flower.png}
   \end{center}
-  \caption{O ser humano é capaz de determinar a forma e a transparência de cada pétala de uma flor. \cite{szeliski:2010:book}}
+  \caption{O ser humano é capaz de determinar a forma e a transparência de cada pétala de uma flor \citep{szeliski:2010:book}.}
   \label{fig:flower}
 \end{figure}
 
-Diante dessa facilidade com que o ser humano enxerga o mundo ao seu redor, é intuitivo pensar que o processamento de imagens por visão computacional é simples. Mas isso não é verdade. Em um sistema de visão, o computador recebe, na maioria das vezes, apenas uma matriz de números inteiros, em que cada posição é denominada pixel, como mostrado na Figura \ref{fig:opencv_car}. E nada mais! Todos aqueles padrões de interpretação de informação presentes no cérebro não existem aqui. Além disso, deve-se considerar os ruídos existentes no sistema que diminuem ainda mais a quantidade de informação dos dados. Esse tipo de problema pode ser causado devido a variações no ambiente (luminosidade, clima, reflexos, movimentações), imperfeições na captura de imagem (lente, configuração mecânica), ruídos elétricos no sensor óptico da câmera e compressão das imagens após a captura. \cite{opencv:2008:book}
+Diante dessa facilidade com que o ser humano enxerga o mundo ao seu redor, é intuitivo pensar que o processamento de imagens por visão computacional é simples. Mas isso não é verdade. Em um sistema de visão, o computador recebe, na maioria das vezes, apenas uma matriz de números inteiros, em que cada posição é denominada pixel, como mostrado na Figura \ref{fig:opencv_car}. E nada mais! Todos aqueles padrões de interpretação de informação presentes no cérebro não existem aqui. Além disso, deve-se considerar os ruídos existentes no sistema que diminuem ainda mais a quantidade de informação dos dados. Esse tipo de problema pode ser causado devido a variações no ambiente (luminosidade, clima, reflexos, movimentações), imperfeições na captura de imagem (lente, configuração mecânica), ruídos elétricos no sensor óptico da câmera e compressão das imagens após a captura \citep{opencv:2008:book}.
 
 \begin{figure}[tb]
   \begin{center}
     \includegraphics{imgs/opencv_car.png}
   \end{center}
-  \caption{Para um computador, o retrovisor de um carro é apenas uma matriz composta por pixeis. \cite{opencv:2008:book}}
+  \caption{Para um computador, o retrovisor de um carro é apenas uma matriz composta por pixeis \citep{opencv:2008:book}.}
   \label{fig:opencv_car}
 \end{figure}
 
@@ -26,7 +26,7 @@ Mesmo com todos esses desafios, por incrível que pareça, é possível desenvolver 
 
 O uso de métodos estatísticos em visão computacional também são primordiais, indo de encontro ao problema de ruídos discutido anteriormente. Considerar a média dos pixeis no tempo é uma abordagem estatística, que pode vir a ser uma solução para problemas que envolvem imagens ruidosas. Outra técnica bastante comum é a construção de modelos das câmeras, capazes de caracterizá-las matematicamente através de seus parâmetros intrínsecos e extrínsecos. Os parâmetros internos da câmera como distância focal, distorções de lente e tamanho do pixel correspondem aos parâmetros intrínsecos. Os parâmetros extrínsecos estão relacionados à orientação e posição da câmera em relação a um sistema de referência no mundo. Com esses parâmetros fica simples corrigir imperfeições nas imagens, que podem ocorrer devido a lente ou alguma configuração mecânica.
 
-Essas e mais uma série de técnicas são objetos de estudo no campo de visão computacional. Elas em conjunto são combinadas e organizadas de maneira a transformar quaisquer dados multidimensionais em informações de alto nível, como por exemplo ausência e presença de um componente, dimensão e cor de objetos. Como regra geral: quanto mais restrito é o escopo de uma aplicação de visão computacional, mais o problema pode ser simplificado e mais confiável será a solução final. \cite{opencv:2008:book}
+Essas e mais uma série de técnicas são objetos de estudo no campo de visão computacional. Elas em conjunto são combinadas e organizadas de maneira a transformar quaisquer dados multidimensionais em informações de alto nível, como por exemplo ausência e presença de um componente, dimensão e cor de objetos. Como regra geral: quanto mais restrito é o escopo de uma aplicação de visão computacional, mais o problema pode ser simplificado e mais confiável será a solução final \citep{opencv:2008:book}.
 
 A seguir é realizado uma breve revisão bibliográfica sobre conceitos, técnicas e métodos de processamento de imagens digitais aplicados ao campo da visão computacional.
 
@@ -88,14 +88,18 @@ A seguir é realizado uma breve revisão bibliográfica sobre conceitos, técnicas e
 \section{Biblioteca OpenCV} % (fold)
 \label{sec:biblioteca_opencv}
 
-\cite{opencv_library}
+OpenCV (\textit{Open Source Computer Vision}) \citep{opencv_library} é uma biblioteca de visão computacional \textit{open source}\footnote{Veja em: \url{http://opensource.org}} disponível em: \url{http://sourceforge.net/projects/opencvlibrary/}. O código é escrito em C e C++ e pode ser compilado e executado em ambientes Linux, Windows e Mac OS X. Existem também interfaces em Python, Ruby, Matlab e outras linguagens. Contém mais de 500 algoritmos otimizados para processamento de imagens e vídeos, cobrindo diversas áreas da visão computacional, como: inspeção industrial, imagens médicas, segurança, interface com o usuário, calibração de câmera, visão estéreo, robótica e \textit{machine learning} \citep{opencv:2008:book}.
+
+Segundo \citeauthor{opencv2:2011:book}, desde seu lançamento em 1999 ela vem sendo largamente adotada como a principal ferramenta de desenvolvimento pela comunidade de pesquisadores e programadores em visão computacional. OpenCV foi originalmente desenvolvida pela Intel \citep{intel:2013:online}, por um time liderado por Gary Bradski e com o propósito de avançar em pesquisas na área de visão. Depois de uma série de versões \textit{Beta}, a versão 1.0 foi lançada em 2006. O segundo maior lançamento aconteceu em 2009 com a OpenCV 2, propondo importantes modificações em sua estrutura e especialmente a nova interface C++. Atualmente a OpenCV encontra-se na versão 2.4.
+
+\citeauthor{opencv:2008:book} afirmam que a licença \textit{open source} da OpenCV permite que aplicações comerciais possam ser construidas utilizando parte ou toda a biblioteca, sem a necessidade de que o código da aplicação seja aberto. Devido a essa política liberal de uso, gigantes como IBM, Microsoft, Intel, SONY, Siemens, Google e outros, além dos centros de pesquisa Stanford, MIT, CMU, Cambridge, INRIA e outros, utilizam a biblioteca em seus projetos e pesquisas. A OpenCV foi peça chave no sistema de visão de um robô desenvolvido em Stanford, conhecido como Stanley, que ganhou a corrida de carros autônomos \$2M DARPA Grand Challenge \citep{thrun:2006:article}.
 
 % section biblioteca_opencv (end)
 
 \section{Aplicações existentes} % (fold)
 \label{sec:aplica_es_existentes}
 
-Diversos tipos de aplicação podem ser concebidas utilizando os conhecimentos de visão computacional. O fato dessa tecnologia ser não intrusiva, ou seja, não altera em nada o meio em que está sendo utilizada, torna os sistemas de visão realizáveis em grande parte dos processos industriais, urbanos e ambientais. \cite{ivision:2013:online}
+Diversos tipos de aplicação podem ser concebidas utilizando os conhecimentos de visão computacional. O fato dessa tecnologia ser não intrusiva, ou seja, não altera em nada o meio em que está sendo utilizada, torna os sistemas de visão realizáveis em grande parte dos processos industriais, urbanos e ambientais \citep{ivision:2013:online}.
 
 \subsection{Análise dimensional} % (fold)
 \label{sub:an_lise_dimensional}
@@ -128,7 +132,7 @@ Possibilita a criação de soluções para separar produtos por cor ou verificar se 
 \subsection{Rastreabilidade} % (fold)
 \label{sub:rastreabilidade}
 
-São aplicações de leituras de códigos de barras ou de códigos bidimensionais como \textit{Data Matrix} e o \textit{QR Code}. Permitem identificar e rastrear os produtos, bem como armazenar grandes quantidades de dado. São sistemas frequentemente utilizados na indústria automobilística mas são aplicáveis em qualquer projeto que necessite de controle de produção.
+São aplicações de leituras de códigos de barras ou de códigos bidimensionais como \textit{Data Matrix}\footnote{Código de barras matricial bi-dimensional que consiste em células brancas ou pretas arranjadas em forma de quadrado ou retângulo. Se caracteriza pelas bordas em formato de L. Armazena no máximo 2335 caracteres alfanuméricos.} e o \textit{QR Code}\footnote{\textit{Quick Response Code} é um código de barras bi-dimensional criado pela empresa japonesa Denso-Wave em 1994. Pode armazenar até 7089 caracteres, dependendo do tipo de dado. Possui redundância em sua codificação, possibilitando correção e recuperação de informação.}. Permitem identificar e rastrear os produtos, bem como armazenar grandes quantidades de dado. São sistemas frequentemente utilizados na indústria automobilística mas são aplicáveis em qualquer projeto que necessite de controle de produção.
 
 % subsection rastreabilidade (end)
 
