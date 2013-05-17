@@ -47,10 +47,35 @@ Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenada
 
 % section imagem_digital (end)
 
-\section{Espaços de cor} % (fold)
-\label{sec:espa_os_de_cor}
+\section{Modelo RGB de cores} % (fold)
+\label{sec:modelo_rgb_de_cores}
 
-% section espa_os_de_cor (end)
+Segundo \cite{woods:2000:book}, é comprovado que o olho humano possui entre 6 e 7 milhões de cones\footnote{Células fotorreceptoras localizadas na retina do olho que são responsáveis pela visão das cores.}, que podem ser dividos em três principais categorias de sensoriamento, aproximadamente correspondentes às cores vermelho, verde e azul. Desse total de cones existentes, cerca de 65\% são sensíveis à luz vermelha, 33\% são sensíveis à luz verde e apenas 2\% deles são sensíveis à luz azul, sendo os cones azuis os que possuem maior grau de sensibilidade à luz. Dessa forma, as cores são vistas pelo olho humano como combinações das chamadas cores primárias: vermelho (R, \textit{red}), verde (G, \textit{green}) e azul (B, \textit{blue}), fato que inspirou estudos do modelo RGB de cores.
+
+O modelo RGB é um sistema de coordenadas cartesianas
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.7\linewidth]{imgs/cubo_rgb.png}
+      \end{center}
+      \caption{}
+      \label{fig:cubo_rgb}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.7\linewidth]{imgs/colorcube.png}
+      \end{center}
+      \caption{}
+      \label{fig:colorcube}
+    \end{subfigure}
+  \end{center}
+  \caption{(a) Cubo de cores RGB. Os pontos ao longo da diagonal principal têm valores da escala de cinza que vão do preto $(0,0,0)$ ao branco $(255,255,255)$ \citep{woods:2000:book}; (b) Representação em cores do cubo RGB \citep{theo:2003:online}.}
+  \label{fig:cubos}
+\end{figure}
+
+% section modelo_rgb_de_cores (end)
 
 \section{Escala de cinza} % (fold)
 \label{sec:escala_de_cinza}
@@ -100,7 +125,7 @@ Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenada
 \section{Biblioteca OpenCV} % (fold)
 \label{sec:biblioteca_opencv}
 
-OpenCV (\textit{Open Source Computer Vision}) \citep{opencv_library} é uma biblioteca de visão computacional \textit{open source}\footnote{\url{http://opensource.org}} disponível em: \url{http://sourceforge.net/projects/opencvlibrary/}. O código é escrito em C e C++ e pode ser compilado e executado em ambientes Linux, Windows e Mac OS X. Existem também interfaces em Python, Ruby, Matlab e outras linguagens. Contém mais de 500 algoritmos otimizados para processamento de imagens e vídeos, cobrindo diversas áreas da visão computacional, como: inspeção industrial, imagens médicas, segurança, interface com o usuário, calibração de câmera, visão estéreo, robótica e \textit{machine learning} \citep{opencv:2008:book}.
+OpenCV (\textit{Open Source Computer Vision}) \citep{opencv_library} é uma biblioteca de visão computacional \textit{open source}\footnote{O termo código aberto, ou \textit{open source} em inglês, foi criado pela OSI e refere-se a \textit{software} livre. Mais informações em \url{http://opensource.org}} disponível em: \url{http://sourceforge.net/projects/opencvlibrary/}. O código é escrito em C e C++ e pode ser compilado e executado em ambientes Linux, Windows e Mac OS X. Existem também interfaces em Python, Ruby, Matlab e outras linguagens. Contém mais de 500 algoritmos otimizados para processamento de imagens e vídeos, cobrindo diversas áreas da visão computacional, como: inspeção industrial, imagens médicas, segurança, interface com o usuário, calibração de câmera, visão estéreo, robótica e \textit{machine learning} \citep{opencv:2008:book}.
 
 Segundo \cite{opencv2:2011:book}, desde o lançamento da OpenCV em 1999, ela vem sendo largamente adotada como a principal ferramenta de desenvolvimento pela comunidade de pesquisadores e programadores em visão computacional. A biblioteca foi originalmente desenvolvida pela Intel \citep{intel:2013:online}, por um time liderado por Gary Bradski e com o propósito de avançar em pesquisas na área de visão. Depois de uma série de versões \textit{Beta}, a versão 1.0 foi lançada em 2006. O segundo maior lançamento aconteceu em 2009 com a OpenCV 2, propondo importantes modificações em sua estrutura e especialmente a nova interface C++. Atualmente a OpenCV encontra-se na versão 2.4.
 
