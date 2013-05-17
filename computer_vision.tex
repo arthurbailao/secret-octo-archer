@@ -43,7 +43,7 @@ De acordo com \cite{woods:2000:book}, uma imagem pode ser definida como uma funç
   \label{fig:imagem_digital}
 \end{figure}
 
-Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenadas espaciais quanto em brilho. A OpenCV \citep{opencv_library}, uma biblioteca de visão computacional descrita na Seção \ref{sec:biblioteca_opencv}, considera uma imagem digital como sendo uma matriz cujos índices de linhas e colunas determinam um ponto na imagem, e o valor correspondente do elemento da matriz identifica o nível de cinza naquele ponto. Os elementos dessa matriz digital são chamados de pixels, embora existam outros nomes como elementos da imagem, elementos da figura ou pels \citep{woods:2000:book}.
+Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenadas espaciais quanto em intensidade de brilho. A OpenCV 2 \citep{opencv_library}, uma biblioteca de visão computacional descrita na Seção \ref{sec:biblioteca_opencv}, considera a imagem digital como sendo uma matriz cujos índices de linhas e colunas determinam um ponto na imagem, e o valor correspondente do elemento da matriz identifica o nível de cinza naquele ponto. Os elementos dessa matriz digital são chamados de pixels, embora existam outros nomes como elementos da imagem, elementos da figura ou pels \citep{woods:2000:book}.
 
 % section imagem_digital (end)
 
@@ -52,20 +52,20 @@ Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenada
 
 Segundo \cite{woods:2000:book}, é comprovado que o olho humano possui entre 6 e 7 milhões de cones\footnote{Células fotorreceptoras localizadas na retina do olho que são responsáveis pela visão das cores.}, que podem ser dividos em três principais categorias de sensoriamento, aproximadamente correspondentes às cores vermelho, verde e azul. Desse total de cones existentes, cerca de 65\% são sensíveis à luz vermelha, 33\% são sensíveis à luz verde e apenas 2\% deles são sensíveis à luz azul, sendo os cones azuis os que possuem maior grau de sensibilidade à luz. Dessa forma, as cores são vistas pelo olho humano como combinações das chamadas cores primárias: vermelho (R, \textit{red}), verde (G, \textit{green}) e azul (B, \textit{blue}), fato que inspirou estudos do modelo RGB de cores.
 
-O modelo RGB é um sistema de coordenadas cartesianas
+O modelo RGB é um sistema de coordenadas cartesianas, onde o sub-espaço das cores de interesse é representado pelo cubo da Figura \ref{fig:cubo_rgb}. Nesse modelo, as cores são pontos sobre ou dentro do cubo, definidas por vetores que estendem-se a partir da origem. A escala de cinza é definida pela diagonal principal desse cubo e assume valores que vão do preto, localizado na origem, ao branco, no vértice mais distante \citep{woods:2000:book}. 
 
 \begin{figure}[ht]
   \begin{center}
     \begin{subfigure}[b]{.49\textwidth}
       \begin{center}
-        \includegraphics[width=.7\linewidth]{imgs/cubo_rgb.png}
+        \includegraphics[width=.85\linewidth]{imgs/cubo_rgb.png}
       \end{center}
       \caption{}
       \label{fig:cubo_rgb}
     \end{subfigure}
     \begin{subfigure}[b]{.49\textwidth}
       \begin{center}
-        \includegraphics[width=.7\linewidth]{imgs/colorcube.png}
+        \includegraphics[width=.9\linewidth]{imgs/colorcube.png}
       \end{center}
       \caption{}
       \label{fig:colorcube}
@@ -75,10 +75,38 @@ O modelo RGB é um sistema de coordenadas cartesianas
   \label{fig:cubos}
 \end{figure}
 
+Em representações computacionais desse modelo os componentes R, G e B assumem valores inteiros de uma escala que vai de 0 a 255, possibilitando que cada valor seja armazenado por 1 \textit{byte}\footnote{Unidade de medida de armazenamento de memória em computação. Cada \textit{byte} contém 8 \textit{bits}, suficiente para armazenar $2^8$ números binários.}. Dessa forma, é possível gerar exatamente 16.777.216 (ou $256^3$) combinações de cores diferentes. A Figura \ref{fig:colorcube} ilustra o gradiente formado na superfície do cubo RGB quando os pontos assumem valores inteiros.
+
 % section modelo_rgb_de_cores (end)
 
 \section{Escala de cinza} % (fold)
 \label{sec:escala_de_cinza}
+
+Agoniza aí
+
+Em representações computacionais desse modelo os componentes R, G e B assumem valores inteiros de uma escala que vai de 0 a 255, possibilitando que cada valor seja armazenado por 1 \textit{byte}\footnote{Unidade de medida de armazenamento de memória em computação. Cada \textit{byte} contém 8 \textit{bits}, suficiente para armazenar $2^8$ números binários.}. Dessa forma, é possível gerar exatamente 16.777.216 (ou $256^3$) combinações de cores diferentes. A Figura \ref{fig:colorcube} ilustra o gradiente formado na superfície do cubo RGB quando os pontos assumem valores inteiros.
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.9\linewidth]{imgs/flower.png}
+      \end{center}
+      \caption{}
+      \label{fig:flower_rgb}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.9\linewidth]{imgs/flower_gray.png}
+      \end{center}
+      \caption{}
+      \label{fig:flower_gray}
+    \end{subfigure}
+  \end{center}
+  \caption{(a) Imagem original RGB; (b) Conversão para escala de cinza.}
+  \label{fig:flowers}
+\end{figure}
+
 
 % section escala_de_cinza (end)
 
