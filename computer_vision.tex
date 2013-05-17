@@ -4,7 +4,7 @@ Segundo \cite{linda:2001:book}, visão computacional é um campo da Ciência da Com
 
 Segundo \cite{szeliski:2010:book}, o ser humano é perfeitamente capaz de perceber a estrutura tridimensional do mundo ao seu redor. Ao visualizar a Figura \ref{fig:flower}, percebe-se que a visão humana interpreta variações de transparência e sombra, além de diferenciar o objeto do \textit{backgroud}\footnote{Segundo plano ou plano de fundo} com facilidade. Isso acontece porque o cérebro humano divide o sinal de visão em muitos canais, gerando um fluxo de diferentes tipos de informação. Ele é capaz de identificar quais são as partes importantes de uma imagem a serem examinadas e ao mesmo tempo suprimir a atenção para regiões menos importantes \citep{szeliski:2010:book}. Além disso, o cérebro possui um sistema de realimentação poderoso que implementa um controle em malha fechada, composto por sensores (visão, audição, olfato, tato e paladar) e atuadores (íris para controlar a entrada de luminosidade nos olhos) \citep{opencv:2008:book}.
 
-\begin{figure}[tb]
+\begin{figure}[ht]
   \begin{center}
     \includegraphics{imgs/flower.png}
   \end{center}
@@ -14,7 +14,7 @@ Segundo \cite{szeliski:2010:book}, o ser humano é perfeitamente capaz de percebe
 
 Diante da facilidade com que o ser humano enxerga o mundo ao seu redor é intuitivo pensar que o processamento de imagens por visão computacional é simples. Mas isso não é verdade. Em um sistema de visão, o computador recebe, na maioria das vezes, apenas uma matriz de números inteiros, em que cada posição é denominada pixel, como mostrado na Figura \ref{fig:opencv_car}. Todos aqueles padrões de interpretação de informação presentes no cérebro não existem aqui. Além disso, deve-se considerar os ruídos existentes num sistema de visão, que diminuem ainda mais a quantidade de informação dos dados. Esse tipo de problema pode ser causado devido a variações no ambiente (luminosidade, clima, reflexos, movimentações), imperfeições na captura de imagem (lente, configuração mecânica), ruídos elétricos no sensor óptico da câmera e compressão das imagens após a captura \citep{opencv:2008:book}.
 
-\begin{figure}[tb]
+\begin{figure}[ht]
   \begin{center}
     \includegraphics{imgs/opencv_car.png}
   \end{center}
@@ -33,7 +33,17 @@ A seguir é realizado uma breve revisão bibliográfica sobre conceitos, técnicas e
 \section{Imagem digital} % (fold)
 \label{sec:imagem_digital}
 
-De acordo com \cite{woods:2000:book}, uma imagem pode ser definida como uma função bidimensional de intensidade de luz $f(x,y)$, em que $x$ e $y$ são cordenadas espaciais de um plano e a amplitude de $f$ é proporcional ao brilho (ou níveis de cinza) da imagem naquele ponto. 
+De acordo com \cite{woods:2000:book}, uma imagem pode ser definida como uma função bidimensional de intensidade de luz $f(x,y)$, em que $x$ e $y$ são cordenadas espaciais de um plano, e a amplitude de $f$ é proporcional ao brilho (ou níveis de cinza) da imagem naquele ponto. A Figura \ref{fig:imagem_digital} ilustra a convenção dos eixos adotada nesse e na maioria dos trabalhos da área.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.7]{imgs/imagem_digital.png}
+  \end{center}
+  \caption{Convenção dos eixos para representação de imagens digitais \citep{woods:2000:book}.}
+  \label{fig:imagem_digital}
+\end{figure}
+
+Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenadas espaciais quanto em brilho. A OpenCV \citep{opencv_library}, uma biblioteca de visão computacional descrita na Seção \ref{sec:biblioteca_opencv}, considera uma imagem digital como sendo uma matriz cujos índices de linhas e colunas determinam um ponto na imagem, e o valor correspondente do elemento da matriz identifica o nível de cinza naquele ponto. Os elementos dessa matriz digital são chamados de pixels, embora existam outros nomes como elementos da imagem, elementos da figura ou pels \citep{woods:2000:book}.
 
 % section imagem_digital (end)
 
