@@ -52,7 +52,9 @@ Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenada
 
 Segundo \cite{woods:2000:book}, é comprovado que o olho humano possui entre 6 e 7 milhões de cones\footnote{Células fotorreceptoras localizadas na retina do olho que são responsáveis pela visão das cores.}, que podem ser dividos em três principais categorias de sensoriamento, aproximadamente correspondentes às cores vermelho, verde e azul. Desse total de cones existentes, cerca de 65\% são sensíveis à luz vermelha, 33\% são sensíveis à luz verde e apenas 2\% deles são sensíveis à luz azul, sendo os cones azuis os que possuem maior grau de sensibilidade à luz. Dessa forma, as cores são vistas pelo olho humano como combinações das chamadas cores primárias: vermelho (R, \textit{red}), verde (G, \textit{green}) e azul (B, \textit{blue}), fato que inspirou estudos do modelo RGB de cores.
 
-O modelo RGB é um sistema de coordenadas cartesianas, onde o sub-espaço das cores de interesse é representado pelo cubo da Figura \ref{fig:cubo_rgb}. Nesse modelo, as cores são pontos sobre ou dentro do cubo, definidas por vetores que estendem-se a partir da origem. A escala de cinza é definida pela diagonal principal desse cubo e assume valores que vão do preto, localizado na origem, ao branco, no vértice mais distante \citep{woods:2000:book}. 
+O modelo RGB é um sistema de coordenadas cartesianas, onde o sub-espaço das cores de interesse é representado pelo cubo da Figura \ref{fig:cubo_rgb}. Nesse modelo, as cores são pontos sobre ou dentro do cubo, definidas por vetores que estendem-se a partir da origem. A escala de cinza é definida pela diagonal principal desse cubo e assume valores que vão do preto, localizado na origem, ao branco, no vértice mais distante \citep{woods:2000:book}.
+
+Em representações computacionais desse modelo os componentes R, G e B, denominados canais de cor, assumem valores inteiros de uma escala que vai de 0 a 255, possibilitando que cada valor seja armazenado por 1 \textit{byte}\footnote{Unidade de medida de armazenamento de memória em computação. Cada \textit{byte} contém 8 \textit{bits}, suficiente para armazenar $2^8$ números binários.}. Dessa forma, é possível gerar exatamente 16.777.216 (ou $256^3$) combinações de cores diferentes. A Figura \ref{fig:colorcube} ilustra o gradiente formado na superfície do cubo RGB quando os pontos assumem valores inteiros num intervalo de 0 a 255.
 
 \begin{figure}[ht]
   \begin{center}
@@ -75,16 +77,22 @@ O modelo RGB é um sistema de coordenadas cartesianas, onde o sub-espaço das core
   \label{fig:cubos}
 \end{figure}
 
-Em representações computacionais desse modelo os componentes R, G e B assumem valores inteiros de uma escala que vai de 0 a 255, possibilitando que cada valor seja armazenado por 1 \textit{byte}\footnote{Unidade de medida de armazenamento de memória em computação. Cada \textit{byte} contém 8 \textit{bits}, suficiente para armazenar $2^8$ números binários.}. Dessa forma, é possível gerar exatamente 16.777.216 (ou $256^3$) combinações de cores diferentes. A Figura \ref{fig:colorcube} ilustra o gradiente formado na superfície do cubo RGB quando os pontos assumem valores inteiros.
-
 % section modelo_rgb_de_cores (end)
 
 \section{Escala de cinza} % (fold)
 \label{sec:escala_de_cinza}
 
-Agoniza aí
+A escala de cinza é muito utilizada em processamento de imagens digitais por ter menor custo computacional. Em imagens RGB são necessários 3 \textit{bytes} (um por canal) para definir a cor de um pixel, enquanto que em imagens \textit{grayscale}\footnote{Do inglês, escala de cinza.} a representação da cor de um pixel utiliza apenas 1 \textit{byte}, um terço de uma imagem RGB. De acordo com \cite{woods:2000:book}, sistemas de visão computacional em que a cor não é um requisito, é essencial converter as imagens RGB para \textit{grayscale} antes de qualquer operação, como mostrado na Figura \ref{fig:flowers}, diminuindo assim o peso do processamento digital.
 
-Em representações computacionais desse modelo os componentes R, G e B assumem valores inteiros de uma escala que vai de 0 a 255, possibilitando que cada valor seja armazenado por 1 \textit{byte}\footnote{Unidade de medida de armazenamento de memória em computação. Cada \textit{byte} contém 8 \textit{bits}, suficiente para armazenar $2^8$ números binários.}. Dessa forma, é possível gerar exatamente 16.777.216 (ou $256^3$) combinações de cores diferentes. A Figura \ref{fig:colorcube} ilustra o gradiente formado na superfície do cubo RGB quando os pontos assumem valores inteiros.
+Para obter uma imagem \textit{grayscale} a partir de uma imagem RGB deve-se levar em conta a média da intensidade de cada canal. Essa conversão é dada por 
+
+\begin{gather}
+\label{eq:conversao_cinza}
+  C_{xy}=(k_{R}\times R_{xy})+(k_{G}\times G_{xy})+(k_{B}\times B_{xy})\text{,}\\
+  \nonumber k_{R}, k_{G}, k_{B} > 0 \text{ e }  k_{R}+k_{G}+k_{B}=1\text{,}
+\end{gather}
+
+\noindent onde $x$ e $y$ representam a posição do pixel no plano espacial da imagem segundo a convenção de eixos descrita na Seção \ref{sec:imagem_digital}; $C_{xy}$ a intensidade resultante dos pixels na escala de cinza; $R_{xy}$, $G_{xy}$ e $B_{xy}$ a intensidade dos pixels dos canais vermelho, verde e azul, respectivamente; e $k_{R}$, $k_{G}$ e $k_{B}$ constantes relacionadas à sensibilidade de incidência de luz de cada canal de cor \citep{sjohnson:2006:book}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -107,13 +115,82 @@ Em representações computacionais desse modelo os componentes R, G e B assumem va
   \label{fig:flowers}
 \end{figure}
 
-
 % section escala_de_cinza (end)
 
-\section{Filtros} % (fold)
-\label{sec:filtros}
+\section{Filtragem linear} % (fold)
+\label{sec:filtragem_linear}
 
-% section filtros (end)
+A filtragem linear é um tipo de operação local que leva em conta pixels vizinhos de um determinado ponto para calcular seu novo valor, como ilustrado na Figura \ref{fig:convolucao}. Operadores locais, ou operadores de vizinhança\footnote{Tradução livre de \textit{neighborhood operators}} como são mais conhecidos, são muito utilizados no processamento digital de imagens e podem ser usados como filtros espaciais lineares para gerar efeitos de borramento, acentuação de bordas, remoção de ruídos, entre outros.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=.55]{imgs/img_convolucao.png}
+  \end{center}
+  \caption{Filtragem linear por convolução: a imagem da esquerda convolução com o filtro no centro produz a imagem da direita. Os pixels azuis indica a vizinhança usada para gerar o pixel verde na saída \citep{szeliski:2010:book}.}
+  \label{fig:convolucao}
+\end{figure}
+
+De acordo com \cite{szeliski:2010:book}, filtros lineares são os operadores de vizinhança mais usados, em que o valor de saída $g(i,j)$ é determinado por uma soma ponderada de valores de pixels de entrada $f(i+k,j+l)$ (Figura \ref{fig:convolucao}),
+
+\begin{equation}
+  \label{eq:correlacao}
+  g(i,j)=\sum_{k,l}f(i+k,j+l)h(k,l)\text{.}
+\end{equation}
+
+\noindent A ponderação é dada pelo \textit{kernel} ou máscara $h(k,l)$, que contém os coeficientes do filtro, responsáveis pelas características de suavização, borramento ou remoção de ruídos inerentes a cada tipo de filtragem. A Equação \eqref{eq:correlacao} é conhecida como operador de \textbf{correlação}, que na forma compacta pode ser escrito como
+
+\begin{equation}
+  \label{eq:correlacao_compac}
+  g=f\otimes h\text{.}
+\end{equation}
+
+Uma variação muito comum de \eqref{eq:correlacao} é
+
+\begin{equation}
+  \label{eq:convolucao}
+  g(i,j)=\sum_{k,l}f(i-k,j-l)h(k,l)=\sum_{k,l}f(k,l)h(i-k,j-l)\text{,}
+\end{equation}
+
+\noindent onde o sinal dos deslocamentos em $f$ foram invertidos. Essa é a chamada operação de \textbf{convolução},
+
+\begin{equation}
+  \label{eq:convolucao_compac}
+  g=f*h\text{.}
+\end{equation}
+
+As operações de correlação e convolução são equivalentes, a não ser pela fase de 180° que gera uma rotação no processo de filtragem por correlação. Elas são a base matemática para implementação de qualquer tipo de filtro linear, como por exemplo, \textbf{gaussiano}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.9\linewidth]{imgs/castelo_original.png}
+      \end{center}
+      \caption{}
+      \label{fig:castelo_orig}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=.9\linewidth]{imgs/castelo_gaussiano.png}
+      \end{center}
+      \caption{}
+      \label{fig:castelo_gauss}
+    \end{subfigure}
+  \end{center}
+  \caption{(a) Imagem original; (b) Aplicação de filtragem linear gaussiana \citep{opencv2:2011:book}. Percebe-se o comportamento passa-baixa do filtro atenuando componentes de alta frequência na imagem (bordas).}
+  \label{fig:filtro_gaussiano}
+\end{figure}
+
+Segundo \cite{opencv_doc:2013:online}, o filtro gaussiano é talvez o mais útil entre todos. É largamente utilizado no processamento de imagens digitais para remoção de ruídos e redução de detalhes, como ilustrado na Figura \ref{fig:filtro_gaussiano}, onde pode-se verificar um suave borramento e a diminuição de detalhes nas bordas, características típicas de um filtro passa-baixa. A filtragem é feita através da convolução de cada pixel da imagem de entrada por um \textit{kernel} cujos valores obedecem uma distribuição gaussiana bidimensional, representada por
+
+\begin{equation}
+  \label{eq:gaussian_blur}
+  h(k,l)=Ae^{\dfrac{-(k-\mu_{k})^{2}}{2\sigma_{k}^{2}}+\dfrac{-(l-\mu_{l})^{2}}{2\sigma_{l}^{2}}}\text{,}
+\end{equation}
+
+\noindent onde $\mu$ é a média e $\sigma$ o desvio padrão. Nessa configuração, os pixels mais próximos de $\mu$ têm maior peso no resultado, portanto são mais significativos para o cálculo da intensidade de cada ponto. O peso dos pixels vizinhos decai com a distância e é influenciado também pelo desvio padrão $\sigma$.
+
+% section filtragem_linear (end)
 
 \section{Limiarização} % (fold)
 \label{sec:limiariza_o}
