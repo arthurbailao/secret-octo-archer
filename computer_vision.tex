@@ -50,7 +50,7 @@ Uma imagem digital é a discretização de uma imagem $f(x,y)$, tanto em coordenada
 \section{Modelo RGB de cores} % (fold)
 \label{sec:modelo_rgb_de_cores}
 
-Segundo \cite{woods:2000:book}, é comprovado que o olho humano possui entre 6 e 7 milhões de cones\footnote{Células fotorreceptoras localizadas na retina do olho que são responsáveis pela visão das cores.}, que podem ser dividos em três principais categorias de sensoriamento, aproximadamente correspondentes às cores vermelho, verde e azul. Desse total de cones existentes, cerca de 65\% são sensíveis à luz vermelha, 33\% são sensíveis à luz verde e apenas 2\% deles são sensíveis à luz azul, sendo os cones azuis os que possuem maior grau de sensibilidade à luz. Dessa forma, as cores são vistas pelo olho humano como combinações das chamadas cores primárias: vermelho (R, \textit{red}), verde (G, \textit{green}) e azul (B, \textit{blue}), fato que inspirou estudos do modelo RGB de cores.
+Segundo \cite{woods:2000:book}, é comprovado que o olho humano possui entre 6 e 7 milhões de cones\footnote{Células fotorreceptoras, localizadas na retina do olho, que são responsáveis pela visão das cores.}, que podem ser dividos em três principais categorias de sensoriamento, aproximadamente correspondentes às cores vermelho, verde e azul. Desse total de cones existentes, cerca de 65\% são sensíveis à luz vermelha, 33\% são sensíveis à luz verde e apenas 2\% deles são sensíveis à luz azul, sendo os cones azuis os que possuem maior grau de sensibilidade à luz. Dessa forma, as cores são vistas pelo olho humano como combinações das chamadas cores primárias: vermelho (R, \textit{red}), verde (G, \textit{green}) e azul (B, \textit{blue}), fato que inspirou estudos do modelo RGB de cores.
 
 O modelo RGB é um sistema de coordenadas cartesianas, onde o sub-espaço das cores de interesse é representado pelo cubo da Figura \ref{fig:cubo_rgb}. Nesse modelo, as cores são pontos sobre ou dentro do cubo, definidas por vetores que estendem-se a partir da origem. A escala de cinza é definida pela diagonal principal desse cubo e assume valores que vão do preto, localizado na origem, ao branco, no vértice mais distante \citep{woods:2000:book}.
 
@@ -117,6 +117,23 @@ Para obter uma imagem \textit{grayscale} a partir de uma imagem RGB deve-se leva
 
 % section escala_de_cinza (end)
 
+\section{Histograma} % (fold)
+\label{sec:histograma}
+
+Histograma é um gráfico matemático que representa a distribuição de frequências de uma massa de medições \citep{lancaster1973introduction}. Normalmente é representado por retângulos na vertical, onde cada retângulo corresponde a um intervalo e sua altura é proporcional ao número de ocorrências naquele intervalo.
+
+Em visão computacional os histogramas são utilizados para representar o número de ocorrências de cada cor em uma imagem, como ilustra a Figura \ref{fig:histograma}. Normalmente é gerado um histograma para cada canal de cor em imagens coloridas, já que pode existir uma infinidade de cores possíveis. O histograma pode proporcionar um melhor entendimento da imagem pois facilita a visualização de parâmetros como contraste e luminosidade.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=.55]{imgs/histograma.png}
+  \end{center}
+  \caption{Histograma de uma imagem \textit{grayscale} gerado pelo \textit{software} \cite{gimp:2013:online}.}
+  \label{fig:histograma}
+\end{figure}
+
+% section histograma (end)
+
 \section{Filtragem linear} % (fold)
 \label{sec:filtragem_linear}
 
@@ -124,7 +141,7 @@ A filtragem linear é um tipo de operação local que leva em conta pixels vizinhos
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[scale=.55]{imgs/img_convolucao.png}
+    \includegraphics[scale=.58]{imgs/img_convolucao.png}
   \end{center}
   \caption{Filtragem linear por convolução: a imagem da esquerda convolução com o filtro no centro produz a imagem da direita. Os pixels azuis indica a vizinhança usada para gerar o pixel verde na saída \citep{szeliski:2010:book}.}
   \label{fig:convolucao}
@@ -195,37 +212,60 @@ Segundo \cite{opencv_doc:2013:online}, o filtro gaussiano é talvez o mais útil e
 \section{Limiarização} % (fold)
 \label{sec:limiariza_o}
 
+Segundo \cite{opencv:2008:book}, a operação de limiarização, também conhecida por \textit{thresholding}, é o método de segmentação em imagens digitais mais simples que existe. Essa técnica pode ser aplicada para separar regiões correspondentes a objetos que se deseja analisar, como iustrado na Figura \ref{fig:threshold_maca}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics{imgs/threshold_maca.png}
+  \end{center}
+  \caption{Segmentação de uma maçã utilizando limiarização binária \citep{opencv_doc:2013:online}.}
+  \label{fig:threshold_maca}
+\end{figure}
+
+A separação se dá pela diferença de intensidade entre os pixels do objeto e os pixels pertencentes ao plano de fundo. Para diferenciar os pixels de interesse é feito uma comparação do nível de cinza de cada pixel com um limiar (ou valor de \textit{threshold}), que pode ser uma constante determinada de acordo com as necessidades do problema ou uma variável em algoritmos de limiarização adaptativos. Uma vez que os pixels de interesse foram segmentados, basta determinar um valor comum para identificá-los, sendo mais comum o branco 255 (Figura \ref{fig:threshold_maca}).
+
+No caso geral, a operação de limiarização binária é dada por
+
+\begin{equation}
+  dst(x,y)=\begin{cases}
+    maxVal & \text{se $src(x,y) > thresh$}\\
+    0 & \text{caso contrário.}
+  \end{cases}
+\end{equation}
+
+\noindent Portanto, se a intensidade do pixel $src(x,y)$ é maior que o limiar $thresh$, então a nova intensidade do pixel $dst(x,y)$ será $maxVal$; caso contrário, é atribuído a $dst(x,y)$ o valor 0 (preto) \citep{opencv:2008:book}.
+
 % section limiariza_o (end)
 
-\section{Subtração de fundo} % (fold)
-\label{sec:subtra_o_de_background}
+% \section{Subtração de fundo} % (fold)
+% \label{sec:subtra_o_de_background}
 
-% section subtra_o_de_background (end)
+% % section subtra_o_de_background (end)
 
-\section{Operações morfológicas} % (fold)
-\label{sec:opera_es_morfol_gicas}
+% \section{Operações morfológicas} % (fold)
+% \label{sec:opera_es_morfol_gicas}
 
-\subsection{Erosão} % (fold)
-\label{sub:eros_o}
+% \subsection{Erosão} % (fold)
+% \label{sub:eros_o}
 
-\subsection{Dilatação} % (fold)
-\label{sub:dilata_o}
+% \subsection{Dilatação} % (fold)
+% \label{sub:dilata_o}
 
-\subsection{Abertura e fechamento} % (fold)
-\label{sub:abertura_e_fechamento}
+% \subsection{Abertura e fechamento} % (fold)
+% \label{sub:abertura_e_fechamento}
 
-% subsection abertura_e_fechamento (end)
+% % subsection abertura_e_fechamento (end)
 
-% subsection dilata_o (end)
+% % subsection dilata_o (end)
 
-% subsection eros_o (end)
+% % subsection eros_o (end)
 
-% section opera_es_morfol_gicas (end)
+% % section opera_es_morfol_gicas (end)
 
-\section{Detecção de características relevantes} % (fold)
-\label{sec:detec_o_de_caracter_sticas_relevantes}
+% \section{Detecção de características relevantes} % (fold)
+% \label{sec:detec_o_de_caracter_sticas_relevantes}
 
-% section detec_o_de_caracter_sticas_relevantes (end)
+% % section detec_o_de_caracter_sticas_relevantes (end)
 
 \section{Biblioteca OpenCV} % (fold)
 \label{sec:biblioteca_opencv}
