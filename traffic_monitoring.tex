@@ -148,6 +148,8 @@ O uso de sensores ultrassônicos é vantajoso pois a instalação é não-invasiva e p
 \section{Aplicações de Visão Computacional} % (fold)
 \label{sec:aplica_es_de_vis_o_computacional}
 
+Com o desenvolvimento de pesquisas na área de processamento de imagens digitais nos últimos tempos, impulsionado pelas facilidades de implementação de aplicações de visão computacional utilizando a biblioteca OpenCV \citep{opencv_library}, cada vez mais trabalhos de monitoramento do tráfego que utilizam visão computacional são publicados. A seguir, uma breve revisão bibliográfica de projetos de Engenharia de Transporte que utilizam conceitos de visão computacional.
+
 % \subsection{Direção autônoma de veículo inteligente} % (fold)
 % \label{sub:dire_o_aut_noma_de_ve_culo_inteligente}
 
@@ -156,19 +158,65 @@ O uso de sensores ultrassônicos é vantajoso pois a instalação é não-invasiva e p
 
 % % subsection dire_o_aut_noma_de_ve_culo_inteligente (end)
 
-\subsection{Detecção de placa de veículos} % (fold)
-\label{sub:detec_o_de_placa_de_ve_culos}
+% \subsection{Detecção de placa de veículos} % (fold)
+% \label{sub:detec_o_de_placa_de_ve_culos}
 
-\cite{martinsky:2007:masther}
+% \cite{martinsky:2007:masther}
 
-% subsection detec_o_de_placa_de_ve_culos (end)
+% % subsection detec_o_de_placa_de_ve_culos (end)
 
 \subsection{Contagem volumétrica utilizando dispositivos móveis} % (fold)
 \label{sub:contagem_volum_trica_utilizando_dispositivos_m_veis}
 
+\cite{feitosa:2012:masther} propõe em sua Tese de Mestrado em Ciência da Computação pela UFG - Universidade Federal de Goiás, um método para contagem volumétrica de veículos baseado em visão computacional. A pesquisa é focada em otimização de algoritmos de processamento de imagens para execução em dispositivos móveis.
+
+Alguns requisitos são estabelecidos nesse trabalho: as imagens são capturadas da lateral de uma via, com uma câmera fixada em uma baixa altura, identificando e contando veículos que trafegam em ambas as direções; as imagens utilizadas são de baixa resolução; e o processo de contagem é realizado em tempo real.
+
+Apesar de o objetivo do projeto ser a contagem volumétrica via dispositivos móveis, o estudo inicial das técnicas de processamento de imagem e visão computacional é feito em um \textit{laptop}\footnote{Computador portátil, que no Brasil também é conhecido como \textit{notebook}}. A metodologia adotada pode ser dividida em seis etapas principais. São elas:
+
+\begin{enumerate}
+  \item \textbf{Entrada de dados}: os \textit{frames}\footnote{Cada um dos quadros de um vídeo.} do vídeo são disponilizados em tempo real ou por um arquivo em disco, que foi gravado anteriormente.
+  \item \textbf{Pré-processamento de imagem}: conversão para escala de cinza, caso ainda não esteja nesse formato; equalização do histograma; e suavização da imagem por filtragem linear.
+  \item \textbf{Reconhecimento da imagem referência de fundo}: obtenção de um modelo adaptativo da imagem de fundo da cena, utilizando um método de rápido processamento.
+  \item \textbf{Definição da área de movimento}: determinação da região da cena com maior movimentação que, provavelmente, é a área de tráfego de veículos. Essa região de interesse também elimina movimentações indesejadas, como por exemplo, o movimento da vegetação.
+  \item \textbf{Segmentação de objetos}: subtrai a imagem referência de fundo do \textit{frame} corrente, segmentando os objetos de interesse. Também descarta objetos sem interesse.
+  \item \textbf{Acompanhamento de objetos segmentados}: rastreamento dos objetos segmentados ao longo dos quadros, evitando que o mesmo seja contado mais de uma vez.
+\end{enumerate}
+
+O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}.
+
+Os testes foram realizados a partir de 15 amostras de vídeos, sendo 14 com resolução $640\times 480$ e apenas 1 com resolução $320\times 240$, e duração média de 09:30 minutos. Para avaliar o desempenho do método, num primeiro momento foi feita uma contagem volumétrica manual dos veículos em cada amostra, para que assim o percentual de acerto do método automático, executado no \textit{laptop}, fosse calculado. Além disso, o tempo de execução de cada amostra foi medido.
+
+Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado por um dispositivo móvel com sistema operacional Android. Os mesmos testes foram realizados para as 15 amostras e o percentual de acerto permaneceu o mesmo, resultado esperado tendo em vista que os algoritmos de processamento de imagem e visão computacional não mudaram. Nesse novo cenário, o tempo de execução também foi medido. A Tabela \ref{tab:feitosa} lista as medições de cinco amostras.
 
 
-\cite{feitosa:2012:masther}
+\begin{table}[ht]
+  \caption{Comparação entre resultados de tempo de execução do método pelo \textit{laptop} e celular \citep{feitosa:2012:masther}.}
+  \label{tab:feitosa}
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+
+    \hline
+    Amostra & \% acerto & Duração do vídeo & Tempo celular & Tempo \textit{laptop}\\
+    \hline
+      1 & 90,58 & 00:15:08 & 01:00:56 & 00:03:54\\
+      \hline
+      2 & 92,45 & 00:05:15 & 00:19:55 & 00:01:36\\
+      \hline
+      3 & 91,30 & 00:02:44 & 00:11:55 & 00:00:27\\
+      \hline
+      4 & 98,15 & 00:10:18 & 00:48:18 & 00:03:39\\
+      \hline
+      5 & 97,71 & 00:13:07 & 01:09:27 & 00:03:48\\
+    \hline
+
+    \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Os percentual de acerto obtido nas contagens foi satisfatórios e aplicativo desenvolvido para executar em um \textit{laptop} foi adaptado e portado para um dispositivo móvel Android com sucesso. No entanto, o tempo de execução do método no dispositivo móvel não foi satisfatório, inviabilizando que essa aplicação funcione em tempo real.
 
 % subsection contagem_volum_trica_utilizando_dispositivos_m_veis (end)
 

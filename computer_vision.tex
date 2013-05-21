@@ -82,7 +82,7 @@ Em representações computacionais desse modelo os componentes R, G e B, denominad
 \section{Escala de cinza} % (fold)
 \label{sec:escala_de_cinza}
 
-A escala de cinza é muito utilizada em processamento de imagens digitais por ter menor custo computacional. Em imagens RGB são necessários 3 \textit{bytes} (um por canal) para definir a cor de um pixel, enquanto que em imagens \textit{grayscale}\footnote{Do inglês, escala de cinza.} a representação da cor de um pixel utiliza apenas 1 \textit{byte}, um terço de uma imagem RGB. De acordo com \cite{woods:2000:book}, sistemas de visão computacional em que a cor não é um requisito, é essencial converter as imagens RGB para \textit{grayscale} antes de qualquer operação, como mostrado na Figura \ref{fig:flowers}, diminuindo assim o peso do processamento digital.
+A escala de cinza é muito utilizada em processamento de imagens digitais por ter menor custo computacional. Em imagens RGB são necessários 3 \textit{bytes} (um por canal) para definir a cor de um pixel, enquanto que em imagens \textit{grayscale}\footnote{Escala de cinza.} a representação da cor de um pixel utiliza apenas 1 \textit{byte}, um terço de uma imagem RGB. De acordo com \cite{woods:2000:book}, sistemas de visão computacional em que a cor não é um requisito, é essencial converter as imagens RGB para \textit{grayscale} antes de qualquer operação, como mostrado na Figura \ref{fig:flowers}, diminuindo assim o peso do processamento digital.
 
 Para obter uma imagem \textit{grayscale} a partir de uma imagem RGB deve-se levar em conta a média da intensidade de cada canal. Essa conversão é dada por 
 
