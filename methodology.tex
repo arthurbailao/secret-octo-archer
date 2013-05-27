@@ -63,6 +63,14 @@ int main(int argc, char const *argv[])
 }
 \end{lstlisting}
 
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/frame.png}
+  \end{center}
+  \caption{\textit{Frame} obtido a partir do vídeo de entrada.}
+  \label{fig:frame_in}
+\end{figure}
+
 % section entrada_de_dados (end)
 
 \section{Pré-processamento} % (fold)
@@ -79,8 +87,15 @@ int main(int argc, char const *argv[])
     ...
   }
   ...  
-
 \end{lstlisting}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/gray.png}
+  \end{center}
+  \caption{Resultado da etapa de pré-processamento, uma imagem filtrada em escala de cinza.}
+  \label{fig:pre_processamento}
+\end{figure}
 
 % section pr_processamento (end)
 
@@ -99,7 +114,15 @@ int main(int argc, char const *argv[])
   ...
 \end{lstlisting}
 
-% section subtra_o_de_i (end)
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/foreground.png}
+  \end{center}
+  \caption{Detecção do \textit{foreground} na etapa de subtração de fundo.}
+  \label{fig:foreground}
+\end{figure}
+
+% section subtra_o_de_background (end)
 
 \section{Binarização} % (fold)
 \label{sec:binariza_o}
@@ -144,6 +167,27 @@ void bin(cv::Mat &src)
   ...  
 \end{lstlisting}
 
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/bin.png}
+      \end{center}
+      \caption{}
+      \label{fig:bin}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/morph.png}
+      \end{center}
+      \caption{}
+      \label{fig:morph}
+    \end{subfigure}
+  \end{center}
+  \caption{Resultado da etapa de binarização. (a) Imagem binarizada utilizando um limiar simples; (b) Operação morfológica de fechamento.}
+  \label{fig:bin_morph}
+\end{figure}
+
 % section binariza_o (end)
 
 \section{Detecção de \textit{blobs}} % (fold)
@@ -163,17 +207,25 @@ void bin(cv::Mat &src)
 
     cv::Ptr<cv::FeatureDetector> detector = 
                                  new cv::SimpleBlobDetector(params);
+    detector->create("SimpleBlob");
     ...
     for(;;) {
       ...
       std::vector<cv::KeyPoint> keypoints;
       detector.detect(morph, keypoints)
     }
-    ... 
-  
+    ...  
 \end{lstlisting}
 
-% section detec_o_de_textit_ (end)
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/keypoints.png}
+  \end{center}
+  \caption{Resultado da etapa de detecção de \textit{blobs}.}
+  \label{fig:keypoints}
+\end{figure}
+
+% section detec_o_de_blobs (end)
 
 \section{Rastreamento e contagem} % (fold)
 \label{sec:rastreamento_e_contagem}
@@ -182,8 +234,16 @@ void bin(cv::Mat &src)
   \begin{center}
     \includegraphics[scale=0.85]{imgs/fluxograma_contagem.pdf}
   \end{center}
-  \caption{Fluxograma do método de rastreamento de \textit{keypoints} utilizando \textit{trackers} e contagem de veículos.}
+  \caption{Fluxograma do algoritmo de rastreamento e contagem de veículos.}
   \label{fig:fluxograma_contagem}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/trackers.png}
+  \end{center}
+  \caption{Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a região de contagem.}
+  \label{fig:trackers}
 \end{figure}
 
 % section rastreamento_e_contagem (end)
