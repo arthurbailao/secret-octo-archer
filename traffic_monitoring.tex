@@ -158,12 +158,12 @@ Com o desenvolvimento de pesquisas na área de processamento de imagens digitais 
 
 % % subsection dire_o_aut_noma_de_ve_culo_inteligente (end)
 
-\subsection{Detecção de placa de veículos} % (fold)
-\label{sub:detec_o_de_placa_de_ve_culos}
+% \subsection{Detecção de placa de veículos} % (fold)
+% \label{sub:detec_o_de_placa_de_ve_culos}
 
-\cite{martinsky:2007:masther}
+% \cite{martinsky:2007:masther}
 
-% subsection detec_o_de_placa_de_ve_culos (end)
+% % subsection detec_o_de_placa_de_ve_culos (end)
 
 \subsection{Contagem volumétrica utilizando dispositivos móveis} % (fold)
 \label{sub:contagem_volum_trica_utilizando_dispositivos_m_veis}
@@ -183,7 +183,7 @@ Apesar de o objetivo do projeto ser a contagem volumétrica via dispositivos móve
   \item \textbf{Acompanhamento de objetos segmentados}: rastreamento dos objetos segmentados ao longo dos quadros, evitando que o mesmo seja contado mais de uma vez.
 \end{enumerate}
 
-O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}.
+O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execução em dispositivos móveis, o desempenho do algoritmo é um fator determinante. Por isso, foi necessário que alguns algoritmos de processamento de imagens, já existentes na OpenCV, fossem reimplementados com foco em velocidade de execução, o que elevou muito a complexidade do código. Na etapa de reconhecimento da imagem referência de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as funções de subtração de \textit{backgroud} já implementadas na OpenCV. No entanto, por ser um método mais completo e complexo, acarretaria em menor desempenho de execução se comparado à implementação de \citeauthor{feitosa:2012:masther}.
 
 Os testes foram realizados a partir de 15 amostras de vídeos, sendo 14 com resolução $640\times 480$ e apenas 1 com resolução $320\times 240$, e duração média de 09:30 minutos. Para avaliar o desempenho do método, num primeiro momento foi feita uma contagem volumétrica manual dos veículos em cada amostra, para que assim o percentual de acerto do método automático, executado no \textit{laptop}, fosse calculado. Além disso, o tempo de execução de cada amostra foi medido.
 

@@ -1,7 +1,25 @@
 % !TEX root = pfc.tex
 
+Como visto no Capítulo \ref{cha:vis_o_computacional}, existem diversas técnicas de processamento digital de imagens que viabilizam a construção de sistemas de visão computacional. A Seção \ref{sec:aplica_es_de_vis_o_computacional} descreve exemplos de sistemas de visão computacional voltados para o monitoramento do tráfego, deixando claro o alto nível de complexidade dessas aplicações do ponto de vista de desenvolvimento. São trabalhos com ótimos resultados, mas de elevada complexidade algorítmica, exigindo um conhecimento profundo na área para um entendimento completo das metodologias propostas.
 
-Como visto no Capítulo \ref{cha:vis_o_computacional}, existem diversas técnicas de processamento digital de imagens que possibilitam que aplicações de visão computacional sejam capazes de extrair informações a partir de uma ou mais imagens de entrada.
+Este trabalho se diferencia dos demais por adotar uma metodologia simplificada, utilizando algoritmos de processamento de imagem já implementados pela biblioteca OpenCV 2.4.4 \citep{opencv_library}, diminuindo a complexidade da solução. Nas seções a seguir, o fluxo de processos é descrito e detalhado, bem como as características de captura e cena especificadas.
+
+\section{Características de captura} % (fold)
+\label{sec:caracter_sticas_de_captura}
+
+Os vídeos do tráfego foram feitos com a câmera que equipa um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, com as seguintes especificações:
+
+\begin{itemize}
+  \item CPU: 1,4 GHz
+  \item Memória: 8 GB
+  \item Sistema operacional: Windows Phone 7.8
+  \item Câmera: 5.0 Megapixel
+  \item Gravação de vídeos HD 720p @30fps
+\end{itemize}
+
+Inicialmente, as imagens foram capturadas e salvas na memória interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todos os vídeos foram feitos durante o dia, em condições de iluminação estável e boa quantidade de luz. Portanto, o método proposto neste trabalho não está validado para grandes variações de iluminação ou cenas com pouca luz.
+
+Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a ocorrência de oclusão, ou seja, dependendo do ângulo de captura, alguns veículos não aparecem em parte ou por completo nas imagens. Alguns sistemas automáticos de contagem mais complexos tratam o problema de oclusão utilizando modelos para a forma dos veículos e calibração de câmera \citep{song:2005}. O método de contagem desenvolvido neste trabalho não leva em conta a possibilidade de oclusão e, com intuito de minimizar esse efeito, buscou-se um ângulo de captura superior e frontal à via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posição de captura e a cena obtida.
 
 \begin{figure}[ht]
   \begin{center}
@@ -20,10 +38,18 @@ Como visto no Capítulo \ref{cha:vis_o_computacional}, existem diversas técnicas 
       \label{fig:original_frame}
     \end{subfigure}
   \end{center}
-  \caption{(a) Posicinamento da câmera para captura de imagens. A área em destaque simboliza }
+  \caption{(a) Posicionamento da câmera para captura de imagens. A área em destaque simboliza o campo de visão obtido na posição escolhida. (b) Cena capturada na Avenida Presidente Carlos Luz.}
   \label{fig:cena}
 \end{figure}
 
+% section caracter_sticas_de_captura (end)
+
+\section{Fluxo de processos} % (fold)
+\label{sec:fluxo_de_processos}
+
+O método aqui apresentado pode ser dividido em seis etapas globais: entrada de dados, pré-processamento, subtração de \textit{background}, binarização, detecção de \textit{blobs} e rastreamento e contagem. A Figura \ref{fig:general_process} representa o fluxograma global do processo.
+
+Para cada etapa de processamento de imagens existe o código \verb!C++! correspondente às operações realizadas pelas mesma, com o objetivo de mostrar a simplicidade de uso da biblioteca OpenCV. O resultado obtido em cada etapa é apresentado por meio de imagens intermediárias do processo. Na última etapa, o fluxograma da Figura \ref{fig:fluxograma_contagem} descreve o algoritmo implementado para rastreamento e contagem dos veículos.
 
 \begin{figure}[ht]
   \begin{center}
@@ -33,19 +59,22 @@ Como visto no Capítulo \ref{cha:vis_o_computacional}, existem diversas técnicas 
   \label{fig:general_process}
 \end{figure}
 
-\section{Entrada de dados} % (fold)
-\label{sec:entrada_de_dados}
+De forma resumida, o método proposto considera o vídeo como um conjunto de imagens sequenciais, obtidas uma a uma na etapa de entrada de dados. Em seguida, cada imagem, chamada também de quadro ou \textit{frame} de vídeo, passa por uma etapa de pré-processamento, responsável pela conversão para escala de cinza e uma filtragem linear. O resultado é então usado para criação de um modelo do plano de fundo da cena e que, por meio de uma subtração do quadro atual, consegue-se isolar os objetos em movimento que encontram-se em primeiro plano. Na etapa de binarização, um limiar de intensidade de cor segmenta a imagem em regiões brancas, que são os objetos em movimento, e pretas, que representam o plano de fundo. Posteriormente, os objetos brancos em movimento são detectados como componentes conectados ou \textit{blobs}, e seu centro é tido como ponto chave para a etapa de rastreamento e contagem. Por último, um algoritmo leva em conta os pontos chave, ou \textit{keypoints}, para realizar o rastreamento e contagem dos veículos.
+
+\subsection{Entrada de dados} % (fold)
+\label{sub:entrada_de_dados}
+
+A obtenção dos dados num sistema de visão computacional pode ser feita em tempo real ou a partir de imagens já capturadas previamente. No trabalho em questão, esse processo se dá por meio de vídeos já salvos em disco, através do trecho de código \verb!C++! a seguir:
 
 \begin{lstlisting}
 #include <iostream>
-
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
 int main(int argc, char const *argv[])
 {
-  cv::VideoCapture capture;
+  cv::VideoCapture capture("video.avi");
   if(!capture.isOpened()) {
     std::cout << "can not open camera or video file" << std::endl;
     return;
@@ -63,6 +92,10 @@ int main(int argc, char const *argv[])
 }
 \end{lstlisting}
 
+A classe \verb!cv::VideoCapture! da OpenCV faz todo o trabalho de obtenção dos \textit{frames}, abstraindo um arquivo de vídeo por uma sequência de imagens, obtidas uma a uma na linha: \verb!capture >> frame!. A Figura \ref{fig:frame_in} representa um \textit{frame} do vídeo, usado para exemplificar o resultado do processamento de cada etapa subsequente. 
+
+Vale ressaltar que a biblioteca OpenCV utiliza objetos do tipo \verb!cv::Mat! para armazenar em memória os dados de uma imagem, sendo este também o tipo de entrada e saída para a maioria das funções de processamento de imagem.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/frame.png}
@@ -71,10 +104,12 @@ int main(int argc, char const *argv[])
   \label{fig:frame_in}
 \end{figure}
 
-% section entrada_de_dados (end)
+% subsection entrada_de_dados (end)
 
-\section{Pré-processamento} % (fold)
-\label{sec:pr_processamento}
+\subsection{Pré-processamento} % (fold)
+\label{sub:pr_processamento}
+
+A principal função da etapa de pré-processamento é a conversão da imagem de entrada para \textit{grayscale}, uma vez que informações de cor não são relevantes nas etapas seguintes e o processamento de imagens em escala de cinza, que possuem apenas um canal, é mais rápido. No código, a conversão é feita pela chamada da função \verb!cv::cvtColor!, passando como parâmetros as imagens de entrada e saída, e o \textit{flag} \verb!CV_BGR2GRAY!, que indica o tipo de operação desejada.
 
 \begin{lstlisting}
   ...
@@ -89,6 +124,8 @@ int main(int argc, char const *argv[])
   ...  
 \end{lstlisting}
 
+Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na Seção \ref{sec:filtragem_linear}, com o objetivo de atenuar ruídos oriundos do processo de captura e provocar um efeito suave de borramento na imagem. A chamada da função \verb!cv::GaussianBlur! realiza a operação de filtragem, que é parametrizada pelas imagens de entrada e saída, o tamanho do \textit{kernel} utilizado como elemento de convolução e o desvio padrão nas direções X e Y. O resultado desse procedimento é ilustrado na Figura \ref{fig:pre_processamento}.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/gray.png}
@@ -97,10 +134,12 @@ int main(int argc, char const *argv[])
   \label{fig:pre_processamento}
 \end{figure}
 
-% section pr_processamento (end)
+% subsection pr_processamento (end)
 
-\section{Subtração de \textit{background}} % (fold)
-\label{sec:subtra_o_de_background}
+\subsection{Subtração de \textit{background}} % (fold)
+\label{sub:subtra_o_de_background}
+
+A subtração de \textit{background} é a operação mais complexa e custosa, do ponto de vista computacional, entre todas as etapas de processamento de imagens do trabalho em questão, mas o seu uso a partir da implementação da OpenCV é extremamente simples. Internamente, a OpenCV constroi um modelo adaptativo de mistura de gaussianas para subtração de \textit{background} com detecção de sombras, baseado em \cite{zivkovic:2004} e \cite{zivkovic:2006}. Nesse método, cada píxel é modelado como uma mistura de gaussianas e, em cada iteração, a probabilidade do pixel pertencer ao plano de fundo é calculada.
 
 \begin{lstlisting}
   ...
@@ -114,6 +153,8 @@ int main(int argc, char const *argv[])
   ...
 \end{lstlisting}
 
+No código \verb!C++!, essa operação pode ser realizada em duas linhas: a declaração do objeto \verb!model! da classe \verb!cv::BackgroundSubtractorMOG2! e a extração da imagem de \textit{foreground}, ou imagem de primeiro plano, com a chamada \verb!model(gray, foreground)!. O resultado é mostrado na Figura \ref{fig:foreground}, onde os pixels pretos representam o plano de fundo, os brancos os objetos em movimento do primeiro plano e os pixels cinza suas sombras.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/foreground.png}
@@ -122,40 +163,22 @@ int main(int argc, char const *argv[])
   \label{fig:foreground}
 \end{figure}
 
-% section subtra_o_de_background (end)
+% subsection subtra_o_de_background (end)
 
-\section{Binarização} % (fold)
-\label{sec:binariza_o}
+\subsection{Binarização} % (fold)
+\label{sub:binariza_o}
+
+Em visão computacional, imagens binárias são aquelas que possuem apenas dois valores de intensidade, normalmente 0 (preto) e 255 (branco). Geralmente, os pixels branco pertencem aos objetos de interesse da cena, que no escopo desse trabalho fazem parte dos veículos em movimento. A etapa de binarização é responsável por segmentar as regiões de interesse da cena para que, nas próximas etapas, sejam detectadas e rastreadas.
+
+A imagem de primeiro plano obtida na etapa anterior (Subseção \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels branco sozinhos não definem muito bem um veículo, mas o conjuntos dos pixels branco e cinza sim. Então, é feita uma operação de limiarização, também conhecida por \textit{thresholding} (Seção \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso é feito pela chamada da função \verb! cv::threshold!, parametrizada pelas imagens de entrada e saída, um valor de limiar baixo, que garante a elevação à branco de praticamente todos os tons de cinza, e o tipo de limiarização a ser aplicada, nesse caso binária. 
+
+Percebe-se na Figura \ref{fig:bin} que a operação de \textit{thresholding} segmentou corretamente os veículos. No entanto, para detecção de objetos em visão computacional, é interessante que as regiões de interesse sejam uniformes e não contenham orifícios. Nesse tipo de situação é muito comum o uso de operações morfológicas, que são capazes de alterar a forma dos objetos segmentados em imagens binárias. Como o objetivo é uniformizar a região de segmentação dos objetos, deve-se aplicar uma operação de fechamento, que diminui orifícios e descontinuidades nas regiões de interesse, alongando os segmentos de cor branca pelas imperfeições de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na região dos objetos segmentados.
 
 \begin{lstlisting}
-
-void bin(cv::Mat &src)
-{
-    //conta os pixeis cinza
-    int sumGray = 0, sumWhite = 0;
-    for(int i = 0; i < src.rows; i++) {
-        const uchar* ptri = src.ptr<uchar>(i);
-        for(int j = 0; j < src.cols; j++) {
-            if(ptri[j] != 0 && ptri[j] != 255)
-                sumGray++;
-            else if(ptri[j] == 255)
-                sumWhite++;
-        }
-    }
-
-    if(sumWhite == 0) {
-        src.setTo(cv::Scalar(0));
-    }
-    else if((float)sumGray/(float)sumWhite > 10.0)
-        cv::threshold(src, src, 250, 255, CV_THRESH_BINARY);
-    else
-        cv::threshold(src, src, 5, 255, CV_THRESH_BINARY);
-}
-
   ...
   for(;;) {
     ...
-    bin(foreground);
+    cv::threshold(foreground, foreground, 5, 255, CV_THRESH_BINARY);
 
     cv::Mat morph;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,
@@ -166,6 +189,8 @@ void bin(cv::Mat &src)
   }
   ...  
 \end{lstlisting}
+
+As operações morfológicas, assim como os filtros, também utilizam um elemento estrutural que percorre toda a imagem. Nesse caso, utilizou-se um \textit{kernel} elíptico, que é a forma que mais se aproxima de um veículo na imagem binarizada. A criação desse elemento se dá pela chamada da função \verb!cv::getStructuringElement!, que recebe como parâmetro a forma e o tamanho desejados. A operação de fechamento propriamente dita é feita pelo método \verb!cv::morphologyEx!, parametrizado pelas imagens de entrada e saída, o tipo de operação morfológica, o elemento estrutural, o ponto de ancoragem com o \textit{kernel} (\verb!cv::Point(-1,-1)!  representa o centro) e o número de iterações.
 
 \begin{figure}[ht]
   \begin{center}
@@ -188,10 +213,14 @@ void bin(cv::Mat &src)
   \label{fig:bin_morph}
 \end{figure}
 
-% section binariza_o (end)
+% subsection binariza_o (end)
 
-\section{Detecção de \textit{blobs}} % (fold)
-\label{sec:detec_o_de_blobs}
+\subsection{Detecção de \textit{blobs}} % (fold)
+\label{sub:detec_o_de_blobs}
+
+Uma vez segmentados, os objetos de interesse são detectados nessa etapa como \textit{blobs}, que são regiões de pontos com valor 255 (branco), conectados entre si, definidas pelo seu ponto central e diâmetro. A biblioteca OpenCV utiliza a entidade \verb!cv::KeyPoint! para representá-los. Nesse caso, a principal função dos \textit{keypoints} é definir a posição de cada objeto segmentado, para que na próxima etapa esses pontos sejam rastreados.
+
+A OpenCV disponibiliza uma interface abstrata para detecção de \textit{keypoints}, chamada \verb!cv::FeatureDetector!. Uma de suas especializações é a classe \verb!cv::SimpleBlobDetector!, capaz de extrair \textit{blobs} de uma imagem. Em sua contrução, a classe \verb!cv::SimpleBlobDetector! recebe uma estrutura de parâmetros de filtragem, responsáveis por descartar pontos que não atendam as especificações desejadas. O método proposto habilita apenas dois tipos de filtro: de cor, que considera apenas \textit{blobs} brancos, e área, que abrange regiões com área mínima de 500 pixels e máxima de 80000.
 
 \begin{lstlisting}
   ...
@@ -217,6 +246,10 @@ void bin(cv::Mat &src)
     ...  
 \end{lstlisting}
 
+Uma vez criado, o objeto \verb!detector!, através do método \verb!detect!, recebe como parâmetro a imagem binarizada da Figura \ref{fig:morph} e retorna um vetor de \textit{keypoints}, contendo todos os \textit{blobs} detectados naquele \textit{frame}. A Figura \ref{fig:keypoints} ilustra os pontos detectados, representados pelos círculos em vermelho. 
+
+Esta é a última operação que envolve processamento de imagem. Com a posição e o tamanho dos \textit{blobs} detectados, definidos por um vetor de \textit{keypoints}, é possível criar um algoritmo de rastreamento que garanta que cada objeto seja contado apenas uma vez, como descrito logo a seguir na Subseção \ref{sub:rastreamento_e_contagem}.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/keypoints.png}
@@ -225,10 +258,31 @@ void bin(cv::Mat &src)
   \label{fig:keypoints}
 \end{figure}
 
-% section detec_o_de_blobs (end)
+% subsection detec_o_de_blobs (end)
 
-\section{Rastreamento e contagem} % (fold)
-\label{sec:rastreamento_e_contagem}
+\subsection{Rastreamento e contagem} % (fold)
+\label{sub:rastreamento_e_contagem}
+
+Assim como em todas as etapas anteriores, buscou-se a implementação de um método simples de rastreamento e contagem, mas que fosse capaz de obter bons resultados. O algoritmo utiliza o vetor de \textit{keypoints}, obtido na etapa anterior, e uma máscara binária, que define a região de contagem. Um objeto só é contabilizado quando o \textit{keypoint} que o define entra na região de contagem, definida pelos pixels branco da Figura \ref{fig:bin_mask}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.5]{imgs/bin_mask.png}
+  \end{center}
+  \caption{Máscara binária que define a região de contagem do algoritmo.}
+  \label{fig:bin_mask}
+\end{figure}
+
+O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, é feito por um perseguidor, denominado \textit{tracker}. Um \textit{tracker} é um objeto circular, definido por sua posição e raio. Um \textit{keypoint} está contido em um \textit{tracker} se a distância entre eles for menor que o raio do \textit{trakcer}, ou seja, se o \textit{keypoint} pertencer à área definida pelo \textit{trakcer}. Ná Figura \ref{fig:trackers}, o \textit{tracker} é representado pelos círculos azuis. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, além de ingressar na região de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} válidos, para que na próxima iteração esses dados sirvam como validação para a operação de contagem.
+
+O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado é gerado uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obtém-se todos os \textit{trackers} que o contenham. Nesse momento, três situações podem ser identificadas:
+
+\begin{enumerate}
+  \item Ainda não existe nenhum \textit{tracker} que contenha \textit{keypoint};
+  \item Existe apenas um \textit{tracker} que contenha \textit{keypoint};
+  \item Existe mais de um \textit{tracker} que contenha \textit{keypoint}.
+\end{enumerate}
+
 
 \begin{figure}[ht]
   \begin{center}
@@ -238,6 +292,12 @@ void bin(cv::Mat &src)
   \label{fig:fluxograma_contagem}
 \end{figure}
 
+O primeiro caso acontece quando um \textit{keypoint} acabou de ser detectado na cena. Um \textit{tracker} para rastreá-lo é criado na mesma posição de \textit{keypoint} e inserido na lista interna de \textit{trackers}, a menos que o \textit{keypoint} encontre-se na área de contagem. Ou seja, não faz sentido rastrear objetos que surgiram subtamente dentro da área de contagem.
+
+Na situação 2, o \textit{tracker} encontrado indica que o \textit{keypoint} já estava sendo rastreado nas iterações anteriores. A posição do \textit{tracker} representa exatamente a posição do objeto na última iteração. Logo, se o \textit{tracker} encontra-se \textbf{fora} da área de contagem e o \textit{keypoint} \textbf{dentro}, significa que o objeto acabou de entrar em uma condição válida de contagem, ou seja, ingressou na região de contagem definida pela máscara binária, e mais um veículo é contabilizado. Uma vez contado, o \textit{tracker} daquele objeto é removido da lista de \textit{trackers}, uma vez que não é mais necessário rastreá-lo. Caso a condição de contagem não seja atendida, a posição do \textit{tracker} é atualizada para a mesma de \textit{keypoint}.
+
+A situação 3 acontece quando um \textit{keypoint} está contido em mais de \textit{tracker}, devido à proximidade de dois ou mais objetos detectados na cena. Esse caso é tratado da mesma forma que na situação 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais próximo de \textit{keypoint}.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/trackers.png}
@@ -246,4 +306,10 @@ void bin(cv::Mat &src)
   \label{fig:trackers}
 \end{figure}
 
-% section rastreamento_e_contagem (end)
+Depois de percorrer todos os \textit{keypoints}, o algoritmo remove da lista os \textit{trackers} que não contenham ao menos um \textit{keypoint}. Isso é necessário pois a detecção de objetos não é perfeita, ou seja, se em algum \textit{frame} um objeto já anteriormente rastreado não for detectado como um \textit{keypoint}, aparece na lista de \textit{trackers} um elemento que não contém um \textit{keypoint}, configurando uma condição inválida.
+
+A Figura \ref{fig:trackers} ilustra um veículo que entrou na região de contagem, teve seu \textit{tracker} removido e foi contabilizado corretamente. Percebe-se também que qualquer objeto em movimento é detectado e rastreado, como uma pessoa caminhando. No entanto, somente objetos que possuam um \textit{keypoint} contido por um \textit{tracker} e que entrem na região de contagem são contabilizados.
+
+% subsection rastreamento_e_contagem (end)
+
+% section fluxo_de_processos (end)
