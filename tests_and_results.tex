@@ -1,5 +1,75 @@
 % !TEX root = pfc.tex
 
+O método proposto foi implementado em forma de um \textit{software} multiplataforma, desenvolvido em linguagem \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho de execução e fácil implementação utilizando os conceitos de programação orientada a objetos.
+
+Como biblioteca para processamento das imagens, foi utilizado a OpenCV 2.4.4 \citep{opencv_library}, contribuindo para que operações complexas de visão computacional pudessem ser realizadas com poucas linhas de código. O desenvolvimento do método não está preso à tecnologia escolhida, podendo ser empregado utilizando outras linguagens de programação, bem como outras bibliotecas. A tecnologia foi escolhida visando a simplicidade no processo de desenvolvimento das operações de processamento de imagens, que estão bem detalhadas pelos trechos de código na Seção \ref{sec:fluxo_de_processos}.
+
+\section{Testes} % (fold)
+\label{sec:testes}
+
+Todos os vídeos foram capturados por um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, como descrito na Seção \ref{sec:caracter_sticas_de_captura}. As imagens foram feitas na passarela localizada na Av. Presidente Carlos Luz, nos dois sentidos da via, como ilustra a Figura \ref{fig:sentidos}. Duas configurações de captura foram utilizadas:
+
+\begin{itemize}
+  \item HD 720p: gerando vídeos com resolução $1280\times 720$, e \textit{framerate} de 29 FPS;
+  \item VGA: gerando vídeos com resolução $640\times 480$, e \textit{framerate} de 29 FPS.
+\end{itemize}
+
+\noindent Uma terceira resolução foi obtida a partir dos vídeos em HD, aplicando uma operação para redimensioná-los com altura e largura a metade do valor original. Essas variações de cena e resolução foram feitas com o objetivo de avaliar o comportamento do método em diferentes condições. Assim, será possível identificar separadamente qual o impacto de cada variável no resultado final. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/trackers.png}
+      \end{center}
+      \caption{}
+      \label{fig:sentido_pampulha}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/sentido_centro.png}
+      \end{center}
+      \caption{}
+      \label{fig:sentido_centro}
+    \end{subfigure}
+  \end{center}
+  \caption{Resultado do método de contagem para dois tipos de cena. (a) Av. Carlos Luz, sentido Pampulha; (b) Av. Carlos Luz, sentido Centro.}
+  \label{fig:sentidos}
+\end{figure}
+
+\begin{table}[ht]
+  \caption{Vídeos utilizados nos testes.}
+  \label{tab:videos_teste}
+  \begin{center}
+    \begin{tabular}{l|cccc}
+    \hline
+
+    \hline
+    \textbf{Nome do vídeo} & \textbf{Formato} & \textbf{Resolução} & \textbf{Duração} & \textbf{FPS} \\
+    \hline
+      carlos\_luz\_centro\_vga & mp4 & $ 640\times 480 $ & 00:05:23 & 29 \\
+      carlos\_luz\_centro\_hd\_resized & mpeg & $ 640\times 360 $ & 00:05:25 & 29 \\
+      carlos\_luz\_centro\_hd & mp4 & $ 1280\times 720 $ & 00:05:29 & 29 \\
+      carlos\_luz\_pampulha\_vga\_1 & mp4 & $ 640\times 480 $ & 00:05:43 & 29 \\
+      carlos\_luz\_pampulha\_vga\_2 & mp4 & $ 640\times 480 $ & 00:05:19 & 29 \\
+      carlos\_luz\_pampulha\_hd\_2\_resized & mpeg & $ 640\times 360 $ & 00:06:19 & 29 \\
+      carlos\_luz\_pampulha\_hd\_2 & mp4 & $ 1280\times 720 $ & 00:06:21 & 29 \\
+    \hline
+
+    \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em um \textit{Laptop} Dell Vostro V131, Processador Intel Core I3-2330M (2.20GHZ, dual core 4 Threads, 3MB L3 cache), 8GB de memória RAM, em ambiente Linux Fedora 18 (Spherical Cow).
+
+% section testes (end)
+
+\section{Resultados finais} % (fold)
+\label{sec:resultados_finais}
+
+Na Tabela \ref{tab:resultados_contagem} são apresentados os resultados obtidos pela contagem via métodos manual e automático, indicando o percentual de acerto para cada amostra. É importante destacar que o resultado da contagem automática representa o total de veículos identificados na amostra, incluindo falsos positivos e descartando objetos não detectados ou rastreados corretamente. Portanto, os percentuais de acerto são medições estatísticas, que representam apenas o desvio existente entre o valor real e o valor medido.
+
 \begin{table}[ht]
   \caption{Resultados de contagem volumétrica.}
   \label{tab:resultados_contagem}
@@ -24,6 +94,14 @@
   \end{center}
 \end{table}
 
+Percebe-se que para uma mesma cena, a variação da resolução do vídeo não afeta de forma siginificativa o percentual de acerto, mostrando que vídeos de alta resolução não trazem vantagens nesse tipo de aplicação. Já a mudança da cena alterou o resultado. Nas amostras do tráfego no sentido centro o percentual de acerto foi superior a 95\%, enquando que as imagens do outro sentido não ultrapassaram os 90\%. 
+
+Analisando as imagens dos dois sentidos %fallar que uma eh pior pq tem mais caminhao e onibus
+
+Portanto, as características de uma cena, tais como o posicionamento 
+
+As amostras do tráfego sentido centro obtiveram  
+
 \begin{table}[ht]
   \caption{Tempo real gasto na execução do método de contagem.}
   \label{tab:resultados_tempo}
@@ -47,6 +125,9 @@
     \end{tabular}
   \end{center}
 \end{table}
+
+% section resultados_finais (end)
+
 
 
 
