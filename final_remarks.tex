@@ -1,13 +1,32 @@
 % !TEX root = pfc.tex
 
-O método automático de contagem volumétrica de veículos apresentado nesse trabalho obteve resultados estatísticos satisfatórios, alcaçando os 98\% de acerto em uma das amostras testadas.
+Baseado nos estudos das técnicas de processamento de imagens e trabalhos de visão computacional com objetivos semelhantes, foi criado um método de simples implementação que realiza a segmentação e o acompanhamento de objetos, tornando assim possível a contagem volumétrica dos mesmos. Em todas as amostras, mostradas na Tabela \ref{tab:resultados_contagem}, a contagem realizada se mostrou satisfatória.
 
-\section{Pontos negativos do método} % (fold)
+O desempenho do algoritmo para as amostras em HD foi baixo, inviabilizando a execução em tempo real. No ambiente de testes utilizado, descrito na Seção \ref{sec:testes}, apenas os vídeos com resolução $640\times 360$ poderiam ser utilizados para processamento em tempo real. Com um poder de processamento maior, provavelmente seria possível realizar a contagem em tempo real nos vídeos com resolução $640\times 480$.
+
+Embora já existam diversos métodos para a realização de contagem volumétrica de veículos, como descrito no Capítulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles são muito caros e causam transtornos na via durante sua instalação e manutenção. O trabalho em questão propõe um método não-invasivo, de baixo custo e simples implementação, capaz de obter medições de boa precisão.
+
+\section{Limitações} % (fold)
 \label{sec:pontos_negativos_do_m_todo}
+
+Vários aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background}, por exemplo, apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. 
+
+Como não foi desenvolvido um método para identificar se o objeto em movimento é um veiculo ou não, alguns elementos indesejáveis foram considerados na contagem. Ao mesmo tempo, devido à proximidade, a detecção de \textit{blobs} falhou e alguns veículos não foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
 
 % section pontos_negativos_do_m_todo (end)
 
 \section{Trabalhos futuros} % (fold)
+
+Como possíveis trabalhos futuros, podem ser apontados:
+
+\begin{itemize}
+  \item Definição de uma uma região de interesse baseada na área com maior movimentação nas imagens;
+  \item Desenvolvimento de um método para contagem de veículos no período noturno ou em locais com baixa iluminação;
+  \item Criação de técnicas para classificação de veículos quanto ao tamanho;
+  \item Contagem de veículos em cruzamentos, com deslocamentos em várias direções e sentidos;
+  \item Estimação do volume do tráfego em vias congestionadas.
+\end{itemize}
+
 \label{sec:trabalhos_futuros}
 
 % section trabalhos_futuros (end)
