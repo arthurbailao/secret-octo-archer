@@ -7,7 +7,7 @@ Este trabalho se diferencia dos demais por adotar uma metodologia simplificada, 
 \section{Características de captura} % (fold)
 \label{sec:caracter_sticas_de_captura}
 
-Os vídeos do tráfego foram feitos com a câmera que equipa um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, com as seguintes especificações:
+A captura das imagens do tráfego foram feitas com a câmera que equipa um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, com as seguintes especificações:
 
 \begin{itemize}
   \item CPU: 1,4 GHz
@@ -17,9 +17,9 @@ Os vídeos do tráfego foram feitos com a câmera que equipa um aparelho celular Sa
   \item Gravação de vídeos HD 720p @30fps\footnote{\textit{Frames per second}, ou frames por secundo.}
 \end{itemize}
 
-Inicialmente, as imagens foram capturadas e salvas na memória interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todos os vídeos foram feitos durante o dia, em condições de iluminação estável e boa quantidade de luz. Portanto, o método proposto neste trabalho não está validado para grandes variações de iluminação ou cenas com pouca luz.
+Inicialmente, as imagens foram capturadas e salvas na memória interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todas as imagens foram capturadas durante o dia, em condições de iluminação estável e boa luminosidade. Portanto, o método proposto neste trabalho não está validado para grandes variações de iluminação ou cenas com pouca luz.
 
-Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a ocorrência de oclusão, ou seja, dependendo do ângulo de captura, alguns veículos não aparecem em parte ou por completo nas imagens. Alguns sistemas automáticos de contagem mais complexos tratam o problema de oclusão utilizando modelos para a forma dos veículos e calibração de câmera \citep{song:2005}. O método de contagem desenvolvido neste trabalho não leva em conta a possibilidade de oclusão e, com intuito de minimizar esse efeito, buscou-se um ângulo de captura superior e frontal à via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posição de captura e a cena obtida.
+Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a ocorrência de oclusão, ou seja, dependendo do ângulo de captura, alguns veículos não aparecem em parte ou por completo nas imagens. Alguns sistemas automáticos de contagem mais complexos tratam o problema de oclusão utilizando modelos para a forma dos veículos e calibração de câmera \citep{song:2005}. O método de contagem desenvolvido neste trabalho não considera a possibilidade de oclusão e, com intuito de minimizar esse efeito, buscou-se um ângulo de captura superior e frontal à via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posição de captura e a cena obtida.
 
 \begin{figure}[ht]
   \begin{center}
@@ -59,12 +59,12 @@ Para cada etapa de processamento de imagens existe o código \verb!C++! correspon
   \label{fig:general_process}
 \end{figure}
 
-De forma resumida, o método proposto considera o vídeo como um conjunto de imagens sequenciais, obtidas uma a uma na etapa de entrada de dados. Em seguida, cada imagem, chamada também de quadro ou \textit{frame} de vídeo, passa por uma etapa de pré-processamento, responsável pela conversão para escala de cinza e uma filtragem linear. O resultado é então usado para criação de um modelo do plano de fundo da cena e que, por meio de uma subtração do quadro atual, consegue-se isolar os objetos em movimento que encontram-se em primeiro plano. Na etapa de binarização, um limiar de intensidade de cor segmenta a imagem em regiões brancas, que são os objetos em movimento, e pretas, que representam o plano de fundo. Posteriormente, os objetos brancos em movimento são detectados como componentes conectados ou \textit{blobs}, e seu centro é tido como ponto chave para a etapa de rastreamento e contagem. Por último, um algoritmo leva em conta os pontos chave, ou \textit{keypoints}, para realizar o rastreamento e contagem dos veículos.
+De forma resumida, o método proposto considera o vídeo como um conjunto de imagens sequenciais, obtidas uma a uma na etapa de entrada de dados. Em seguida, cada imagem, chamada também de quadro ou \textit{frame} de vídeo, passa por uma etapa de pré-processamento, responsável pela conversão para escala de cinza e uma filtragem linear. O resultado é usado para criação de um modelo do plano de fundo da cena e que, por meio de uma subtração do quadro atual, consegue-se isolar os objetos em movimento que encontram-se em primeiro plano. Na etapa de binarização, um limiar de intensidade de cor segmenta a imagem em regiões brancas, que são os objetos em movimento, e pretas, que representam o plano de fundo. Posteriormente, os objetos brancos em movimento são detectados como componentes conectados ou \textit{blobs}, e seu centro é tido como ponto chave para a etapa de rastreamento e contagem. Por último, um algoritmo considera os pontos chave, ou \textit{keypoints}, para realizar o rastreamento e contagem dos veículos.
 
 \subsection{Entrada de dados} % (fold)
 \label{sub:entrada_de_dados}
 
-A obtenção dos dados num sistema de visão computacional pode ser feita em tempo real ou a partir de imagens já capturadas previamente. No trabalho em questão, esse processo se dá por meio de vídeos já salvos em disco, através do trecho de código \verb!C++! a seguir:
+A obtenção dos dados em um sistema de visão computacional pode ser feita em tempo real ou a partir de imagens já capturadas previamente. No trabalho em questão, esse processo se dá por meio de vídeos já salvos em disco, através do trecho de código \verb!C++! a seguir:
 
 \begin{lstlisting}
 #include <iostream>
@@ -139,7 +139,7 @@ Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na Seção \ref{se
 \subsection{Subtração de \textit{background}} % (fold)
 \label{sub:subtra_o_de_background}
 
-A subtração de \textit{background} é a operação mais complexa e custosa, do ponto de vista computacional, entre todas as etapas de processamento de imagens do trabalho em questão, mas o seu uso a partir da implementação da OpenCV é extremamente simples. Internamente, a OpenCV constroi um modelo adaptativo de mistura de gaussianas para subtração de \textit{background} com detecção de sombras, baseado em \cite{zivkovic:2004} e \cite{zivkovic:2006}. Nesse método, cada píxel é modelado como uma mistura de gaussianas e, em cada iteração, a probabilidade do pixel pertencer ao plano de fundo é calculada.
+A subtração de \textit{background} é a operação mais complexa e custosa, do ponto de vista computacional, entre todas as etapas de processamento de imagens do trabalho em questão, mas o seu uso, a partir da implementação da OpenCV, é extremamente simples. Internamente, a OpenCV constrói um modelo adaptativo de mistura de gaussianas para subtração de \textit{background} com detecção de sombras, baseado em \cite{zivkovic:2004} e \cite{zivkovic:2006}. Nesse método, cada píxel é modelado como uma mistura de gaussianas e, em cada iteração, a probabilidade do pixel pertencer ao plano de fundo é calculada.
 
 \begin{lstlisting}
   ...
@@ -172,7 +172,7 @@ Em visão computacional, imagens binárias são aquelas que possuem apenas dois val
 
 A imagem de primeiro plano obtida na etapa anterior (Subseção \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels branco sozinhos não definem muito bem um veículo, mas o conjuntos dos pixels branco e cinza sim. Então, é feita uma operação de limiarização, também conhecida por \textit{thresholding} (Seção \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso é feito pela chamada da função \verb! cv::threshold!, parametrizada pelas imagens de entrada e saída, um valor de limiar baixo, que garante a elevação à branco de praticamente todos os tons de cinza, e o tipo de limiarização a ser aplicada, nesse caso binária. 
 
-Percebe-se na Figura \ref{fig:bin} que a operação de \textit{thresholding} segmentou corretamente os veículos. No entanto, para detecção de objetos em visão computacional, é interessante que as regiões de interesse sejam uniformes e não contenham orifícios. Nesse tipo de situação é muito comum o uso de operações morfológicas, que são capazes de alterar a forma dos objetos segmentados em imagens binárias. Como o objetivo é uniformizar a região de segmentação dos objetos, deve-se aplicar uma operação de fechamento, que diminui orifícios e descontinuidades nas regiões de interesse, alongando os segmentos de cor branca pelas imperfeições de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na região dos objetos segmentados.
+Percebe-se na Figura \ref{fig:bin} que a operação de \textit{thresholding} segmentou corretamente os veículos. No entanto, para detecção de objetos em visão computacional, é interessante que as regiões de interesse sejam uniformes e não contenham orifícios. Nesse tipo de situação é comum o uso de operações morfológicas, capazes de alterar a forma dos objetos segmentados em imagens binárias. Como o objetivo é uniformizar a região de segmentação dos objetos, deve-se aplicar uma operação de fechamento, que diminui orifícios e descontinuidades nas regiões de interesse, alongando os segmentos de cor branca pelas imperfeições de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na região dos objetos segmentados.
 
 \begin{lstlisting}
   ...

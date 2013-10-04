@@ -5,22 +5,22 @@ De acordo com \cite{dnit:2011:online}, Departamento Nacional de Infra-Estrutura 
 O volume de veículos, obtido através da contagem, pode ser classificado como \citep{goldner:2009:misc}:
 
 \begin{itemize}
-  \item \textbf{Volume de tráfego}: quantidade de veículos em tráfego na seção de uma via, em um período de tempo definido.
-  \item \textbf{AADT} ou \textbf{VMDA}: volume médio diário de veículos durante o ano, ou seja, a somatória anual, dividido por 365.
+  \item \textbf{Volume de tráfego}: quantidade de veículos em tráfego na seção de uma via, em um período de tempo definido;
+  \item \textbf{AADT} ou \textbf{VMDA}: volume médio diário de veículos durante o ano, ou seja, a somatória anual, dividido por 365;
   \item \textbf{ADT} ou \textbf{VMD}: volume diário do tráfego ou volume médio diário. Também é usado para intervalos de tempo diferentes, representando o volume total durante dado período, dividido pela quantidade de dias do período. Assim tem-se:
   \begin{itemize}
-    \item \textbf{VMDm}: volume médio diário mensal. Número total de veículos em um mês, dividido pelo número de dias do mês.
-    \item \textbf{VMDs}: volume médio diário semanal. Número total de veículos em uma semana, dividido por 7. É sempre acompanhado pelo nome do mês a que se refere.
-    \item \textbf{VMDd}: Volume médio diário em um dia de semana. Deve ser sempre acompanhado pela indicação do dia de semana e do mês correspondente.
+    \item \textbf{VMDm}: volume médio diário mensal. Número total de veículos em um mês, dividido pelo número de dias do mês;
+    \item \textbf{VMDs}: volume médio diário semanal. Número total de veículos em uma semana, dividido por 7. É sempre acompanhado pelo nome do mês a que se refere;
+    \item \textbf{VMDd}: Volume médio diário em um dia de semana. Deve ser sempre acompanhado pela indicação do dia de semana e do mês correspondente;
   \end{itemize}
-  \item \textbf{Composição do tráfego}: porcentagem dos diferentes tipos de veículos que compõem o tráfego, por exemplo, automóveis, caminhões, ônibus e motos.
-  \item \textbf{Volume abreviado}: volume do fluxo de um período menor do que 1 hora.
+  \item \textbf{Composição do tráfego}: porcentagem dos diferentes tipos de veículos que compõem o tráfego, por exemplo, automóveis, caminhões, ônibus e motos;
+  \item \textbf{Volume abreviado}: volume do fluxo de um período menor do que 1 hora;
   \item \textbf{Variações do volume de tráfego}: mudanças no volume em um determinado período, divididas em: variações sazonais ou mensais ao longo do ano; variações diárias ao longo da semana; variações horárias ao longo do dia; e variações dentro da hora.
 \end{itemize}
 
 \cite{goldner:2009:misc} define dois métodos de contagem: \textbf{manual} e \textbf{mecânica}. A contagem manual utiliza recursos humanos, ou seja, pesquisadores observam o fluxo de veículos e manualmente fazem suas anotações. Esse procedimento é vantajoso pela precisão e variedade nas informações de tráfego obtidas, como tipo e tamanho dos veículos, além de proporcionar flexibilidade, simplicidade e rapidez de execução. No entanto, é um método com limitações de cobertura e de alto custo. A contagem mecânica utiliza detectores de tráfego de instalações permanente ou móvel. Possui algumas vantagens, dentre elas: baixo custo operacional, grande amplitude de tempo de cobertura e boa precisão. Por outro lado não fornecesse muitas informações e demanda investimento inicial alto.
 
-A classificação feita por \citeauthor{goldner:2009:misc} peca ao usar o termo contagem mecânica para caracterizar métodos não manuais. Grande parte dos equipamentos de contagem volumétrica são dispositivos eletrônicos, por exemplo sensores micro-ondas, ultra-sônicos e piezoelétricos, descaracterizando o uso dessa nomenclatura. Até mesmo o tubo pneumático, que pode ser considerado um dispositivo mecânico, utiliza sinais elétricos para transmissão dos dados. Por esse motivo, será adotado o termo \textbf{contagem automática} para descrever os métodos de contagem que não dependem diretamente da participação humana durante o processo de obtenção dos dados.
+A classificação feita por \cite{goldner:2009:misc} peca ao usar o termo contagem mecânica para caracterizar métodos não manuais. Grande parte dos equipamentos de contagem volumétrica são dispositivos eletrônicos, por exemplo sensores micro-ondas, ultra-sônicos e piezoelétricos, descaracterizando o uso dessa nomenclatura. Até mesmo o tubo pneumático, que pode ser considerado um dispositivo mecânico, utiliza sinais elétricos para transmissão dos dados. Por esse motivo, será adotado o termo \textbf{contagem automática} para descrever os métodos de contagem que não dependem diretamente da participação humana durante o processo de obtenção dos dados.
 
 Por sua vez, os métodos automáticos de contagem podem ser classificados como \textbf{invasivos} e \textbf{não-invasivos}. Os métodos invasivos necessitam de instalações junto ou sob a camada asfáltica. Já os métodos não-invasivos não modificam a estrutura da via, com instalações acima ou às margens da faixa de tráfego \citep{goldner:2009:misc}.
 
@@ -183,7 +183,7 @@ Apesar de o objetivo do projeto ser a contagem volumétrica via dispositivos móve
   \item \textbf{Acompanhamento de objetos segmentados}: rastreamento dos objetos segmentados ao longo dos quadros, evitando que o mesmo seja contado mais de uma vez.
 \end{enumerate}
 
-O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execução em dispositivos móveis, o desempenho do algoritmo é um fator determinante. Por isso, foi necessário que alguns algoritmos de processamento de imagens, já existentes na OpenCV, fossem reimplementados com foco em velocidade de execução, o que elevou muito a complexidade do código. Na etapa de reconhecimento da imagem referência de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as funções de subtração de \textit{backgroud} já implementadas na OpenCV. No entanto, por ser um método mais completo e complexo, acarretaria em menor desempenho de execução se comparado à implementação de \citeauthor{feitosa:2012:masther}.
+O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execução em dispositivos móveis, o desempenho do algoritmo é um fator determinante. Por isso, foi necessário que alguns algoritmos de processamento de imagens, já existentes na OpenCV, fossem reimplementados com foco em velocidade de execução, o que elevou muito a complexidade do código. Na etapa de reconhecimento da imagem referência de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as funções de subtração de \textit{backgroud} já implementadas na OpenCV. No entanto, por ser um método mais completo e complexo, acarretaria em menor desempenho de execução se comparado à implementação de \cite{feitosa:2012:masther}.
 
 Os testes foram realizados a partir de 15 amostras de vídeos, sendo 14 com resolução $640\times 480$ e apenas 1 com resolução $320\times 240$, e duração média de 09:30 minutos. Para avaliar o desempenho do método, num primeiro momento foi feita uma contagem volumétrica manual dos veículos em cada amostra, para que assim o percentual de acerto do método automático, executado no \textit{laptop}, fosse calculado. Além disso, o tempo de execução de cada amostra foi medido.
 
