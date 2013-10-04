@@ -123,18 +123,20 @@
 \def\ppgcc@redefchaptitlefont{}
 
 \let\ppgcc@coadvisorname\empty
+\let\ppgcc@supervisorname\empty
 
-\newcommand*{\authorrev}[1]{\gdef\ppgcc@authorrev{#1}}     % Nome rev. do autor
-\newcommand*{\advisor}[1]{\gdef\ppgcc@advisorname{#1}}     % Nome do orientador
-\newcommand*{\coadvisor}[1]{\gdef\ppgcc@coadvisorname{#1}} % Nome do coorientador
-\newcommand*{\university}[1]{\gdef\ppgcc@university{#1}}   % Nome da universidade
-\newcommand*{\course}[1]{\gdef\@course{#1}}                % Nome do curso
-\newcommand*{\address}[1]{\gdef\@address{#1}}              % Endereço (cidade/UF)
-\newcommand*{\fcuniversity}[1]                             % Nome da universidade
-  {\gdef\ppgcc@fcuniversity{#1}}                           % para a F.C.
-\newcommand*{\cutter}[1]{\gdef\ppgcc@cutter{#1}}           % Código "cutter"
-\newcommand*{\cdu}[1]{\gdef\ppgcc@cdu{#1}}                 % Código CDU
-\newcommand*{\indexkeys}[1]{\gdef\ppgcc@indexkeys{#1}}     % Chaves para indexação
+\newcommand*{\authorrev}[1]{\gdef\ppgcc@authorrev{#1}}       % Nome rev. do autor
+\newcommand*{\advisor}[1]{\gdef\ppgcc@advisorname{#1}}       % Nome do orientador
+\newcommand*{\coadvisor}[1]{\gdef\ppgcc@coadvisorname{#1}}   % Nome do coorientador
+\newcommand*{\supervisor}[1]{\gdef\ppgcc@supervisorname{#1}} % Nome do supervisor
+\newcommand*{\university}[1]{\gdef\ppgcc@university{#1}}     % Nome da universidade
+\newcommand*{\course}[1]{\gdef\@course{#1}}                  % Nome do curso
+\newcommand*{\address}[1]{\gdef\@address{#1}}                % Endereço (cidade/UF)
+\newcommand*{\fcuniversity}[1]                               % Nome da universidade
+  {\gdef\ppgcc@fcuniversity{#1}}                             % para a F.C.
+\newcommand*{\cutter}[1]{\gdef\ppgcc@cutter{#1}}             % Código "cutter"
+\newcommand*{\cdu}[1]{\gdef\ppgcc@cdu{#1}}                   % Código CDU
+\newcommand*{\indexkeys}[1]{\gdef\ppgcc@indexkeys{#1}}       % Chaves para indexação
 
 \indexkeys{\ppgccexpandlistoffckeywords{} \ppgccexpandlistoffcpostkeywords}
 
@@ -437,6 +439,7 @@
   \def\ppgcc@phddocproj{Projeto de tese}
   \def\ppgcc@advisor{Orientador}
   \def\ppgcc@coadvisor{Coorientador}
+  \def\ppgcc@supervisor{Supervisor}
   \def\ppgcc@docdescription{%
     \@documenttype{} apresentad\ppgcc@doctype@gender{} ao Programa de
     P\'{o}s\discretionary{-}{-}{-}Gradua\c{c}\~{a}o em \@deflang@course{} do
@@ -495,6 +498,7 @@
   \def\ppgcc@phddocproj{Thesis project}
   \def\ppgcc@advisor{Advisor}
   \def\ppgcc@coadvisor{Co-Advisor}
+  \def\ppgcc@supervisor{Supervisor}
   \def\ppgcc@docdescription{%
     \@documenttype{} presented to the Graduate Program in \@course{} of the
     \ppgcc@university{} in partial fulfillment of the requirements for the
@@ -552,6 +556,7 @@
 \def\ppgcc@titpag@fmtauthor#1{\large\BreakableUppercase{#1}}
 \def\ppgcc@titpag@fmtadvisor{\large\scshape}
 \let\ppgcc@titpag@fmtcoadvisor\ppgcc@titpag@fmtadvisor
+\let\ppgcc@titpag@fmtsupervisor\ppgcc@titpag@fmtadvisor
 \def\ppgcc@titpag@fmttitle#1{\Large\bfseries\BreakableUppercase{#1}}
 \def\ppgcc@titpag@fmtaddress{\large}
 \def\ppgcc@titpag@fmtdate{\large}
@@ -581,6 +586,9 @@
   {\ppgcc@titpag@fmtadvisor{\ppgcc@advisor: \ppgcc@advisorname}\par}%
   \ifx\ppgcc@coadvisorname\empty\else
     {\ppgcc@titpag@fmtcoadvisor{\ppgcc@coadvisor: \ppgcc@coadvisorname}\par}%
+  \fi
+  \ifx\ppgcc@supervisorname\empty\else
+    {\ppgcc@titpag@fmtsupervisor{\ppgcc@supervisor: \ppgcc@supervisorname}\par}%
   \fi
 }
 
@@ -659,6 +667,9 @@
       {\ppgcc@titpag@fmtadvisor{\ppgcc@advisor: \ppgcc@advisorname}\par}%
       \ifx\ppgcc@coadvisorname\empty\else
         {\ppgcc@titpag@fmtcoadvisor{\ppgcc@coadvisor: \ppgcc@coadvisorname}\par}%
+      \fi
+      \ifx\ppgcc@supervisorname\empty\else
+        {\ppgcc@titpag@fmtsupervisor{\ppgcc@supervisor: \ppgcc@supervisorname}\par}%
       \fi
     \fi
 
@@ -1185,6 +1196,7 @@
 \define@key{ppgcc}{epigraphtext}{\epigraphtext#1}
 \define@key{ppgcc}{advisor}{\advisor{#1}}
 \define@key{ppgcc}{coadvisor}{\coadvisor{#1}}
+\define@key{ppgcc}{supervisor}{\supervisor{#1}}
 \define@key{ppgcc}{abstract}{\ppgcc@addabstract#1}
 \define@key{ppgcc}{dedication}{\ppgcc@adddedication{#1}}
 \define@key{ppgcc}{ack}{\ppgcc@addack#1\relax}
