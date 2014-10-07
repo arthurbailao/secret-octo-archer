@@ -65,6 +65,94 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 
 % section testes (end)
 
+\section{Matriz de confusão} % (fold)
+\label{sec:matriz_de_confus_o}
+
+TODO: Explicar cada uma das classes: VP, VN, FP e FN; referenciar cada uma das equações;
+
+\begin{equation}
+  \label{eq:especificidade}
+  E=\dfrac{VN}{VN+FP}
+\end{equation}
+
+\begin{equation}
+  \label{eq:valor_preditivo_negativo}
+  VPN=\dfrac{VN}{VN+FN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:precisao}
+  P=\dfrac{VP}{VP+FP}
+\end{equation}
+
+\begin{equation}
+  \label{eq:recall}
+  R=\dfrac{VP}{VP+FN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:acuracia}
+  A=\dfrac{VP+VN}{VP+FP+FN+VN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:f_measure}
+  FM=\dfrac{2*R*P}{R+P}
+\end{equation}
+
+% section matriz_de_confus_o (end)
+
+\section{Índice Kappa (K)} % (fold)
+\label{sec:_ndice_kappa_}
+
+TODO: falar sobre o indice kappa e fazer a referencia; referenciar a table \ref{tab:indice_kappa}.
+
+O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
+
+\begin{equation}
+  \label{eq:kappa}
+  K=\dfrac{\theta_{1}-\theta_{2}}{1-\theta_{2}}\text{,}
+\end{equation}
+
+\noindent onde
+
+\begin{equation}
+  \label{eq:theta_1}
+  \theta_{1}=\dfrac{VP+VN}{VP+FP+FN+VN}\text{,}
+\end{equation}
+
+\noindent e
+
+\begin{equation}
+  \label{eq:theta_2}
+  \theta_{2}=\dfrac{\alpha+\beta}{\gamma^{2}}\text{,}
+\end{equation}
+
+\noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
+
+\begin{table}[ht]
+  \caption{Nível de exatidão de uma contagem, conforme o valor do índice Kappa.}
+  \label{tab:indice_kappa}
+  \begin{center}
+    \begin{tabular}{cc}
+    \hline
+
+    \hline
+    \textbf{Índice Kappa (K)} & \textbf{Qualidade} \\
+    \hline
+      $K \leq 0.2$ & Ruim \\
+      $0.2 \leq K \leq 0.4$ & Razoável \\
+      $0.4 \leq K \leq 0.6$ & Bom \\
+      $0.6 \leq K \leq 0.8$ & Muito bom \\
+      $K \geq 0.8$ & Excelente \\
+
+    \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+% section _ndice_kappa_ (end)
+
 \section{Resultados finais} % (fold)
 \label{sec:resultados_finais}
 
