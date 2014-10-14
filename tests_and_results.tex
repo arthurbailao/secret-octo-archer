@@ -41,12 +41,10 @@ Todos os vídeos foram capturados por um aparelho celular Samsung OMNIA W GT-I835
   \caption{Vídeos utilizados nos testes.}
   \label{tab:videos_teste}
   \begin{center}
-    \begin{tabular}{l|cccc}
-    \hline
-
-    \hline
+    \begin{tabular}{lcccc}
+    \toprule
     \textbf{Nome do vídeo} & \textbf{Formato} & \textbf{Resolução} & \textbf{Duração} & \textbf{FPS} \\
-    \hline
+    \midrule
       carlos\_luz\_centro\_vga & mp4 & $ 640\times 480 $ & 00:05:23 & 29 \\
       carlos\_luz\_centro\_hd\_resized & mpeg & $ 640\times 360 $ & 00:05:25 & 29 \\
       carlos\_luz\_centro\_hd & mp4 & $ 1280\times 720 $ & 00:05:29 & 29 \\
@@ -54,9 +52,7 @@ Todos os vídeos foram capturados por um aparelho celular Samsung OMNIA W GT-I835
       carlos\_luz\_pampulha\_vga\_2 & mp4 & $ 640\times 480 $ & 00:05:19 & 29 \\
       carlos\_luz\_pampulha\_hd\_2\_resized & mpeg & $ 640\times 360 $ & 00:06:19 & 29 \\
       carlos\_luz\_pampulha\_hd\_2 & mp4 & $ 1280\times 720 $ & 00:06:21 & 29 \\
-    \hline
-
-    \hline
+    \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
@@ -68,7 +64,41 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 \section{Matriz de confusão} % (fold)
 \label{sec:matriz_de_confus_o}
 
-TODO: Explicar cada uma das classes: VP, VN, FP e FN; referenciar cada uma das equações;
+A matriz de confusão contém informações sobre classificações reais e preditas feitas por um classificador, como mostrado na Tabela \ref{tab:matriz_de_confusao}. Ela permite que a partir de seus elementos diversas medidas de desempenho sejam calculadas.
+
+\begin{table}[ht]
+  \caption{Matriz de confusão para um classificador de duas classes.}
+  \label{tab:matriz_de_confusao}
+  \begin{center}
+    \begin{tabular}{l|l|c|c|}
+
+    \multicolumn{2}{c}{} & \multicolumn{2}{c}{Classe verdadeira} \\
+    \cline{3-4}
+    \multicolumn{2}{c|}{} & Positivo & Negativo \\
+    \cline{2-4}
+    \multirow{2}{*}{Classe predita} & Positivo & VP & FP \\
+    \cline{2-4}
+    & Negativo & FN & VN \\
+    \cline{2-4}
+    
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
+
+No contexto desse trabalho, os elementos da matriz de confusão podem ser descritos como:
+
+\begin{itemize}
+  \item Verdadeiro positivo (VP): mais um veículo foi contabilizado quando o mesmo adentrou a região de contagem;
+  \item Falso negativo (FN): mais um veículo não foi contabilizado quando o mesmo adentrou a região de contagem;
+  \item Verdadeiro negativo (VN): mais um veículo não foi contabilizado quando nenhum veículo adentrou a região de contagem em uma janela de tempo;
+  \item Falso positivo (FP): mais um veículo foi contabilizado quando nenhum veículo adentrou a região de contagem.
+\end{itemize}
+
+Os eventos verdadeiro negativos (VN) foram contados utilizando uma janela de tempo, que corresponde ao tempo médio em que um veículo leva para percorrer a cena. Essa intervalo foi medido empiricamente para cada amostra de video.
+
+Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confusão. São elas: Especificidade (Equação \ref{eq:especificidade}), Valor Preditivo Negativo (Equação \ref{eq:valor_preditivo_negativo}), Precisão (Equação \ref{eq:precisao}), \textit{Recall} (Equação \ref{eq:recall}), Acurácia (Equação \ref{eq:acuracia}) e \textit{F-Measure} (Equação \ref{eq:f_measure}) \citep{powers07evaluation}.
 
 \begin{equation}
   \label{eq:especificidade}
@@ -105,7 +135,7 @@ TODO: Explicar cada uma das classes: VP, VN, FP e FN; referenciar cada uma das e
 \section{Índice Kappa (K)} % (fold)
 \label{sec:_ndice_kappa_}
 
-TODO: falar sobre o indice kappa e fazer a referencia; referenciar a table \ref{tab:indice_kappa}.
+O índice Kappa é utilizado como uma medida apropriada da exatidão por representar inteiramente a matriz de confusão. Ele toma todos os elementos da matriz ao invés de apenas aqueles que retratam a quantidade de classificações verdadeiras, o que ocorre quando se calcula a exatidão global da classificação \citep{Jnl605963009}.
 
 O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 
@@ -130,23 +160,22 @@ O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 
 \noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
 
+O nível de exatidão obtido foi classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
+
 \begin{table}[ht]
   \caption{Nível de exatidão de uma contagem, conforme o valor do índice Kappa.}
   \label{tab:indice_kappa}
   \begin{center}
     \begin{tabular}{cc}
-    \hline
-
-    \hline
+    \toprule
     \textbf{Índice Kappa (K)} & \textbf{Qualidade} \\
-    \hline
-      $K \leq 0.2$ & Ruim \\
-      $0.2 \leq K \leq 0.4$ & Razoável \\
-      $0.4 \leq K \leq 0.6$ & Bom \\
-      $0.6 \leq K \leq 0.8$ & Muito bom \\
+    \midrule
+      $K < 0.2$ & Ruim \\
+      $0.2 \leq K < 0.4$ & Razoável \\
+      $0.4 \leq K < 0.6$ & Bom \\
+      $0.6 \leq K < 0.8$ & Muito bom \\
       $K \geq 0.8$ & Excelente \\
-
-    \hline
+    \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
@@ -156,35 +185,33 @@ O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 \section{Resultados finais} % (fold)
 \label{sec:resultados_finais}
 
-Na Tabela \ref{tab:resultados_contagem} são apresentados os resultados obtidos pela contagem via métodos manual e automático, indicando o percentual de acerto para cada amostra. É importante destacar que o resultado da contagem automática representa o total de veículos identificados na amostra, incluindo falsos positivos e descartando objetos detectados ou rastreados incorretamente. Portanto, os percentuais de acerto são medições estatísticas, que representam apenas o desvio existente entre o valor real e o valor medido.
+% Na Tabela \ref{tab:resultados_contagem} são apresentados os resultados obtidos pela contagem via métodos manual e automático, indicando o percentual de acerto para cada amostra. É importante destacar que o resultado da contagem automática representa o total de veículos identificados na amostra, incluindo falsos positivos e descartando objetos detectados ou rastreados incorretamente. Portanto, os percentuais de acerto são medições estatísticas, que representam apenas o desvio existente entre o valor real e o valor medido.
 
-\begin{table}[ht]
-  \caption{Resultados de contagem volumétrica.}
-  \label{tab:resultados_contagem}
-  \begin{center}
-    \begin{tabular}{l|cccc}
-    \hline
+% \begin{table}[ht]
+%   \caption{Resultados de contagem volumétrica.}
+%   \label{tab:resultados_contagem}
+%   \begin{center}
+%     \begin{tabular}{l|cccc}
+%     \toprule
+%     \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Manual} & \textbf{Autom.} & \textbf{\% acerto}\\
+%     \midrule
+%       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 164 & 156 & 95,12 \\
+%       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 150 & 153 & 98,04 \\
+%       carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 150 & 145 & 96,67 \\
+%       carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 208 & 173 & 83,17 \\
+%       carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 169 & 138 & 81,66 \\
+%       carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 201 & 175 & 87,06 \\
+%       carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 201 & 170 & 84,58 \\
+%     \bottomrule
+%     \end{tabular}
+%   \end{center}
+% \end{table}
 
-    \hline
-    \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Manual} & \textbf{Autom.} & \textbf{\% acerto}\\
-    \hline
-      carlos\_luz\_centro\_vga & $ 640\times 480 $ & 164 & 156 & 95,12 \\
-      carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 150 & 153 & 98,04 \\
-      carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 150 & 145 & 96,67 \\
-      carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 208 & 173 & 83,17 \\
-      carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 169 & 138 & 81,66 \\
-      carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 201 & 175 & 87,06 \\
-      carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 201 & 170 & 84,58 \\
-    \hline
+% Percebe-se que para uma mesma cena, a variação da resolução do vídeo não afeta de forma siginificativa o percentual de acerto, mostrando que vídeos de alta resolução não trazem vantagens nesse tipo de aplicação. Já a mudança da cena alterou o resultado. Nas amostras do tráfego no sentido centro o percentual de acerto foi superior a 95\%, enquanto que as imagens do outro sentido não ultrapassaram os 90\%. 
 
-    \hline
-    \end{tabular}
-  \end{center}
-\end{table}
+Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada. Esses objetos com área muito grande causam problemas na etapa de subtração de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detecção de \textit{blobs} e gerando oclusão em veículos menores. 
 
-Percebe-se que para uma mesma cena, a variação da resolução do vídeo não afeta de forma siginificativa o percentual de acerto, mostrando que vídeos de alta resolução não trazem vantagens nesse tipo de aplicação. Já a mudança da cena alterou o resultado. Nas amostras do tráfego no sentido centro o percentual de acerto foi superior a 95\%, enquanto que as imagens do outro sentido não ultrapassaram os 90\%. 
-
-Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada. Esses objetos com área muito grande causam problemas na etapa de subtração de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detecção de \textit{blobs} e gerando oclusão em veículos menores. Esse tipo de tráfego na cena fez com que o resultado da contagem automática ficasse sempre abaixo da referência em todas as amostras sentido Pampulha, justificando o percentual de acerto baixo.
+% Esse tipo de tráfego na cena fez com que o resultado da contagem automática ficasse sempre abaixo da referência em todas as amostras sentido Pampulha, justificando o percentual de acerto baixo.
 
 \begin{figure}[ht]
   \begin{center}
@@ -217,12 +244,10 @@ Com intuito de manter o algoritmo simples e o mais genérico possível, os \textit
   \caption{Tempo real gasto na execução do método de contagem.}
   \label{tab:resultados_tempo}
   \begin{center}
-    \begin{tabular}{l|ccc}
-    \hline
-
-    \hline
+    \begin{tabular}{lccc}
+    \toprule
     \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{Tempo gasto} \\
-    \hline
+    \midrule
       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\
       carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 00:17:48 \\
@@ -230,9 +255,7 @@ Com intuito de manter o algoritmo simples e o mais genérico possível, os \textit
       carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 00:05:33 \\
       carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 00:05:38 \\
       carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 00:19:00 \\
-    \hline
-
-    \hline
+    \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
