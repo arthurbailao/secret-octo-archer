@@ -26,7 +26,130 @@ Por sua vez, os métodos automáticos de contagem podem ser classificados como \te
 
 Nas seções seguintes são apresentados alguns equipamentos automáticos de contagem volumétrica, descritos em \cite{goldner:2009:misc}, \cite{almeida:2010:masther} e \cite{dnit:2011:online}, bem como algumas aplicações de visão computacional inseridas na área de Engenharia de Transporte.
 
-\section{Detector de laço indutivo} % (fold)
+\section{Tecnologias detectoras de veículos} % (fold)
+\label{sec:tecnologias_detectoras_de_ve_culos}
+
+Atualmente existem diversas tecnologias de sensores capazes de efetuar a detecção de veículos \citep{minnesota1997field}. A Tabela \ref{fig:tabela_vantagens_desvantagens} lista grande parte delas, apresentando vantagens e desvantagens para cada uma \citep{aguiar2008thesis}. Nas subseções a seguir alguns sensores que utilizam essas tecnologias são detalhados.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.8]{imgs/tabela_vantagens_desvantagens.png}
+  \end{center}
+  \caption{Vantagens e desvantagens de tecnologias detectoras de veículos \citep{aguiar2008thesis}.}
+  \label{fig:tabela_vantagens_desvantagens}
+\end{figure}
+
+% \begin{center}
+% \begin{longtable}{@{\extracolsep{\fill}}lll@{}}
+% \caption[Feasible triples for a highly variable Grid]{Feasible triples for 
+% highly variable Grid, MLMMH.} \label{grid_mlmmh} \\
+% \toprule
+% \multicolumn{1}{l}{\textbf{Time (s)}} & \multicolumn{1}{l}{\textbf{Triple chosen}} & \multicolumn{1}{l}{\textbf{Other feasible triples}} \\
+% \midrule
+% \endfirsthead
+
+% \multicolumn{3}{c}%
+% {{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+% \hline \multicolumn{1}{|c|}{\textbf{Time (s)}} &
+% \multicolumn{1}{c|}{\textbf{Triple chosen}} &
+% \multicolumn{1}{c|}{\textbf{Other feasible triples}} \\ \hline 
+% \endhead
+
+% \hline \multicolumn{3}{|r|}{{Continued on next page}} \\ \hline
+% \endfoot
+
+% \hline \hline
+% \endlastfoot
+
+% 0 & (1, 11, 13725) & (1, 12, 10980), (1, 13, 8235), (2, 2, 0), (3, 1, 0) \\
+% 2745 & (1, 12, 10980) & (1, 13, 8235), (2, 2, 0), (2, 3, 0), (3, 1, 0) \\
+% 5490 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 8235 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 10980 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 13725 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 16470 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 19215 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 21960 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 24705 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 27450 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 30195 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 32940 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 35685 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 38430 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 41175 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 43920 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 46665 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 49410 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 52155 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 54900 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 57645 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 60390 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 63135 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 65880 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 68625 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 71370 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 74115 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 76860 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 79605 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 82350 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 85095 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 87840 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 90585 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 93330 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 96075 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 98820 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 101565 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 104310 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 107055 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 109800 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 112545 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 115290 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 118035 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 120780 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 123525 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 126270 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 129015 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 131760 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 134505 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 137250 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 139995 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 142740 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 145485 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 148230 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
+% 150975 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 153720 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 156465 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 159210 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 161955 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% 164700 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
+% \end{longtable}
+% \end{center}
+
+% \begin{table}[ht]
+%   \caption{Vantagens e desvantagens de tecnologias detectoras de veículos.}
+%   \label{tab:tecnologias_vantagens_desvantagens}
+%   \begin{center}
+%     \begin{tabularx}{\textwidth}{XXX}
+%     \toprule
+%     \textbf{Tecnologia} & \textbf{Vantagens} & \textbf{Desvantagens} \\
+%     \midrule
+%       Ultra-sônico & \tabitem Tamanho compacto, fácil instalação & \tabitem Pode ser sensível à temperatura e turbulência do ar \\
+%       Microondas Doppler & \tabitem Bom para condições meteorológicas adversas \tabitem Mede velocidade dos veículos diretamente & \tabitem Não consegue detectar veículos parados ou com velocidade inferior a 6 km/h \\
+%       Microondas - presença real & \tabitem Bom para condições meteorológicas adversas \tabitem Detecta veículos parados \tabitem Opera com visada lateral da via & \tabitem Requer uma antena de feixe estreito para confinar área de interesse a uma única faixa no modo de visualização no sentido da via \\
+%       Infravermelho passivo (somente recebe sinal) & \tabitem Distância de alcance sob neblina maior do que sensores de imagem na área da luz visível & \tabitem Degradação potencial por chuva ou neve intensa \tabitem Imprecisão na medida de velocidade \\
+%       Infravermelho ativo (transmite e recebe) & \tabitem Distância de alcance sob neblina maior do que sensores de imagem na área da luz visível \tabitem Mede velocidade diretamente & \tabitem Degradação potencial por substâncias que obscurecem a atmosfera e por condições meteorológicas adversas \\
+%       Processadores de imagem e vídeo no espectro de luz visível & \tabitem Provê dados para gerenciamento de tráfego e imagem para gerenciamento de incidentes \tabitem Uma única câmera e processador podem cuidar de muitas faixas \tabitem Riqueza de informações sobre tráfego torna-se disponível & \tabitem Degradação potencial por condições meteorológicas adversas \tabitem Veículos grandes podem ocluir veículos menores \tabitem Sombras, reflexos do chão molhado e transições dia/noite podem resultar em detecções falsas ou perdidas \\
+%       Laser pulsado & \tabitem Alta direcionalidade \tabitem Grande alcance \tabitem Portátil, normalmente instalado na lateral da via & \tabitem Custo elevado \tabitem Degradação potencial por condições meteorológicas adversas \tabitem Obstrução por outros veículos \\
+%       Laser de varredura & \tabitem Excelente classificação dos veículos & \tabitem Custo elevado \tabitem Necessidade de ser colocado sobre a via, verticalmente \\
+%       Fibra ótica & \tabitem Imunidade a adversidades meteorológicas \tabitem Imunidade a distúrbios eletromagnéticos & \tabitem Custo elevado \tabitem Necessita interrupção da via e cortes no pavimento \\
+%       Acústico passivo & \tabitem Instalação lateral à via \tabitem Auxilia na classificação & \tabitem Adequado apenas à detecção de passagem de veículos \\
+%       Cabos piezo-elétricos & \tabitem Sensível ao peso do veículo, permite peso em movimento \tabitem Imune a adversidades meteorológicas & \tabitem É preciso interromper a via e fazer cortes no pavimento \tabitem Não permite detecção de presença (a menos que o veículo pare exatamente sobre o sensor) \\
+%     \bottomrule
+%     \end{tabularx}
+%   \end{center}
+% \end{table}
+
+\subsection{Detector de laço indutivo} % (fold)
 \label{sub:detectores_de_la_os_indutivos}
 
 São os sensores mais utilizados para a coleta de dados de tráfego. É composto basicamente por um circuito elétrico oscilador, uma unidade eletrônica de processamento, cabos de transmissão e o laço indutivo propriamente dito, que é formado por uma ou mais voltas de um cabo isolado instalado sob o pavimento da via (Figura \ref{fig:laco_indutivo}), caracterizando-o como equipamento invasivo.
@@ -47,7 +170,7 @@ A vantagem de se usar laços indutivos para monitoramento é o bom funcionamento n
 
 % section detectores_de_la_os_indutivos (end)
 
-\section{Tubo pneumático} % (fold)
+\subsection{Tubo pneumático} % (fold)
 \label{sub:tubo_pneum_tico}
 
 Os sensores de contagem volumétrica por tubo pneumático funcionam a partir da pressão exercida pelos pneus de um veículo assim que passam sobre o tubo de borracha. A massa de ar é então deslocada ao longo do tubo até o ponto de conversão, onde um interruptor converte o sinal pneumático em sinal elétrico, para que esse possa ser transmitido a um \textit{software} de análise ou a um contador.
@@ -58,7 +181,7 @@ Apesar de ser a primeira tecnologia de detecção de tráfego, inventada em 1920, é
 
 % section tubo_pneum_tico (end)
 
-\section{Sensor magnético} % (fold)
+\subsection{Sensor magnético} % (fold)
 \label{sub:sensores_magn_ticos}
 
 O princípio de funcionamentos dos sensores magnéticos é baseado em variações das linhas de fluxo do campo magnético terrestre. Tal efeito é conhecido como anomalia magnética, causada pela aproximação de objetos metálicos (veículos) da área de cobertura do sensor. Por indução eletromagnética, variações de tensão são geradas e posteriormente amplificadas, digitalizadas e finalmente transmitidas ao controlador eletrônico que realiza a contagem.
@@ -69,7 +192,7 @@ São utilizados para medir volume, direção, presença e velocidade dos veículos. P
 
 % section sensores_magn_ticos (end)
 
-\section{Sensor piezoelétrico} % (fold)
+\subsection{Sensor piezoelétrico} % (fold)
 \label{sub:sensores_piezoel_tricos}
 
 Um material piezoelétrico é capaz de converter energia cinética em energia elétrica. Esses materiais geram uma tensão quando submetidos a choques mecânicos ou vibrações. Portanto, quando um veículo passa sobre um detector, o sensor gera uma tensão proporcional ao peso do veículo. É construído a partir de um cabo piezoelétrico do tipo coaxial, com um núcleo de metal, seguido pelo material piezoelétrico e uma camada externa de metal, como ilustrado na Figura \ref{fig:piezoeletrico}.
@@ -86,7 +209,7 @@ Devido a sua grande precisão, esse tipo de sensor é capaz de medir volume do trá
 
 % section sensores_piezoel_tricos (end)
 
-\section{Câmera de vídeo} % (fold)
+\subsection{Câmera de vídeo} % (fold)
 \label{sub:c_mera_de_v_deo}
 
 As câmeras de vídeo são utilizadas no monitoramento do tráfego, na maioria das vezes, como uma simples ferramenta de vigilância urbana, com capacidades de transmissão e gravação de imagens. Nesse cenário, as imagens devem ser interpretadas por um operador humano, que tem a função de extrair dados de tráfego. Com o avanço das áreas de processamento digital de imagens e visão computacional, surgiram diversos sistemas de gerenciamento do tráfego capazes de extrair automaticamente informações de tráfego importantes, como velocidade, volume, presença, ocupação, densidade, movimentos de conversão, mudança de faixa, aceleração, classificação de veículos e outros \citep{martinsky:2007:masther,feitosa:2012:masther}.
@@ -97,7 +220,7 @@ Dentre as vantagens de uso de câmeras está a instalação, que é totalmente não-in
 
 % section c_mera_de_v_deo (end)
 
-\section{Sensores micro-ondas} % (fold)
+\subsection{Sensores micro-ondas} % (fold)
 \label{sub:radar_por_microondas}
 
 Esse tipo de equipamento transmite radiação de micro-ondas de baixa energia na direção de uma área do pavimento utilizando uma antena localizada na parte superior do radar. Quando um veículo atravessa um feixe, uma parte dessa energia é refletida de volta para o detector, também localizado na parte superior do radar, e dados como velocidade e presença são calculados por um controlador. A Figura \ref{fig:microondas} ilustra a configuração mais comum de um sistema de monitoramento baseado em sensores micro-ondas.
@@ -121,7 +244,7 @@ Os sensores micro-ondas são não-invasivos e não interferem no tráfego de veículo
 
 % section radar_por_microondas (end)
 
-\section{Sensores ultrassônicos} % (fold)
+\subsection{Sensores ultrassônicos} % (fold)
 \label{sec:sensores_ultrass_nicos}
 
 Esses detectores transmitem ondas de pressão de energia sonora acima da frequência audível humana, que é de 20 KHz. Estas ondas sonoras refletem no pavimento ou no veículo, são captadas por um receptor e processadas para fornecer informações de passagem e presença de veículos. A montagem não-invasiva do equipamento pode ser feita acima ou ao lado da via, como ilustra a Figura \ref{fig:ultrassonico}.
@@ -144,6 +267,9 @@ Existem dois tipos de sensores ultrassônicos:
 O uso de sensores ultrassônicos é vantajoso pois a instalação é não-invasiva e pode monitorar mais de uma pista ao mesmo tempo. Como desvantagem, as mudanças de temperatura e ventanias podem afetar o seu desempenho.
 
 % section sensores_ultrass_nicos (end)
+
+% section tecnologias_detectoras_de_ve_culos (end)
+
 
 \section{Aplicações de Visão Computacional} % (fold)
 \label{sec:aplica_es_de_vis_o_computacional}

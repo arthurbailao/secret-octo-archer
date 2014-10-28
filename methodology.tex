@@ -313,3 +313,156 @@ A Figura \ref{fig:trackers} ilustra um veículo que entrou na região de contagem,
 % subsection rastreamento_e_contagem (end)
 
 % section fluxo_de_processos (end)
+
+\section{Estrutura do \textit{software}} % (fold)
+\label{sec:estrutura_do_software}
+
+Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido um \textit{software} multiplataforma na linguagem  \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho computacional, fácil implementação e a possibilidade de utilizar os conceitos de programação orientada a objetos. A Figura \ref{fig:uml} ilustra a estrutura e o relacionamento entre classes através de um diagrama UML\footnote{\textit{Unified Modeling Language} - um conjunto padronizado de diagramas com notação formalmente definida, adotado na área de engenharia de software em um esforço para facilitar a concepção de sistemas orientados a objetos \citep{aguiar2008thesis}.}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[scale=0.55]{imgs/uml_pfc.png}
+  \end{center}
+  \caption{Diagrama UML do \textit{software}.}
+  \label{fig:uml}
+\end{figure}
+
+A classe \verb!VideoProcessor! é a classe central do sistema. Ela é responsável por abrir e ler o arquivo de vídeo através do objeto \verb!capture! do tipo \verb!cv::VideoCapture!; interfacear com a classe abstrata \verb!FrameProcessor! através da chamada do método \verb!process!; e executar o algoritmo de rastreamento e contagem implementado pela classe \verb!Counter!.
+
+A classe abstrata \verb!FrameProcessor! define uma interface cuja função é receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as operações descritas nas seguintes subseções: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as operações de visão computacional e através do método \verb!keypoints! retorna os pontos que pontencialmente representam veículos em movimento.
+
+A classe \verb!Counter! implementa o algoritmo descrito na subseção \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma máscara binária que define a região de contagem e uma lista interna de \textit{trackers}, o método \verb!count! retorna quantos eventos de contagem ocorrem para cada iteração.
+
+A classe \verb!Circle! é utilizada pela classe \verb!Tracker! para representar computacionalmente um círculo com centro e raio definidos. Já a classe \verb!Tracker! é utilizada na forma de lista pela classe \verb!Counter!, na implementação do algoritmo de rastreamento e contagem.
+
+O código dessa aplicação pode ser encontrado no seguinte repositório: \url{https://github.com/arthurbailao/potential-ironman}.
+
+% section estrutura_do_software (end)
+
+\section{Avaliação dos resultados} % (fold)
+\label{sec:avalia_o_dos_resultados}
+
+TODO: escrever alguma coisa aqui, nem que seja citar as subseções a seguir.
+
+\subsection{Matriz de confusão} % (fold)
+\label{sub:matriz_de_confus_o}
+
+A matriz de confusão contém informações sobre classificações reais e preditas feitas por um classificador, como mostrado na Tabela \ref{tab:matriz_de_confusao}. Ela permite que a partir de seus elementos diversas medidas de desempenho sejam calculadas.
+
+\begin{table}[ht]
+  \caption{Matriz de confusão para um classificador de duas classes.}
+  \label{tab:matriz_de_confusao}
+  \begin{center}
+    \begin{tabular}{l|l|c|c|}
+
+    \multicolumn{2}{c}{} & \multicolumn{2}{c}{Classe verdadeira} \\
+    \cline{3-4}
+    \multicolumn{2}{c|}{} & Positivo & Negativo \\
+    \cline{2-4}
+    \multirow{2}{*}{Classe predita} & Positivo & VP & FP \\
+    \cline{2-4}
+    & Negativo & FN & VN \\
+    \cline{2-4}
+    
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
+
+No contexto desse trabalho é necessário analisar os eventos em um intervalo de tempo. Dessa forma, os elementos da matriz de confusão podem ser descritos como:
+
+\begin{itemize}
+  \item Verdadeiro positivo (VP): mais um veículo foi contabilizado quando o mesmo adentrou a região de contagem em uma janela de tempo;
+  \item Falso negativo (FN): mais um veículo não foi contabilizado quando o mesmo adentrou a região de contagem em uma janela de tempo;
+  \item Verdadeiro negativo (VN): mais um veículo não foi contabilizado quando nenhum veículo adentrou a região de contagem em uma janela de tempo;
+  \item Falso positivo (FP): mais um veículo foi contabilizado quando nenhum veículo adentrou a região de contagem em uma janela de tempo.
+\end{itemize}
+
+Os eventos verdadeiro negativos (VN) foram contados utilizando uma janela de tempo, que corresponde ao tempo médio em que um veículo leva para percorrer a cena. Essa intervalo foi medido empiricamente para cada amostra de video.
+
+Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confusão. São elas: Especificidade (Equação \ref{eq:especificidade}), Valor Preditivo Negativo (Equação \ref{eq:valor_preditivo_negativo}), Precisão (Equação \ref{eq:precisao}), \textit{Recall} (Equação \ref{eq:recall}), Acurácia (Equação \ref{eq:acuracia}) e \textit{F-Measure} (Equação \ref{eq:f_measure}) \citep{powers07evaluation}.
+
+\begin{equation}
+  \label{eq:especificidade}
+  E=\dfrac{VN}{VN+FP}
+\end{equation}
+
+\begin{equation}
+  \label{eq:valor_preditivo_negativo}
+  VPN=\dfrac{VN}{VN+FN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:precisao}
+  P=\dfrac{VP}{VP+FP}
+\end{equation}
+
+\begin{equation}
+  \label{eq:recall}
+  R=\dfrac{VP}{VP+FN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:acuracia}
+  A=\dfrac{VP+VN}{VP+FP+FN+VN}
+\end{equation}
+
+\begin{equation}
+  \label{eq:f_measure}
+  FM=\dfrac{2*R*P}{R+P}
+\end{equation}
+
+% subsection matriz_de_confus_o (end)
+
+\subsection{Índice Kappa (K)} % (fold)
+\label{sub:_ndice_kappa_}
+
+O índice Kappa é utilizado como uma medida apropriada da exatidão por representar inteiramente a matriz de confusão. Ele toma todos os elementos da matriz ao invés de apenas aqueles que retratam a quantidade de classificações verdadeiras, o que ocorre quando se calcula a exatidão global da classificação \citep{Jnl605963009}.
+
+O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
+
+\begin{equation}
+  \label{eq:kappa}
+  K=\dfrac{\theta_{1}-\theta_{2}}{1-\theta_{2}}\text{,}
+\end{equation}
+
+\noindent onde
+
+\begin{equation}
+  \label{eq:theta_1}
+  \theta_{1}=\dfrac{VP+VN}{VP+FP+FN+VN}\text{,}
+\end{equation}
+
+\noindent e
+
+\begin{equation}
+  \label{eq:theta_2}
+  \theta_{2}=\dfrac{\alpha+\beta}{\gamma^{2}}\text{,}
+\end{equation}
+
+\noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
+
+O nível de exatidão obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
+
+\begin{table}[ht]
+  \caption{Nível de exatidão de uma contagem, conforme o valor do índice Kappa.}
+  \label{tab:indice_kappa}
+  \begin{center}
+    \begin{tabular}{cc}
+    \toprule
+    \textbf{Índice Kappa (K)} & \textbf{Qualidade} \\
+    \midrule
+      $K < 0.2$ & Ruim \\
+      $0.2 \leq K < 0.4$ & Razoável \\
+      $0.4 \leq K < 0.6$ & Bom \\
+      $0.6 \leq K < 0.8$ & Muito bom \\
+      $K \geq 0.8$ & Excelente \\
+    \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
+% subsection _ndice_kappa_ (end)
+
+% section avalia_o_dos_resultados (end)
