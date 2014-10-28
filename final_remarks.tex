@@ -9,7 +9,7 @@ Embora já existam diversos métodos para a realização de contagem volumétrica de 
 \section{Limitações} % (fold)
 \label{sec:pontos_negativos_do_m_todo}
 
-Vários aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background}, por exemplo, apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. 
+Vários aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background}, por exemplo, apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Além disso, movimentações na câmeras causadas por trepidações da passarela quando veículos de grande porte transitavam na via, também geraram ruídos na subtração de \textit{background}, comprometendo as etapas subsequentes.
 
 Como não foi desenvolvido um método para identificar se o objeto em movimento é um veiculo ou não, alguns elementos indesejáveis foram considerados na contagem. Ao mesmo tempo, devido à proximidade, a detecção de \textit{blobs} falhou e alguns veículos não foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
 
@@ -20,6 +20,7 @@ Como não foi desenvolvido um método para identificar se o objeto em movimento é 
 Como possíveis trabalhos futuros, podem ser apontados:
 
 \begin{itemize}
+  \item Minimizar o prejuízo causado pela movimentação da câmera pelo uso de pontos fiduciais;
   \item Definição de uma uma região de interesse baseada na área com maior movimentação nas imagens;
   \item Desenvolvimento de um método para contagem de veículos no período noturno ou em locais com baixa iluminação;
   \item Criação de técnicas para classificação de veículos quanto ao tamanho;
