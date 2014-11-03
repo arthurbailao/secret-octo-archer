@@ -1,4 +1,4 @@
-\documentclass[msc,    % ou [msc] para dissertações 
+\documentclass[msc,    % ou [msc] para dissertaÃ§Ãµes 
   % hidetitle,         % de mestrado. Para propostas ou
   hidecover,           % projetos, usar [phd,project],
   hidefc,              % [msc,proposal], etc.
@@ -7,14 +7,15 @@
   a4paper
   ]{ppgccufmg} 
 
-\usepackage[brazil]{babel}        % se o documento for em português, OU
-%\usepackage[english]{babel}      % se o documento for em inglês
-\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}        % se o documento for em portuguÃªs, OU
+%\usepackage[english]{babel}      % se o documento for em inglÃªs
+\usepackage[utf8x]{inputenc}
+\PrerenderUnicode{Ã£}
 \usepackage[T1]{fontenc}
 \usepackage{type1ec}
 \usepackage{graphicx}
 \usepackage{multirow}
-\usepackage{listings} % escrever trechos de códigos
+\usepackage{listings} % escrever trechos de cÃ³digos
 \usepackage{xcolor}
 \lstset { %
   language=C++,
@@ -23,7 +24,7 @@
   showstringspaces=false,
 }
 \usepackage{subcaption} % subfigures
-\usepackage{amssymb,amsmath} % equações
+\usepackage{amssymb,amsmath} % equaÃ§Ãµes
 
 \usepackage[portuguese,
   bookmarks=true,
@@ -42,45 +43,45 @@
 
 \begin{document}
 
-% O comando a seguir, \ppgccufmg, provê todas as informações relevantes para a
-% classe ppgccufmg. Por favor, consulte a documentação para a descrição de
+% O comando a seguir, \ppgccufmg, provÃª todas as informaÃ§Ãµes relevantes para a
+% classe ppgccufmg. Por favor, consulte a documentaÃ§Ã£o para a descriÃ§Ã£o de
 % cada chave.
 
-% Um exemplo para documentos em português é apresentado a seguir:
+% Um exemplo para documentos em portuguÃªs Ã© apresentado a seguir:
 \ppgccufmg{
-  title={Método Automático de Contagem Volumétrica de Veículos baseado em Visão Computacional},
-  authorrev={Ferreira Bailão, Arthur},
+  title={MÃ©todo AutomÃ¡tico de Contagem VolumÃ©trica de VeÃ­culos baseado em VisÃ£o Computacional},
+  authorrev={Ferreira BailÃ£o, Arthur},
   % cutter={D1234p},
   % cdu={519.6*82.10},
   university={Universidade Federal de Minas Gerais},
-  course={Engenharia de Controle e Automação},
+  course={Engenharia de Controle e AutomaÃ§Ã£o},
   address={Belo Horizonte},
-  date={2013-10},
-  keywords={Visão Computacional, Engenharia de Transporte, Contagem Volumétrica},
-  advisor={Profª Leise Kelli de Oliveira},
-  supervisor={Henrique Nunes Machado},
+  date={2014-11},
+  keywords={VisÃ£o Computacional, Engenharia de Transporte, Contagem VolumÃ©trica},
+  advisor={Prof. Hermes Aguiar MagalhÃ£es},
+  supervisor={ProfÂª. Leise Kelli de Oliveira},
 %  approval={img/approvalsheet.eps},
 %  approval=[-2.5cm][1]{aprovalsheet},
   abstract={Resumo}{abstract_ptbr},
   abstract=[english]{Abstract}{abstract_en},
   % abstract={Resumo Estendido}{resumoest},
-  dedication={dedication},
-  ack={thanks},
+  % dedication={dedication},
+  % ack=[Acknowledgments]{thanks},
 % ack=[Acknowledgments]{ack},
-  epigraphtext={A ciência pode ser descrita como a arte da sistemática simplificação.}{Karl Popper}
+  epigraphtext={A ciÃªncia pode ser descrita como a arte da sistemÃ¡tica simplificaÃ§Ã£o.}{Karl Popper}
 }
 
-\chapter{Introdução} % (fold)
+\chapter{IntroduÃ§Ã£o} % (fold)
 \label{cha:introdu_o}
 \input{introduction}
 % chapter introdu_o (end)
 
-\chapter{Contagem de Veículos e Monitoramento do Tráfego} % (fold)
+\chapter{Contagem de VeÃ­culos e Monitoramento do TrÃ¡fego} % (fold)
 \label{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}
 \input{traffic_monitoring}
 % chapter contagem_de_ve_culos_e_monitoramento_do_tr_fego (end)
 
-\chapter{Visão Computacional} % (fold)
+\chapter{VisÃ£o Computacional} % (fold)
 \label{cha:vis_o_computacional}
 \input{computer_vision}
 % chapter vis_o_computacional (end)
@@ -95,39 +96,39 @@
 \input{tests_and_results}
 % chapter testes_e_resultados (end)
 
-\chapter{Considerações Finais} % (fold)
+\chapter{ConsideraÃ§Ãµes Finais} % (fold)
 \label{cha:considera_es_finais}
 \input{final_remarks}
 % chapter considera_es_finais (end)
 
 % Aqui vem a parte da bibliografia: use o comando \ppgccbibliography indicando
-% apenas o nome do arquivo .bib (sem a extensão).
+% apenas o nome do arquivo .bib (sem a extensÃ£o).
 \ppgccbibliography{bibfile}
 
 
-% Este comando encapsula o conjunto de apêndices. A sua função é fazer com que
-% a numeração dos apêndices seja feita com letras maiúsculas (A, B, C, etc.) e
-% a palavra "Apêndice" anteceda as entradas no Sumário.
+% Este comando encapsula o conjunto de apÃªndices. A sua funÃ§Ã£o Ã© fazer com que
+% a numeraÃ§Ã£o dos apÃªndices seja feita com letras maiÃºsculas (A, B, C, etc.) e
+% a palavra "ApÃªndice" anteceda as entradas no SumÃ¡rio.
 % \begin{appendices}
 
-% Para cada apêndice, um \chapter
-% \chapter{Um apêndice}
-% \chapter{Outro apêndice}
+% Para cada apÃªndice, um \chapter
+% \chapter{Um apÃªndice}
+% \chapter{Outro apÃªndice}
 
-% Fim dos apêndices (usar apenas depois do último apêndice)
+% Fim dos apÃªndices (usar apenas depois do Ãºltimo apÃªndice)
 % \end{appendices}
 
 
-% Este comando encapsula o conjunto de anexos. A sua função é fazer com que a
-% numeração dos anexos seja feita com letras maiúsculas (A, B, C, etc.) e a
-% palavra "Anexo" anteceda as entradas no Sumário.
+% Este comando encapsula o conjunto de anexos. A sua funÃ§Ã£o Ã© fazer com que a
+% numeraÃ§Ã£o dos anexos seja feita com letras maiÃºsculas (A, B, C, etc.) e a
+% palavra "Anexo" anteceda as entradas no SumÃ¡rio.
 % \begin{attachments}
 
 % Para cada anexo, um \chapter
 % \chapter{Um anexo}
 % \chapter{Outro anexo}
 
-% Fim dos anexos (usar apenas depois do último anexo)
+% Fim dos anexos (usar apenas depois do Ãºltimo anexo)
 % \end{attachments}
 
 

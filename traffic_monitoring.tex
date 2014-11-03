@@ -1,282 +1,166 @@
 % !TEX root = pfc.tex
 
-De acordo com \cite{dnit:2011:online}, Departamento Nacional de Infra-Estrutura de Transportes, a contagem volumÈtrica consiste em quantificar o volume de veÌculos que trafegam por um determinado trecho da rodovia, durante um intervalo de tempo definido. A contagem de veÌculos È importante para o cumprimento de diversas finalidades, dentre elas: planejamento do sistema rodovi·rio, estabelecimento de tendÍncias de tr·fego futuro, determinaÁ„o do volume de viagens de forma a proporcionar justificativa econÙmica aos investimentos programados, avaliaÁ„o do fluxo existente de tr·fego em relaÁ„o ao sistema rodovi·rio atual, planejamento e justificativa do policiamento, realizaÁ„o de an·lise estatÌstica de acidentes, estudos de localizaÁ„o de postos de pesagem, socorro mÈdico emergencial, entre outros.
+De acordo com \cite{dnit:2011:online}, Departamento Nacional de Infra-Estrutura de Transportes, a contagem volum√©trica consiste em quantificar o volume de ve√≠culos que trafegam por um determinado trecho da rodovia, durante um intervalo de tempo definido. A contagem de ve√≠culos √© importante para o cumprimento de diversas finalidades, dentre elas: planejamento do sistema rodovi√°rio, estabelecimento de tend√™ncias de tr√°fego futuro, determina√ß√£o do volume de viagens de forma a proporcionar justificativa econ√¥mica aos investimentos programados, avalia√ß√£o do fluxo existente de tr√°fego em rela√ß√£o ao sistema rodovi√°rio atual, planejamento e justificativa do policiamento, realiza√ß√£o de an√°lise estat√≠stica de acidentes, estudos de localiza√ß√£o de postos de pesagem, socorro m√©dico emergencial, entre outros.
 
-O volume de veÌculos, obtido atravÈs da contagem, pode ser classificado como \citep{goldner:2009:misc}:
+O volume de ve√≠culos, obtido atrav√©s da contagem, pode ser classificado como \citep{goldner:2009:misc}:
 
 \begin{itemize}
-  \item \textbf{Volume de tr·fego}: quantidade de veÌculos em tr·fego na seÁ„o de uma via, em um perÌodo de tempo definido;
-  \item \textbf{AADT} ou \textbf{VMDA}: volume mÈdio di·rio de veÌculos durante o ano, ou seja, a somatÛria anual, dividido por 365;
-  \item \textbf{ADT} ou \textbf{VMD}: volume di·rio do tr·fego ou volume mÈdio di·rio. TambÈm È usado para intervalos de tempo diferentes, representando o volume total durante dado perÌodo, dividido pela quantidade de dias do perÌodo. Assim tem-se:
+  \item \textbf{Volume de tr√°fego}: quantidade de ve√≠culos em tr√°fego na se√ß√£o de uma via, em um per√≠odo de tempo definido;
+  \item \textbf{AADT} ou \textbf{VMDA}: volume m√©dio di√°rio de ve√≠culos durante o ano, ou seja, a somat√≥ria anual, dividido por 365;
+  \item \textbf{ADT} ou \textbf{VMD}: volume di√°rio do tr√°fego ou volume m√©dio di√°rio. Tamb√©m √© usado para intervalos de tempo diferentes, representando o volume total durante dado per√≠odo, dividido pela quantidade de dias do per√≠odo. Assim tem-se:
   \begin{itemize}
-    \item \textbf{VMDm}: volume mÈdio di·rio mensal. N˙mero total de veÌculos em um mÍs, dividido pelo n˙mero de dias do mÍs;
-    \item \textbf{VMDs}: volume mÈdio di·rio semanal. N˙mero total de veÌculos em uma semana, dividido por 7. … sempre acompanhado pelo nome do mÍs a que se refere;
-    \item \textbf{VMDd}: Volume mÈdio di·rio em um dia de semana. Deve ser sempre acompanhado pela indicaÁ„o do dia de semana e do mÍs correspondente;
+    \item \textbf{VMDm}: volume m√©dio di√°rio mensal. N√∫mero total de ve√≠culos em um m√™s, dividido pelo n√∫mero de dias do m√™s;
+    \item \textbf{VMDs}: volume m√©dio di√°rio semanal. N√∫mero total de ve√≠culos em uma semana, dividido por 7. √â sempre acompanhado pelo nome do m√™s a que se refere;
+    \item \textbf{VMDd}: Volume m√©dio di√°rio em um dia de semana. Deve ser sempre acompanhado pela indica√ß√£o do dia de semana e do m√™s correspondente;
   \end{itemize}
-  \item \textbf{ComposiÁ„o do tr·fego}: porcentagem dos diferentes tipos de veÌculos que compıem o tr·fego, por exemplo, automÛveis, caminhıes, Ùnibus e motos;
-  \item \textbf{Volume abreviado}: volume do fluxo de um perÌodo menor do que 1 hora;
-  \item \textbf{VariaÁıes do volume de tr·fego}: mudanÁas no volume em um determinado perÌodo, divididas em: variaÁıes sazonais ou mensais ao longo do ano; variaÁıes di·rias ao longo da semana; variaÁıes hor·rias ao longo do dia; e variaÁıes dentro da hora.
+  \item \textbf{Composi√ß√£o do tr√°fego}: porcentagem dos diferentes tipos de ve√≠culos que comp√µem o tr√°fego, por exemplo, autom√≥veis, caminh√µes, √¥nibus e motos;
+  \item \textbf{Volume abreviado}: volume do fluxo de um per√≠odo menor do que 1 hora;
+  \item \textbf{Varia√ß√µes do volume de tr√°fego}: mudan√ßas no volume em um determinado per√≠odo, divididas em: varia√ß√µes sazonais ou mensais ao longo do ano; varia√ß√µes di√°rias ao longo da semana; varia√ß√µes hor√°rias ao longo do dia; e varia√ß√µes dentro da hora.
 \end{itemize}
 
-\cite{goldner:2009:misc} define dois mÈtodos de contagem: \textbf{manual} e \textbf{mec‚nica}. A contagem manual utiliza recursos humanos, ou seja, pesquisadores observam o fluxo de veÌculos e manualmente fazem suas anotaÁıes. Esse procedimento È vantajoso pela precis„o e variedade nas informaÁıes de tr·fego obtidas, como tipo e tamanho dos veÌculos, alÈm de proporcionar flexibilidade, simplicidade e rapidez de execuÁ„o. No entanto, È um mÈtodo com limitaÁıes de cobertura e de alto custo. A contagem mec‚nica utiliza detectores de tr·fego de instalaÁıes permanente ou mÛvel. Possui algumas vantagens, dentre elas: baixo custo operacional, grande amplitude de tempo de cobertura e boa precis„o. Por outro lado n„o fornecesse muitas informaÁıes e demanda investimento inicial alto.
+\cite{goldner:2009:misc} define dois m√©todos de contagem: \textbf{manual} e \textbf{mec√¢nica}. A contagem manual utiliza recursos humanos, ou seja, pesquisadores observam o fluxo de ve√≠culos e manualmente fazem suas anota√ß√µes. Esse procedimento √© vantajoso pela precis√£o e variedade nas informa√ß√µes de tr√°fego obtidas, como tipo e tamanho dos ve√≠culos, al√©m de proporcionar flexibilidade, simplicidade e rapidez de execu√ß√£o. No entanto, √© um m√©todo com limita√ß√µes de cobertura e de alto custo. A contagem mec√¢nica utiliza detectores de tr√°fego de instala√ß√µes permanente ou m√≥vel. Possui algumas vantagens, dentre elas: baixo custo operacional, grande amplitude de tempo de cobertura e boa precis√£o. Por outro lado n√£o fornecesse muitas informa√ß√µes e demanda investimento inicial alto.
 
-A classificaÁ„o feita por \cite{goldner:2009:misc} peca ao usar o termo contagem mec‚nica para caracterizar mÈtodos n„o manuais. Grande parte dos equipamentos de contagem volumÈtrica s„o dispositivos eletrÙnicos, por exemplo sensores micro-ondas, ultra-sÙnicos e piezoelÈtricos, descaracterizando o uso dessa nomenclatura. AtÈ mesmo o tubo pneum·tico, que pode ser considerado um dispositivo mec‚nico, utiliza sinais elÈtricos para transmiss„o dos dados. Por esse motivo, ser· adotado o termo \textbf{contagem autom·tica} para descrever os mÈtodos de contagem que n„o dependem diretamente da participaÁ„o humana durante o processo de obtenÁ„o dos dados.
+A classifica√ß√£o feita por \cite{goldner:2009:misc} peca ao usar o termo contagem mec√¢nica para caracterizar m√©todos n√£o manuais. Grande parte dos equipamentos de contagem volum√©trica s√£o dispositivos eletr√¥nicos, por exemplo sensores micro-ondas, ultra-s√¥nicos e piezoel√©tricos, descaracterizando o uso dessa nomenclatura. At√© mesmo o tubo pneum√°tico, que pode ser considerado um dispositivo mec√¢nico, utiliza sinais el√©tricos para transmiss√£o dos dados. Por esse motivo, ser√° adotado o termo \textbf{contagem autom√°tica} para descrever os m√©todos de contagem que n√£o dependem diretamente da participa√ß√£o humana durante o processo de obten√ß√£o dos dados.
 
-Por sua vez, os mÈtodos autom·ticos de contagem podem ser classificados como \textbf{invasivos} e \textbf{n„o-invasivos}. Os mÈtodos invasivos necessitam de instalaÁıes junto ou sob a camada asf·ltica. J· os mÈtodos n„o-invasivos n„o modificam a estrutura da via, com instalaÁıes acima ou ‡s margens da faixa de tr·fego \citep{goldner:2009:misc}.
+Por sua vez, os m√©todos autom√°ticos de contagem podem ser classificados como \textbf{invasivos} e \textbf{n√£o-invasivos}. Os m√©todos invasivos necessitam de instala√ß√µes junto ou sob a camada asf√°ltica. J√° os m√©todos n√£o-invasivos n√£o modificam a estrutura da via, com instala√ß√µes acima ou √†s margens da faixa de tr√°fego \citep{goldner:2009:misc}.
 
-Nas seÁıes seguintes s„o apresentados alguns equipamentos autom·ticos de contagem volumÈtrica, descritos em \cite{goldner:2009:misc}, \cite{almeida:2010:masther} e \cite{dnit:2011:online}, bem como algumas aplicaÁıes de vis„o computacional inseridas na ·rea de Engenharia de Transporte.
+Nas se√ß√µes seguintes s√£o apresentados alguns equipamentos autom√°ticos de contagem volum√©trica, descritos em \cite{goldner:2009:misc}, \cite{almeida:2010:masther} e \cite{dnit:2011:online}, bem como algumas aplica√ß√µes de vis√£o computacional inseridas na √°rea de Engenharia de Transporte.
 
-\section{Tecnologias detectoras de veÌculos} % (fold)
+\section{Tecnologias detectoras de ve√≠culos} % (fold)
 \label{sec:tecnologias_detectoras_de_ve_culos}
 
-Atualmente existem diversas tecnologias de sensores capazes de efetuar a detecÁ„o de veÌculos \citep{minnesota1997field}. A Tabela \ref{fig:tabela_vantagens_desvantagens} lista grande parte delas, apresentando vantagens e desvantagens para cada uma \citep{aguiar2008thesis}. Nas subseÁıes a seguir alguns sensores que utilizam essas tecnologias s„o detalhados.
+Atualmente existem diversas tecnologias de sensores capazes de efetuar a detec√ß√£o de ve√≠culos \citep{minnesota1997field}. A Tabela \ref{tab:tecnologias_vantagens_desvantagens} lista grande parte delas, apresentando vantagens e desvantagens para cada uma \citep{aguiar2008thesis}. Nas subse√ß√µes a seguir alguns sensores que utilizam essas tecnologias s√£o detalhados.
 
-\begin{figure}[ht]
-  \begin{center}
-    \includegraphics[scale=0.8]{imgs/tabela_vantagens_desvantagens.png}
-  \end{center}
-  \caption{Vantagens e desvantagens de tecnologias detectoras de veÌculos \citep{aguiar2008thesis}.}
-  \label{fig:tabela_vantagens_desvantagens}
-\end{figure}
+\LTXtable{\textwidth}{advantages_disadvantages}
 
-% \begin{center}
-% \begin{longtable}{@{\extracolsep{\fill}}lll@{}}
-% \caption[Feasible triples for a highly variable Grid]{Feasible triples for 
-% highly variable Grid, MLMMH.} \label{grid_mlmmh} \\
-% \toprule
-% \multicolumn{1}{l}{\textbf{Time (s)}} & \multicolumn{1}{l}{\textbf{Triple chosen}} & \multicolumn{1}{l}{\textbf{Other feasible triples}} \\
-% \midrule
-% \endfirsthead
-
-% \multicolumn{3}{c}%
-% {{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
-% \hline \multicolumn{1}{|c|}{\textbf{Time (s)}} &
-% \multicolumn{1}{c|}{\textbf{Triple chosen}} &
-% \multicolumn{1}{c|}{\textbf{Other feasible triples}} \\ \hline 
-% \endhead
-
-% \hline \multicolumn{3}{|r|}{{Continued on next page}} \\ \hline
-% \endfoot
-
-% \hline \hline
-% \endlastfoot
-
-% 0 & (1, 11, 13725) & (1, 12, 10980), (1, 13, 8235), (2, 2, 0), (3, 1, 0) \\
-% 2745 & (1, 12, 10980) & (1, 13, 8235), (2, 2, 0), (2, 3, 0), (3, 1, 0) \\
-% 5490 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 8235 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 10980 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 13725 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 16470 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 19215 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 21960 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 24705 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 27450 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 30195 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 32940 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 35685 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 38430 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 41175 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 43920 & (1, 13, 10980) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 46665 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 49410 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 52155 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 54900 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 57645 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 60390 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 63135 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 65880 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 68625 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 71370 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 74115 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 76860 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 79605 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 82350 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 85095 & (1, 12, 13725) & (1, 13, 10980), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 87840 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 90585 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 93330 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 96075 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 98820 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 101565 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 104310 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 107055 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 109800 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 112545 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 115290 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 118035 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 120780 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 123525 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 126270 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 129015 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 131760 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 134505 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 137250 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 139995 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 142740 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 145485 & (1, 12, 16470) & (1, 13, 13725), (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 148230 & (2, 2, 2745) & (2, 3, 0), (3, 1, 0) \\
-% 150975 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 153720 & (1, 12, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 156465 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 159210 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 161955 & (1, 13, 16470) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% 164700 & (1, 13, 13725) & (2, 2, 2745), (2, 3, 0), (3, 1, 0) \\
-% \end{longtable}
-% \end{center}
-
-% \begin{table}[ht]
-%   \caption{Vantagens e desvantagens de tecnologias detectoras de veÌculos.}
-%   \label{tab:tecnologias_vantagens_desvantagens}
-%   \begin{center}
-%     \begin{tabularx}{\textwidth}{XXX}
-%     \toprule
-%     \textbf{Tecnologia} & \textbf{Vantagens} & \textbf{Desvantagens} \\
-%     \midrule
-%       Ultra-sÙnico & \tabitem Tamanho compacto, f·cil instalaÁ„o & \tabitem Pode ser sensÌvel ‡ temperatura e turbulÍncia do ar \\
-%       Microondas Doppler & \tabitem Bom para condiÁıes meteorolÛgicas adversas \tabitem Mede velocidade dos veÌculos diretamente & \tabitem N„o consegue detectar veÌculos parados ou com velocidade inferior a 6 km/h \\
-%       Microondas - presenÁa real & \tabitem Bom para condiÁıes meteorolÛgicas adversas \tabitem Detecta veÌculos parados \tabitem Opera com visada lateral da via & \tabitem Requer uma antena de feixe estreito para confinar ·rea de interesse a uma ˙nica faixa no modo de visualizaÁ„o no sentido da via \\
-%       Infravermelho passivo (somente recebe sinal) & \tabitem Dist‚ncia de alcance sob neblina maior do que sensores de imagem na ·rea da luz visÌvel & \tabitem DegradaÁ„o potencial por chuva ou neve intensa \tabitem Imprecis„o na medida de velocidade \\
-%       Infravermelho ativo (transmite e recebe) & \tabitem Dist‚ncia de alcance sob neblina maior do que sensores de imagem na ·rea da luz visÌvel \tabitem Mede velocidade diretamente & \tabitem DegradaÁ„o potencial por subst‚ncias que obscurecem a atmosfera e por condiÁıes meteorolÛgicas adversas \\
-%       Processadores de imagem e vÌdeo no espectro de luz visÌvel & \tabitem ProvÍ dados para gerenciamento de tr·fego e imagem para gerenciamento de incidentes \tabitem Uma ˙nica c‚mera e processador podem cuidar de muitas faixas \tabitem Riqueza de informaÁıes sobre tr·fego torna-se disponÌvel & \tabitem DegradaÁ„o potencial por condiÁıes meteorolÛgicas adversas \tabitem VeÌculos grandes podem ocluir veÌculos menores \tabitem Sombras, reflexos do ch„o molhado e transiÁıes dia/noite podem resultar em detecÁıes falsas ou perdidas \\
-%       Laser pulsado & \tabitem Alta direcionalidade \tabitem Grande alcance \tabitem Port·til, normalmente instalado na lateral da via & \tabitem Custo elevado \tabitem DegradaÁ„o potencial por condiÁıes meteorolÛgicas adversas \tabitem ObstruÁ„o por outros veÌculos \\
-%       Laser de varredura & \tabitem Excelente classificaÁ„o dos veÌculos & \tabitem Custo elevado \tabitem Necessidade de ser colocado sobre a via, verticalmente \\
-%       Fibra Ûtica & \tabitem Imunidade a adversidades meteorolÛgicas \tabitem Imunidade a dist˙rbios eletromagnÈticos & \tabitem Custo elevado \tabitem Necessita interrupÁ„o da via e cortes no pavimento \\
-%       Ac˙stico passivo & \tabitem InstalaÁ„o lateral ‡ via \tabitem Auxilia na classificaÁ„o & \tabitem Adequado apenas ‡ detecÁ„o de passagem de veÌculos \\
-%       Cabos piezo-elÈtricos & \tabitem SensÌvel ao peso do veÌculo, permite peso em movimento \tabitem Imune a adversidades meteorolÛgicas & \tabitem … preciso interromper a via e fazer cortes no pavimento \tabitem N„o permite detecÁ„o de presenÁa (a menos que o veÌculo pare exatamente sobre o sensor) \\
-%     \bottomrule
-%     \end{tabularx}
-%   \end{center}
-% \end{table}
-
-\subsection{Detector de laÁo indutivo} % (fold)
+\subsection{Detector de la√ßo indutivo} % (fold)
 \label{sub:detectores_de_la_os_indutivos}
 
-S„o os sensores mais utilizados para a coleta de dados de tr·fego. … composto basicamente por um circuito elÈtrico oscilador, uma unidade eletrÙnica de processamento, cabos de transmiss„o e o laÁo indutivo propriamente dito, que È formado por uma ou mais voltas de um cabo isolado instalado sob o pavimento da via (Figura \ref{fig:laco_indutivo}), caracterizando-o como equipamento invasivo.
+S√£o os sensores mais utilizados para a coleta de dados de tr√°fego. √â composto basicamente por um circuito el√©trico oscilador, uma unidade eletr√¥nica de processamento, cabos de transmiss√£o e o la√ßo indutivo propriamente dito, que √© formado por uma ou mais voltas de um cabo isolado instalado sob o pavimento da via (Figura \ref{fig:laco_indutivo}), caracterizando-o como equipamento invasivo.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.6]{imgs/laco_indutivo.png}
   \end{center}
-  \caption{Seis laÁos indutivos instalado em uma rodovia, dois por faixa \citep{goldner:2009:misc}.}
+  \caption{Seis la√ßos indutivos instalado em uma rodovia, dois por faixa \citep{goldner:2009:misc}.}
   \label{fig:laco_indutivo}
 \end{figure}
 
-O laÁo funciona como indutor de um circuito oscilador de frequÍncia fixa, normalmente entre 10 KHz e 200 KHz. Quando objetos de metal transitam nas proximidades do equipamento instalado no solo, acontece uma interaÁ„o entre os campos magnÈticos induzidos no laÁo e no objeto met·lico, que normalmente È um veÌculo, provocando variaÁıes na indut‚ncia do laÁo e, portanto, variaÁıes na frequÍncia de oscilaÁ„o do circuito ressonante. A presenÁa de um veÌculo na regi„o do laÁo provoca um aumento na frequÍncia de oscilaÁ„o do circuito, comportamento que È interpretado pela unidade de processamento capaz de realizar a contagem.
+O la√ßo funciona como indutor de um circuito oscilador de frequ√™ncia fixa, normalmente entre 10 KHz e 200 KHz. Quando objetos de metal transitam nas proximidades do equipamento instalado no solo, acontece uma intera√ß√£o entre os campos magn√©ticos induzidos no la√ßo e no objeto met√°lico, que normalmente √© um ve√≠culo, provocando varia√ß√µes na indut√¢ncia do la√ßo e, portanto, varia√ß√µes na frequ√™ncia de oscila√ß√£o do circuito ressonante. A presen√ßa de um ve√≠culo na regi√£o do la√ßo provoca um aumento na frequ√™ncia de oscila√ß√£o do circuito, comportamento que √© interpretado pela unidade de processamento capaz de realizar a contagem.
 
-Cada veÌculo que passa pelo laÁo indutivo possui um perfil magnÈtico caracterÌstico que depende de v·rios fatores, dentre eles, seu tamanho, formato, condutividade e orientaÁ„o em relaÁ„o ao laÁo. Isso possibilita, alÈm da contagem, realizar uma classificaÁ„o veicular atravÈs de mÈtodos de clusterizaÁ„o por redes neurais, como descrito em \citep{almeida:2010:masther}.
+Cada ve√≠culo que passa pelo la√ßo indutivo possui um perfil magn√©tico caracter√≠stico que depende de v√°rios fatores, dentre eles, seu tamanho, formato, condutividade e orienta√ß√£o em rela√ß√£o ao la√ßo. Isso possibilita, al√©m da contagem, realizar uma classifica√ß√£o veicular atrav√©s de m√©todos de clusteriza√ß√£o por redes neurais, como descrito em \citep{almeida:2010:masther}.
 
-A vantagem de se usar laÁos indutivos para monitoramento È o bom funcionamento na captura de dados b·sicos do tr·fego, como volume e velocidade, alÈm de apresentar baixo custo se comparado ‡ equipamentos n„o-invasivos. Por outro lado, o processo de instalaÁ„o do equipamento junto ao solo gera a paralisaÁ„o no tr·fego local e muitas vezes causa transtornos no tr‚nsito.
+A vantagem de se usar la√ßos indutivos para monitoramento √© o bom funcionamento na captura de dados b√°sicos do tr√°fego, como volume e velocidade, al√©m de apresentar baixo custo se comparado √† equipamentos n√£o-invasivos. Por outro lado, o processo de instala√ß√£o do equipamento junto ao solo gera a paralisa√ß√£o no tr√°fego local e muitas vezes causa transtornos no tr√¢nsito.
 
 % section detectores_de_la_os_indutivos (end)
 
-\subsection{Tubo pneum·tico} % (fold)
+\subsection{Tubo pneum√°tico} % (fold)
 \label{sub:tubo_pneum_tico}
 
-Os sensores de contagem volumÈtrica por tubo pneum·tico funcionam a partir da press„o exercida pelos pneus de um veÌculo assim que passam sobre o tubo de borracha. A massa de ar È ent„o deslocada ao longo do tubo atÈ o ponto de convers„o, onde um interruptor converte o sinal pneum·tico em sinal elÈtrico, para que esse possa ser transmitido a um \textit{software} de an·lise ou a um contador.
+Os sensores de contagem volum√©trica por tubo pneum√°tico funcionam a partir da press√£o exercida pelos pneus de um ve√≠culo assim que passam sobre o tubo de borracha. A massa de ar √© ent√£o deslocada ao longo do tubo at√© o ponto de convers√£o, onde um interruptor converte o sinal pneum√°tico em sinal el√©trico, para que esse possa ser transmitido a um \textit{software} de an√°lise ou a um contador.
 
-O tubo È instalado sobre a via, perpendicular ‡ direÁ„o do fluxo do tr·fego, caracterizando-se como um equipamento invasivo. … normalmente utilizado para contagem de tr·fego em perÌodos curtos, classificaÁ„o dos veÌculos por n˙mero de eixos e espaÁamento, mediÁ„o de velocidade e pesquisas acadÍmicas.
+O tubo √© instalado sobre a via, perpendicular √† dire√ß√£o do fluxo do tr√°fego, caracterizando-se como um equipamento invasivo. √â normalmente utilizado para contagem de tr√°fego em per√≠odos curtos, classifica√ß√£o dos ve√≠culos por n√∫mero de eixos e espa√ßamento, medi√ß√£o de velocidade e pesquisas acad√™micas.
 
-Apesar de ser a primeira tecnologia de detecÁ„o de tr·fego, inventada em 1920, È ainda muito utilizada devido ao baixo custo e a simples instalaÁ„o e operaÁ„o. No entanto, o equipamento È impreciso na contagem de caminhıes ou Ùnibus muito largos, alÈm de apresentar baixa durabilidade e sensibilidade ‡ temperatura.
+Apesar de ser a primeira tecnologia de detec√ß√£o de tr√°fego, inventada em 1920, √© ainda muito utilizada devido ao baixo custo e a simples instala√ß√£o e opera√ß√£o. No entanto, o equipamento √© impreciso na contagem de caminh√µes ou √¥nibus muito largos, al√©m de apresentar baixa durabilidade e sensibilidade √† temperatura.
 
 % section tubo_pneum_tico (end)
 
-\subsection{Sensor magnÈtico} % (fold)
+\subsection{Sensor magn√©tico} % (fold)
 \label{sub:sensores_magn_ticos}
 
-O princÌpio de funcionamentos dos sensores magnÈticos È baseado em variaÁıes das linhas de fluxo do campo magnÈtico terrestre. Tal efeito È conhecido como anomalia magnÈtica, causada pela aproximaÁ„o de objetos met·licos (veÌculos) da ·rea de cobertura do sensor. Por induÁ„o eletromagnÈtica, variaÁıes de tens„o s„o geradas e posteriormente amplificadas, digitalizadas e finalmente transmitidas ao controlador eletrÙnico que realiza a contagem.
+O princ√≠pio de funcionamentos dos sensores magn√©ticos √© baseado em varia√ß√µes das linhas de fluxo do campo magn√©tico terrestre. Tal efeito √© conhecido como anomalia magn√©tica, causada pela aproxima√ß√£o de objetos met√°licos (ve√≠culos) da √°rea de cobertura do sensor. Por indu√ß√£o eletromagn√©tica, varia√ß√µes de tens√£o s√£o geradas e posteriormente amplificadas, digitalizadas e finalmente transmitidas ao controlador eletr√¥nico que realiza a contagem.
 
-S„o utilizados para medir volume, direÁ„o, presenÁa e velocidade dos veÌculos. Podem ser divididos em dois tipos: os magnetÙmetros de induÁ„o, que se baseiam em mudanÁas nas linhas de fluxo do campo magnÈtico devido ao movimento, n„o detectam veÌculos parados na via; e os magnetÙmetros de eixo duplo, que detectam mudanÁas nos componentes horizontais e verticais do campo magnÈtico terrestre de acordo com a densidade do metal do veÌculo, e s„o capazes de identificar objetos em movimento ou parados.
+S√£o utilizados para medir volume, dire√ß√£o, presen√ßa e velocidade dos ve√≠culos. Podem ser divididos em dois tipos: os magnet√¥metros de indu√ß√£o, que se baseiam em mudan√ßas nas linhas de fluxo do campo magn√©tico devido ao movimento, n√£o detectam ve√≠culos parados na via; e os magnet√¥metros de eixo duplo, que detectam mudan√ßas nos componentes horizontais e verticais do campo magn√©tico terrestre de acordo com a densidade do metal do ve√≠culo, e s√£o capazes de identificar objetos em movimento ou parados.
 
- A utilizaÁ„o destes sensores È vantajosa devido a pouca sensibilidade ‡ temperatura ambiente e ao tr·fego intenso. Suas desvantagens s„o a pequena zona de detecÁ„o, a dificuldade em considerar veÌculos parados e a sua caracterÌstica de instalaÁ„o invasiva, fazendo-se necess·rias paralizaÁıes do tr·fego e interferÍncias na camada asf·ltica.
+ A utiliza√ß√£o destes sensores √© vantajosa devido a pouca sensibilidade √† temperatura ambiente e ao tr√°fego intenso. Suas desvantagens s√£o a pequena zona de detec√ß√£o, a dificuldade em considerar ve√≠culos parados e a sua caracter√≠stica de instala√ß√£o invasiva, fazendo-se necess√°rias paraliza√ß√µes do tr√°fego e interfer√™ncias na camada asf√°ltica.
 
 % section sensores_magn_ticos (end)
 
-\subsection{Sensor piezoelÈtrico} % (fold)
+\subsection{Sensor piezoel√©trico} % (fold)
 \label{sub:sensores_piezoel_tricos}
 
-Um material piezoelÈtrico È capaz de converter energia cinÈtica em energia elÈtrica. Esses materiais geram uma tens„o quando submetidos a choques mec‚nicos ou vibraÁıes. Portanto, quando um veÌculo passa sobre um detector, o sensor gera uma tens„o proporcional ao peso do veÌculo. … construÌdo a partir de um cabo piezoelÈtrico do tipo coaxial, com um n˙cleo de metal, seguido pelo material piezoelÈtrico e uma camada externa de metal, como ilustrado na Figura \ref{fig:piezoeletrico}.
+Um material piezoel√©trico √© capaz de converter energia cin√©tica em energia el√©trica. Esses materiais geram uma tens√£o quando submetidos a choques mec√¢nicos ou vibra√ß√µes. Portanto, quando um ve√≠culo passa sobre um detector, o sensor gera uma tens√£o proporcional ao peso do ve√≠culo. √â constru√≠do a partir de um cabo piezoel√©trico do tipo coaxial, com um n√∫cleo de metal, seguido pelo material piezoel√©trico e uma camada externa de metal, como ilustrado na Figura \ref{fig:piezoeletrico}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.6]{imgs/piezoeletrico.png}
   \end{center}
-  \caption{RepresentaÁ„o esquem·tica de um cabo piezoelÈtrico \citep{goldner:2009:misc}.}
+  \caption{Representa√ß√£o esquem√°tica de um cabo piezoel√©trico \citep{goldner:2009:misc}.}
   \label{fig:piezoeletrico}
 \end{figure}
 
-Devido a sua grande precis„o, esse tipo de sensor È capaz de medir volume do tr·fego, velocidade, peso e ainda classificar os veÌculos baseado no espaÁamento e contagem de eixos. Sua instalaÁ„o È feita junto ‡ via, caracterizando-o como invasivo, e n„o È recomendado em solos irregulares. Apresenta alto custo se comparado a outros equipamentos invasivos, mas em contrapartida s„o mais precisos e adquirem informaÁıes mais completas.
+Devido a sua grande precis√£o, esse tipo de sensor √© capaz de medir volume do tr√°fego, velocidade, peso e ainda classificar os ve√≠culos baseado no espa√ßamento e contagem de eixos. Sua instala√ß√£o √© feita junto √† via, caracterizando-o como invasivo, e n√£o √© recomendado em solos irregulares. Apresenta alto custo se comparado a outros equipamentos invasivos, mas em contrapartida s√£o mais precisos e adquirem informa√ß√µes mais completas.
 
 % section sensores_piezoel_tricos (end)
 
-\subsection{C‚mera de vÌdeo} % (fold)
+\subsection{C√¢mera de v√≠deo} % (fold)
 \label{sub:c_mera_de_v_deo}
 
-As c‚meras de vÌdeo s„o utilizadas no monitoramento do tr·fego, na maioria das vezes, como uma simples ferramenta de vigil‚ncia urbana, com capacidades de transmiss„o e gravaÁ„o de imagens. Nesse cen·rio, as imagens devem ser interpretadas por um operador humano, que tem a funÁ„o de extrair dados de tr·fego. Com o avanÁo das ·reas de processamento digital de imagens e vis„o computacional, surgiram diversos sistemas de gerenciamento do tr·fego capazes de extrair automaticamente informaÁıes de tr·fego importantes, como velocidade, volume, presenÁa, ocupaÁ„o, densidade, movimentos de convers„o, mudanÁa de faixa, aceleraÁ„o, classificaÁ„o de veÌculos e outros \citep{martinsky:2007:masther,feitosa:2012:masther}.
+As c√¢meras de v√≠deo s√£o utilizadas no monitoramento do tr√°fego, na maioria das vezes, como uma simples ferramenta de vigil√¢ncia urbana, com capacidades de transmiss√£o e grava√ß√£o de imagens. Nesse cen√°rio, as imagens devem ser interpretadas por um operador humano, que tem a fun√ß√£o de extrair dados de tr√°fego. Com o avan√ßo das √°reas de processamento digital de imagens e vis√£o computacional, surgiram diversos sistemas de gerenciamento do tr√°fego capazes de extrair automaticamente informa√ß√µes de tr√°fego importantes, como velocidade, volume, presen√ßa, ocupa√ß√£o, densidade, movimentos de convers√£o, mudan√ßa de faixa, acelera√ß√£o, classifica√ß√£o de ve√≠culos e outros \citep{martinsky:2007:masther,feitosa:2012:masther}.
 
-Um sistema inteligente de processamento de imagens de vÌdeo consiste em uma ou mais c‚meras, um \textit{hardware}\footnote{Parte fÌsica de computadores ou quaisquer equipamentos eletrÙnicos.} para digitalizaÁ„o e processamento e um \textit{software} para interpretaÁ„o e convers„o de imagens em dados de tr·fego, numÈricos ou simbÛlicos. Segundo \cite{feitosa:2012:masther}, esse tipo de sistema pode, com apenas uma c‚mera, substituir v·rios equipamentos invasivos, como laÁos indutivos, e proporcionar detecÁ„o de veÌculos em m˙ltiplas faixas com menores custos de manutenÁ„o.
+Um sistema inteligente de processamento de imagens de v√≠deo consiste em uma ou mais c√¢meras, um \textit{hardware}\footnote{Parte f√≠sica de computadores ou quaisquer equipamentos eletr√¥nicos.} para digitaliza√ß√£o e processamento e um \textit{software} para interpreta√ß√£o e convers√£o de imagens em dados de tr√°fego, num√©ricos ou simb√≥licos. Segundo \cite{feitosa:2012:masther}, esse tipo de sistema pode, com apenas uma c√¢mera, substituir v√°rios equipamentos invasivos, como la√ßos indutivos, e proporcionar detec√ß√£o de ve√≠culos em m√∫ltiplas faixas com menores custos de manuten√ß√£o.
 
-Dentre as vantagens de uso de c‚meras est· a instalaÁ„o, que È totalmente n„o-invasiva e n„o gera qualquer tipo de transtorno ao tr‚nsito. Uma vez capturadas, as imagens do tr·fego podem ser analisadas posteriormente por profissionais capazes de, por exemplo, realizar a contagem volumÈtrica manual ou periciar um acidente. MudanÁas naturais na cena, como chuvas, tempo nublado, o dia e a noite, podem interferir na visibilidade, dificultando tanto a interpretaÁ„o humana quanto o processamento digital por vis„o computacional. Deslocamentos indesejados da c‚mera e problemas de oclus„o tambÈm s„o comuns.
+Dentre as vantagens de uso de c√¢meras est√° a instala√ß√£o, que √© totalmente n√£o-invasiva e n√£o gera qualquer tipo de transtorno ao tr√¢nsito. Uma vez capturadas, as imagens do tr√°fego podem ser analisadas posteriormente por profissionais capazes de, por exemplo, realizar a contagem volum√©trica manual ou periciar um acidente. Mudan√ßas naturais na cena, como chuvas, tempo nublado, o dia e a noite, podem interferir na visibilidade, dificultando tanto a interpreta√ß√£o humana quanto o processamento digital por vis√£o computacional. Deslocamentos indesejados da c√¢mera e problemas de oclus√£o tamb√©m s√£o comuns.
 
 % section c_mera_de_v_deo (end)
 
 \subsection{Sensores micro-ondas} % (fold)
 \label{sub:radar_por_microondas}
 
-Esse tipo de equipamento transmite radiaÁ„o de micro-ondas de baixa energia na direÁ„o de uma ·rea do pavimento utilizando uma antena localizada na parte superior do radar. Quando um veÌculo atravessa um feixe, uma parte dessa energia È refletida de volta para o detector, tambÈm localizado na parte superior do radar, e dados como velocidade e presenÁa s„o calculados por um controlador. A Figura \ref{fig:microondas} ilustra a configuraÁ„o mais comum de um sistema de monitoramento baseado em sensores micro-ondas.
+Esse tipo de equipamento transmite radia√ß√£o de micro-ondas de baixa energia na dire√ß√£o de uma √°rea do pavimento utilizando uma antena localizada na parte superior do radar. Quando um ve√≠culo atravessa um feixe, uma parte dessa energia √© refletida de volta para o detector, tamb√©m localizado na parte superior do radar, e dados como velocidade e presen√ßa s√£o calculados por um controlador. A Figura \ref{fig:microondas} ilustra a configura√ß√£o mais comum de um sistema de monitoramento baseado em sensores micro-ondas.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=.6]{imgs/microondas.png}
   \end{center}
-  \caption{Esquema ilustrativo da arquitetura de um sistema de monitoramento do tr·fego baseado em sensores micro-ondas \citep{goldner:2009:misc}.}
+  \caption{Esquema ilustrativo da arquitetura de um sistema de monitoramento do tr√°fego baseado em sensores micro-ondas \citep{goldner:2009:misc}.}
   \label{fig:microondas}
 \end{figure}
 
 Esses sensores podem ser de dois tipos:
 
 \begin{itemize}
-  \item \textbf{Doppler}: mede a presenÁa de um veÌculo em funÁ„o do movimento relativo entre uma fonte sonora e seu receptor e que, por efeito \textit{Doppler}, varia a frequÍncia recebida na volta. Como È um mÈtodo baseado em movimento, n„o considera veÌculos parados ou em regime de ``anda-p·ra''.
-  \item \textbf{Radar}: utiliza um sinal de frequÍncia ou fase modulada para calcular o atraso de tempo da onda refletida, obtendo a dist‚ncia do veÌculo. Nesse mÈtodo È possÌvel detectar a presenÁa de veÌculos parados, alÈm de medir velocidade, monitorar filas e ocupaÁ„o.
+  \item \textbf{Doppler}: mede a presen√ßa de um ve√≠culo em fun√ß√£o do movimento relativo entre uma fonte sonora e seu receptor e que, por efeito \textit{Doppler}, varia a frequ√™ncia recebida na volta. Como √© um m√©todo baseado em movimento, n√£o considera ve√≠culos parados ou em regime de ``anda-p√°ra''.
+  \item \textbf{Radar}: utiliza um sinal de frequ√™ncia ou fase modulada para calcular o atraso de tempo da onda refletida, obtendo a dist√¢ncia do ve√≠culo. Nesse m√©todo √© poss√≠vel detectar a presen√ßa de ve√≠culos parados, al√©m de medir velocidade, monitorar filas e ocupa√ß√£o.
 \end{itemize}
 
-Os sensores micro-ondas s„o n„o-invasivos e n„o interferem no tr·fego de veÌculos no processo de instalaÁ„o. Geralmente n„o apresentam sensibilidade em m·s condiÁıes clim·ticas e podem ser construÌdos para suportar m˙ltiplas pistas. No entanto, um dos tipos n„o È capaz de detectar veÌculos parados.
+Os sensores micro-ondas s√£o n√£o-invasivos e n√£o interferem no tr√°fego de ve√≠culos no processo de instala√ß√£o. Geralmente n√£o apresentam sensibilidade em m√°s condi√ß√µes clim√°ticas e podem ser constru√≠dos para suportar m√∫ltiplas pistas. No entanto, um dos tipos n√£o √© capaz de detectar ve√≠culos parados.
 
 % section radar_por_microondas (end)
 
-\subsection{Sensores ultrassÙnicos} % (fold)
+\subsection{Sensores ultrass√¥nicos} % (fold)
 \label{sec:sensores_ultrass_nicos}
 
-Esses detectores transmitem ondas de press„o de energia sonora acima da frequÍncia audÌvel humana, que È de 20 KHz. Estas ondas sonoras refletem no pavimento ou no veÌculo, s„o captadas por um receptor e processadas para fornecer informaÁıes de passagem e presenÁa de veÌculos. A montagem n„o-invasiva do equipamento pode ser feita acima ou ao lado da via, como ilustra a Figura \ref{fig:ultrassonico}.
+Esses detectores transmitem ondas de press√£o de energia sonora acima da frequ√™ncia aud√≠vel humana, que √© de 20 KHz. Estas ondas sonoras refletem no pavimento ou no ve√≠culo, s√£o captadas por um receptor e processadas para fornecer informa√ß√µes de passagem e presen√ßa de ve√≠culos. A montagem n√£o-invasiva do equipamento pode ser feita acima ou ao lado da via, como ilustra a Figura \ref{fig:ultrassonico}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=.65]{imgs/ultrassonico.png}
   \end{center}
-  \caption{Tipos de montagem para um sensor ultrassÙnico \citep{goldner:2009:misc}.}
+  \caption{Tipos de montagem para um sensor ultrass√¥nico \citep{goldner:2009:misc}.}
   \label{fig:ultrassonico}
 \end{figure}
 
-Existem dois tipos de sensores ultrassÙnicos:
+Existem dois tipos de sensores ultrass√¥nicos:
 
 \begin{itemize}
-  \item \textbf{Pulso ultrassÙnico}: s„o emitidos pulsos de energia com largura e perÌodo conhecidos. Se o tempo do pulso refletido for menor que o valor conhecido, a presenÁa do veÌculo È acusada, fornecendo informaÁıes de altura, largura, ocupaÁ„o, volume e classificaÁ„o.
-  \item \textbf{Onda ultrassÙnica contÌnua}: usam o princÌpio  de \textit{Doppler}, que leva em conta a variaÁ„o da frequÍncia causada pela velocidade relativa entre onda emitida e refletida, para determinar a presenÁa, volume e velocidade veicular.
+  \item \textbf{Pulso ultrass√¥nico}: s√£o emitidos pulsos de energia com largura e per√≠odo conhecidos. Se o tempo do pulso refletido for menor que o valor conhecido, a presen√ßa do ve√≠culo √© acusada, fornecendo informa√ß√µes de altura, largura, ocupa√ß√£o, volume e classifica√ß√£o.
+  \item \textbf{Onda ultrass√¥nica cont√≠nua}: usam o princ√≠pio  de \textit{Doppler}, que leva em conta a varia√ß√£o da frequ√™ncia causada pela velocidade relativa entre onda emitida e refletida, para determinar a presen√ßa, volume e velocidade veicular.
 \end{itemize}
 
-O uso de sensores ultrassÙnicos È vantajoso pois a instalaÁ„o È n„o-invasiva e pode monitorar mais de uma pista ao mesmo tempo. Como desvantagem, as mudanÁas de temperatura e ventanias podem afetar o seu desempenho.
+O uso de sensores ultrass√¥nicos √© vantajoso pois a instala√ß√£o √© n√£o-invasiva e pode monitorar mais de uma pista ao mesmo tempo. Como desvantagem, as mudan√ßas de temperatura e ventanias podem afetar o seu desempenho.
 
 % section sensores_ultrass_nicos (end)
 
 % section tecnologias_detectoras_de_ve_culos (end)
 
 
-\section{AplicaÁıes de Vis„o Computacional} % (fold)
+\section{Aplica√ß√µes de Vis√£o Computacional} % (fold)
 \label{sec:aplica_es_de_vis_o_computacional}
 
-Com o desenvolvimento de pesquisas na ·rea de processamento de imagens digitais nos ˙ltimos tempos, impulsionado pelas facilidades de implementaÁ„o de aplicaÁıes de vis„o computacional utilizando a biblioteca OpenCV \citep{opencv_library}, cada vez mais trabalhos de monitoramento do tr·fego que utilizam vis„o computacional s„o publicados. A seguir, uma breve revis„o bibliogr·fica de projetos de Engenharia de Transporte que utilizam conceitos de vis„o computacional.
+Com o desenvolvimento de pesquisas na √°rea de processamento de imagens digitais nos √∫ltimos tempos, impulsionado pelas facilidades de implementa√ß√£o de aplica√ß√µes de vis√£o computacional utilizando a biblioteca OpenCV \citep{opencv_library}, cada vez mais trabalhos de monitoramento do tr√°fego que utilizam vis√£o computacional s√£o publicados. A seguir, uma breve revis√£o bibliogr√°fica de projetos de Engenharia de Transporte que utilizam conceitos de vis√£o computacional.
 
-% \subsection{DireÁ„o autÙnoma de veÌculo inteligente} % (fold)
+% \subsection{Dire√ß√£o aut√¥noma de ve√≠culo inteligente} % (fold)
 % \label{sub:dire_o_aut_noma_de_ve_culo_inteligente}
 
 % \cite{thrun:2006:article}
@@ -284,45 +168,45 @@ Com o desenvolvimento de pesquisas na ·rea de processamento de imagens digitais 
 
 % % subsection dire_o_aut_noma_de_ve_culo_inteligente (end)
 
-% \subsection{DetecÁ„o de placa de veÌculos} % (fold)
+% \subsection{Detec√ß√£o de placa de ve√≠culos} % (fold)
 % \label{sub:detec_o_de_placa_de_ve_culos}
 
 % \cite{martinsky:2007:masther}
 
 % % subsection detec_o_de_placa_de_ve_culos (end)
 
-\subsection{Contagem volumÈtrica utilizando dispositivos mÛveis} % (fold)
+\subsection{Contagem volum√©trica utilizando dispositivos m√≥veis} % (fold)
 \label{sub:contagem_volum_trica_utilizando_dispositivos_m_veis}
 
-\cite{feitosa:2012:masther} propıe em sua Tese de Mestrado em CiÍncia da ComputaÁ„o pela UFG - Universidade Federal de Goi·s, um mÈtodo para contagem volumÈtrica de veÌculos baseado em vis„o computacional. A pesquisa È focada em otimizaÁ„o de algoritmos de processamento de imagens para execuÁ„o em dispositivos mÛveis.
+\cite{feitosa:2012:masther} prop√µe em sua Tese de Mestrado em Ci√™ncia da Computa√ß√£o pela UFG - Universidade Federal de Goi√°s, um m√©todo para contagem volum√©trica de ve√≠culos baseado em vis√£o computacional. A pesquisa √© focada em otimiza√ß√£o de algoritmos de processamento de imagens para execu√ß√£o em dispositivos m√≥veis.
 
-Alguns requisitos s„o estabelecidos nesse trabalho: as imagens s„o capturadas da lateral de uma via, com uma c‚mera fixada em uma baixa altura, identificando e contando veÌculos que trafegam em ambas as direÁıes; as imagens utilizadas s„o de baixa resoluÁ„o; e o processo de contagem È realizado em tempo real.
+Alguns requisitos s√£o estabelecidos nesse trabalho: as imagens s√£o capturadas da lateral de uma via, com uma c√¢mera fixada em uma baixa altura, identificando e contando ve√≠culos que trafegam em ambas as dire√ß√µes; as imagens utilizadas s√£o de baixa resolu√ß√£o; e o processo de contagem √© realizado em tempo real.
 
-Apesar de o objetivo do projeto ser a contagem volumÈtrica via dispositivos mÛveis, o estudo inicial das tÈcnicas de processamento de imagem e vis„o computacional È feito em um \textit{laptop}\footnote{Computador port·til, que no Brasil tambÈm È conhecido como \textit{notebook}}. A metodologia adotada pode ser dividida em seis etapas principais. S„o elas:
+Apesar de o objetivo do projeto ser a contagem volum√©trica via dispositivos m√≥veis, o estudo inicial das t√©cnicas de processamento de imagem e vis√£o computacional √© feito em um \textit{laptop}\footnote{Computador port√°til, que no Brasil tamb√©m √© conhecido como \textit{notebook}}. A metodologia adotada pode ser dividida em seis etapas principais. S√£o elas:
 
 \begin{enumerate}
-  \item \textbf{Entrada de dados}: os \textit{frames}\footnote{Cada um dos quadros de um vÌdeo.} do vÌdeo s„o disponilizados em tempo real ou por um arquivo em disco, que foi gravado anteriormente.
-  \item \textbf{PrÈ-processamento de imagem}: convers„o para escala de cinza, caso ainda n„o esteja nesse formato; equalizaÁ„o do histograma; e suavizaÁ„o da imagem por filtragem linear.
-  \item \textbf{Reconhecimento da imagem referÍncia de fundo}: obtenÁ„o de um modelo adaptativo da imagem de fundo da cena, utilizando um mÈtodo de r·pido processamento.
-  \item \textbf{DefiniÁ„o da ·rea de movimento}: determinaÁ„o da regi„o da cena com maior movimentaÁ„o que, provavelmente, È a ·rea de tr·fego de veÌculos. Essa regi„o de interesse tambÈm elimina movimentaÁıes indesejadas, como por exemplo, o movimento da vegetaÁ„o.
-  \item \textbf{SegmentaÁ„o de objetos}: subtrai a imagem referÍncia de fundo do \textit{frame} corrente, segmentando os objetos de interesse. TambÈm descarta objetos sem interesse.
+  \item \textbf{Entrada de dados}: os \textit{frames}\footnote{Cada um dos quadros de um v√≠deo.} do v√≠deo s√£o disponilizados em tempo real ou por um arquivo em disco, que foi gravado anteriormente.
+  \item \textbf{Pr√©-processamento de imagem}: convers√£o para escala de cinza, caso ainda n√£o esteja nesse formato; equaliza√ß√£o do histograma; e suaviza√ß√£o da imagem por filtragem linear.
+  \item \textbf{Reconhecimento da imagem refer√™ncia de fundo}: obten√ß√£o de um modelo adaptativo da imagem de fundo da cena, utilizando um m√©todo de r√°pido processamento.
+  \item \textbf{Defini√ß√£o da √°rea de movimento}: determina√ß√£o da regi√£o da cena com maior movimenta√ß√£o que, provavelmente, √© a √°rea de tr√°fego de ve√≠culos. Essa regi√£o de interesse tamb√©m elimina movimenta√ß√µes indesejadas, como por exemplo, o movimento da vegeta√ß√£o.
+  \item \textbf{Segmenta√ß√£o de objetos}: subtrai a imagem refer√™ncia de fundo do \textit{frame} corrente, segmentando os objetos de interesse. Tamb√©m descarta objetos sem interesse.
   \item \textbf{Acompanhamento de objetos segmentados}: rastreamento dos objetos segmentados ao longo dos quadros, evitando que o mesmo seja contado mais de uma vez.
 \end{enumerate}
 
-O mÈtodo proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funÁıes da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execuÁ„o em dispositivos mÛveis, o desempenho do algoritmo È um fator determinante. Por isso, foi necess·rio que alguns algoritmos de processamento de imagens, j· existentes na OpenCV, fossem reimplementados com foco em velocidade de execuÁ„o, o que elevou muito a complexidade do cÛdigo. Na etapa de reconhecimento da imagem referÍncia de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as funÁıes de subtraÁ„o de \textit{backgroud} j· implementadas na OpenCV. No entanto, por ser um mÈtodo mais completo e complexo, acarretaria em menor desempenho de execuÁ„o se comparado ‡ implementaÁ„o de \cite{feitosa:2012:masther}.
+O m√©todo proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das fun√ß√µes da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execu√ß√£o em dispositivos m√≥veis, o desempenho do algoritmo √© um fator determinante. Por isso, foi necess√°rio que alguns algoritmos de processamento de imagens, j√° existentes na OpenCV, fossem reimplementados com foco em velocidade de execu√ß√£o, o que elevou muito a complexidade do c√≥digo. Na etapa de reconhecimento da imagem refer√™ncia de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as fun√ß√µes de subtra√ß√£o de \textit{backgroud} j√° implementadas na OpenCV. No entanto, por ser um m√©todo mais completo e complexo, acarretaria em menor desempenho de execu√ß√£o se comparado √† implementa√ß√£o de \cite{feitosa:2012:masther}.
 
-Os testes foram realizados a partir de 15 amostras de vÌdeos, sendo 14 com resoluÁ„o $640\times 480$ e apenas 1 com resoluÁ„o $320\times 240$, e duraÁ„o mÈdia de 09:30 minutos. Para avaliar o desempenho do mÈtodo, num primeiro momento foi feita uma contagem volumÈtrica manual dos veÌculos em cada amostra, para que assim o percentual de acerto do mÈtodo autom·tico, executado no \textit{laptop}, fosse calculado. AlÈm disso, o tempo de execuÁ„o de cada amostra foi medido.
+Os testes foram realizados a partir de 15 amostras de v√≠deos, sendo 14 com resolu√ß√£o $640\times 480$ e apenas 1 com resolu√ß√£o $320\times 240$, e dura√ß√£o m√©dia de 09:30 minutos. Para avaliar o desempenho do m√©todo, num primeiro momento foi feita uma contagem volum√©trica manual dos ve√≠culos em cada amostra, para que assim o percentual de acerto do m√©todo autom√°tico, executado no \textit{laptop}, fosse calculado. Al√©m disso, o tempo de execu√ß√£o de cada amostra foi medido.
 
-Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado por um dispositivo mÛvel com sistema operacional Android. Os mesmos testes foram realizados para as 15 amostras e o percentual de acerto permaneceu o mesmo, resultado esperado tendo em vista que os algoritmos de processamento de imagem e vis„o computacional n„o mudaram. Nesse novo cen·rio, o tempo de execuÁ„o tambÈm foi medido. A Tabela \ref{tab:feitosa} lista as mediÁıes de cinco amostras.
+Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado por um dispositivo m√≥vel com sistema operacional Android. Os mesmos testes foram realizados para as 15 amostras e o percentual de acerto permaneceu o mesmo, resultado esperado tendo em vista que os algoritmos de processamento de imagem e vis√£o computacional n√£o mudaram. Nesse novo cen√°rio, o tempo de execu√ß√£o tamb√©m foi medido. A Tabela \ref{tab:feitosa} lista as medi√ß√µes de cinco amostras.
 
 
 \begin{table}[ht]
-  \caption{ComparaÁ„o entre resultados de tempo de execuÁ„o do mÈtodo pelo \textit{laptop} e celular \citep{feitosa:2012:masther}.}
+  \caption{Compara√ß√£o entre resultados de tempo de execu√ß√£o do m√©todo pelo \textit{laptop} e celular \citep{feitosa:2012:masther}.}
   \label{tab:feitosa}
   \begin{center}
     \begin{tabular}{ccccc}
     \toprule
-    \textbf{Amostra} & \textbf{\% acerto} & \textbf{DuraÁ„o} & \textbf{Tempo celular} & \textbf{Tempo \textit{laptop}}\\
+    \textbf{Amostra} & \textbf{\% acerto} & \textbf{Dura√ß√£o} & \textbf{Tempo celular} & \textbf{Tempo \textit{laptop}}\\
     \midrule
       1 & 90,58 & 00:15:08 & 01:00:56 & 00:03:54\\
       2 & 92,45 & 00:05:15 & 00:19:55 & 00:01:36\\
@@ -334,7 +218,7 @@ Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado po
   \end{center}
 \end{table}
 
-Os percentual de acerto obtido nas contagens foi satisfatÛrios e aplicativo desenvolvido para executar em um \textit{laptop} foi adaptado e portado para um dispositivo mÛvel Android com sucesso. No entanto, o tempo de execuÁ„o do mÈtodo no dispositivo mÛvel n„o foi satisfatÛrio, inviabilizando que essa aplicaÁ„o funcione em tempo real.
+Os percentual de acerto obtido nas contagens foi satisfat√≥rios e aplicativo desenvolvido para executar em um \textit{laptop} foi adaptado e portado para um dispositivo m√≥vel Android com sucesso. No entanto, o tempo de execu√ß√£o do m√©todo no dispositivo m√≥vel n√£o foi satisfat√≥rio, inviabilizando que essa aplica√ß√£o funcione em tempo real.
 
 % subsection contagem_volum_trica_utilizando_dispositivos_m_veis (end)
 

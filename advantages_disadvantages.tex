@@ -1,0 +1,50 @@
+% !TEX root = pfc.tex
+
+\begin{longtable}{XXX}
+\caption[Vantagens e desvantagens de tecnologias detectoras de veículos.]{Vantagens e desvantagens de tecnologias detectoras de veículos.} \label{tab:tecnologias_vantagens_desvantagens} \\
+
+\hline \multicolumn{1}{l}{\textbf{Tecnologia}} & \multicolumn{1}{l}{\textbf{Vantagens}} & \multicolumn{1}{l}{\textbf{Desvantagens}} \\ \hline 
+\endfirsthead
+
+\multicolumn{3}{c}%
+{{\tablename\ \thetable{}}} \\
+\hline \multicolumn{1}{l}{\textbf{Tecnologia}} &
+\multicolumn{1}{l}{\textbf{Vantagens}} &
+\multicolumn{1}{l}{\textbf{Desvantagens}} \\ \hline 
+\endhead
+
+\hline \multicolumn{3}{r}{{Continua na próxima página}} \\ \hline
+\endfoot
+
+\hline
+\endlastfoot
+
+Ultra-sônico & \tabitem Tamanho compacto, fácil instalação & \tabitem Pode ser sensível à temperatura e turbulência do ar \\
+\hline
+Microondas Doppler & \tabitem Bom para condições meteorológicas adversas \tabitem Mede velocidade dos veículos diretamente & \tabitem Não consegue detectar veículos parados ou com velocidade inferior a 6 km/h \\
+\hline
+Microondas - presença real & \tabitem Bom para condições meteorológicas adversas \tabitem Detecta veículos parados \tabitem Opera com visada lateral da via & \tabitem Requer uma antena de feixe estreito para confinar área de interesse a uma única faixa no modo de visualização no sentido da via \\
+\hline
+Infravermelho passivo (somente recebe sinal) & \tabitem Distância de alcance sob neblina maior do que sensores de imagem na área da luz visível & \tabitem Degradação potencial por chuva ou neve intensa \tabitem Imprecisão na medida de velocidade \\
+\hline
+Infravermelho ativo (transmite e recebe) & \tabitem Distância de alcance sob neblina maior do que sensores de imagem na área da luz visível \tabitem Mede velocidade diretamente & \tabitem Degradação potencial por substâncias que obscurecem a atmosfera e por condições meteorológicas adversas \\
+\hline
+Processadores de imagem e vídeo no espectro de luz visível & \tabitem Provê dados para gerenciamento de tráfego e imagem para gerenciamento de incidentes \tabitem Uma única câmera e processador podem cuidar de muitas faixas \tabitem Riqueza de informações sobre tráfego torna-se disponível & \tabitem Degradação potencial por condições meteorológicas adversas \tabitem Veículos grandes podem ocluir veículos menores \tabitem Sombras, reflexos do chão molhado e transições dia/noite podem resultar em detecções falsas ou perdidas \\
+\hline
+Laser pulsado & \tabitem Alta direcionalidade \tabitem Grande alcance \tabitem Portátil, normalmente instalado na lateral da via & \tabitem Custo elevado \tabitem Degradação potencial por condições meteorológicas adversas \tabitem Obstrução por outros veículos \\
+\hline
+Laser de varredura & \tabitem Excelente classificação dos veículos & \tabitem Custo elevado \tabitem Necessidade de ser colocado sobre a via, verticalmente \\
+\hline
+Fibra ótica & \tabitem Imunidade a adversidades meteorológicas \tabitem Imunidade a distúrbios eletromagnéticos & \tabitem Custo elevado \tabitem Necessita interrupção da via e cortes no pavimento \\
+\hline
+Acústico passivo & \tabitem Instalação lateral à via \tabitem Auxilia na classificação & \tabitem Adequado apenas à detecção de passagem de veículos \\
+\hline
+Cabos piezo-elétricos & \tabitem Sensível ao peso do veículo, permite peso em movimento \tabitem Imune a adversidades meteorológicas & \tabitem É preciso interromper a via e fazer cortes no pavimento \tabitem Não permite detecção de presença (a menos que o veículo pare exatamente sobre o sensor) \\
+\hline
+Pneumático & \tabitem Baixo custo \tabitem Usado em contagem de veículos para gerenciamento de tráfego & \tabitem Componentes mecânicos envolvidos: manutenção freqüente \tabitem Instalação normalmente provisória \\
+\hline
+Microloop (3M) & \tabitem Cortes no pavimento são mínimos \tabitem Fácil instalação & \tabitem Não permite instalação em latitudes próximas à linha do equador, pois detecta variações no campo magnético da terra \\
+\hline
+Laços indutivos (ILD - \textit{Inductive Loop Detectors}) & \tabitem Baixo custo \tabitem Imune a adversidades meteorológicas \tabitem Robusto \tabitem Permite classificação pela assinatura magnética & \tabitem É preciso interromper a via e fazer cortes no pavimento \tabitem Instalação permanente \\
+
+\end{longtable}

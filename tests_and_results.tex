@@ -1,20 +1,20 @@
 % !TEX root = pfc.tex
 
-O mÈtodo proposto foi implementado em forma de um \textit{software} multiplataforma, desenvolvido em linguagem \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho de execuÁ„o e f·cil implementaÁ„o utilizando os conceitos de programaÁ„o orientada a objetos.
+O m√©todo proposto foi implementado em forma de um \textit{software} multiplataforma, desenvolvido em linguagem \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho de execu√ß√£o e f√°cil implementa√ß√£o utilizando os conceitos de programa√ß√£o orientada a objetos.
 
-Como biblioteca para processamento das imagens, foi utilizado a OpenCV 2.4.4 \citep{opencv_library}, contribuindo para que operaÁıes complexas de vis„o computacional pudessem ser realizadas com poucas linhas de cÛdigo. O desenvolvimento do mÈtodo n„o est· preso ‡ tecnologia escolhida, podendo ser empregado utilizando outras linguagens de programaÁ„o, bem como outras bibliotecas. A tecnologia foi escolhida visando a simplicidade no processo de desenvolvimento das operaÁıes de processamento de imagens, que est„o bem detalhadas pelos trechos de cÛdigo na SeÁ„o \ref{sec:fluxo_de_processos}.
+Como biblioteca para processamento das imagens, foi utilizado a OpenCV 2.4.4 \citep{opencv_library}, contribuindo para que opera√ß√µes complexas de vis√£o computacional pudessem ser realizadas com poucas linhas de c√≥digo. O desenvolvimento do m√©todo n√£o est√° preso √† tecnologia escolhida, podendo ser empregado utilizando outras linguagens de programa√ß√£o, bem como outras bibliotecas. A tecnologia foi escolhida visando a simplicidade no processo de desenvolvimento das opera√ß√µes de processamento de imagens, que est√£o bem detalhadas pelos trechos de c√≥digo na Se√ß√£o \ref{sec:fluxo_de_processos}.
 
 \section{Testes} % (fold)
 \label{sec:testes}
 
-Todos os vÌdeos foram capturados por um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, como descrito na SeÁ„o \ref{sec:caracter_sticas_de_captura}. As imagens foram feitas na passarela localizada na Av. Presidente Carlos Luz, nos dois sentidos da via, como ilustra a Figura \ref{fig:sentidos}. Duas configuraÁıes de captura foram utilizadas:
+Todos os v√≠deos foram capturados por um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, como descrito na Se√ß√£o \ref{sec:caracter_sticas_de_captura}. As imagens foram feitas na passarela localizada na Av. Presidente Carlos Luz, nos dois sentidos da via, como ilustra a Figura \ref{fig:sentidos}. Duas configura√ß√µes de captura foram utilizadas:
 
 \begin{itemize}
-  \item HD 720p: gerando vÌdeos com resoluÁ„o $1280\times 720$, e \textit{framerate} de 29 FPS;
-  \item VGA: gerando vÌdeos com resoluÁ„o $640\times 480$, e \textit{framerate} de 29 FPS.
+  \item HD 720p: gerando v√≠deos com resolu√ß√£o $1280\times 720$, e \textit{framerate} de 29 FPS;
+  \item VGA: gerando v√≠deos com resolu√ß√£o $640\times 480$, e \textit{framerate} de 29 FPS.
 \end{itemize}
 
-\noindent Uma terceira resoluÁ„o foi obtida a partir dos vÌdeos em HD, aplicando uma operaÁ„o para redimension·-los com altura e largura a metade do valor original. Essas variaÁıes de cena e resoluÁ„o foram feitas com o objetivo de avaliar o comportamento do mÈtodo em diferentes condiÁıes. Assim, ser· possÌvel identificar o impacto de cada vari·vel no resultado final. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
+\noindent Uma terceira resolu√ß√£o foi obtida a partir dos v√≠deos em HD, aplicando uma opera√ß√£o para redimension√°-los com altura e largura a metade do valor original. Essas varia√ß√µes de cena e resolu√ß√£o foram feitas com o objetivo de avaliar o comportamento do m√©todo em diferentes condi√ß√µes. Assim, ser√° poss√≠vel identificar o impacto de cada vari√°vel no resultado final. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
 
 \begin{figure}[ht]
   \begin{center}
@@ -33,17 +33,17 @@ Todos os vÌdeos foram capturados por um aparelho celular Samsung OMNIA W GT-I835
       \label{fig:sentido_centro}
     \end{subfigure}
   \end{center}
-  \caption{Resultado do mÈtodo de contagem para dois tipos de cena. (a) Av. Carlos Luz, sentido Pampulha; (b) Av. Carlos Luz, sentido Centro.}
+  \caption{Resultado do m√©todo de contagem para dois tipos de cena. (a) Av. Carlos Luz, sentido Pampulha; (b) Av. Carlos Luz, sentido Centro.}
   \label{fig:sentidos}
 \end{figure}
 
 \begin{table}[ht]
-  \caption{VÌdeos utilizados nos testes.}
+  \caption{V√≠deos utilizados nos testes.}
   \label{tab:videos_teste}
   \begin{center}
     \begin{tabular}{lcccc}
     \toprule
-    \textbf{Nome do vÌdeo} & \textbf{Formato} & \textbf{ResoluÁ„o} & \textbf{DuraÁ„o} & \textbf{FPS} \\
+    \textbf{Nome do v√≠deo} & \textbf{Formato} & \textbf{Resolu√ß√£o} & \textbf{Dura√ß√£o} & \textbf{FPS} \\
     \midrule
       carlos\_luz\_centro\_vga & mp4 & $ 640\times 480 $ & 00:05:23 & 29 \\
       carlos\_luz\_centro\_hd\_resized & mpeg & $ 640\times 360 $ & 00:05:25 & 29 \\
@@ -57,22 +57,22 @@ Todos os vÌdeos foram capturados por um aparelho celular Samsung OMNIA W GT-I835
   \end{center}
 \end{table}
 
-Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em um \textit{Laptop} Dell Vostro V131, Processador Intel Core I3-2330M (2.20GHZ, dual core 4 Threads, 3MB L3 cache), 8GB de memÛria RAM, em ambiente Linux Fedora 18 (Spherical Cow).
+Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em um \textit{Laptop} Dell Vostro V131, Processador Intel Core I3-2330M (2.20GHZ, dual core 4 Threads, 3MB L3 cache), 8GB de mem√≥ria RAM, em ambiente Linux Fedora 18 (Spherical Cow).
 
 % section testes (end)
 
 \section{Resultados finais} % (fold)
 \label{sec:resultados_finais}
 
-% Na Tabela \ref{tab:resultados_contagem} s„o apresentados os resultados obtidos pela contagem via mÈtodos manual e autom·tico, indicando o percentual de acerto para cada amostra. … importante destacar que o resultado da contagem autom·tica representa o total de veÌculos identificados na amostra, incluindo falsos positivos e descartando objetos detectados ou rastreados incorretamente. Portanto, os percentuais de acerto s„o mediÁıes estatÌsticas, que representam apenas o desvio existente entre o valor real e o valor medido.
+% Na Tabela \ref{tab:resultados_contagem} s√£o apresentados os resultados obtidos pela contagem via m√©todos manual e autom√°tico, indicando o percentual de acerto para cada amostra. √â importante destacar que o resultado da contagem autom√°tica representa o total de ve√≠culos identificados na amostra, incluindo falsos positivos e descartando objetos detectados ou rastreados incorretamente. Portanto, os percentuais de acerto s√£o medi√ß√µes estat√≠sticas, que representam apenas o desvio existente entre o valor real e o valor medido.
 
 % \begin{table}[ht]
-%   \caption{Resultados de contagem volumÈtrica.}
+%   \caption{Resultados de contagem volum√©trica.}
 %   \label{tab:resultados_contagem}
 %   \begin{center}
 %     \begin{tabular}{l|cccc}
 %     \toprule
-%     \textbf{Nome do vÌdeo} & \textbf{ResoluÁ„o} & \textbf{Manual} & \textbf{Autom.} & \textbf{\% acerto}\\
+%     \textbf{Nome do v√≠deo} & \textbf{Resolu√ß√£o} & \textbf{Manual} & \textbf{Autom.} & \textbf{\% acerto}\\
 %     \midrule
 %       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 164 & 156 & 95,12 \\
 %       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 150 & 153 & 98,04 \\
@@ -86,11 +86,11 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 %   \end{center}
 % \end{table}
 
-% Percebe-se que para uma mesma cena, a variaÁ„o da resoluÁ„o do vÌdeo n„o afeta de forma siginificativa o percentual de acerto, mostrando que vÌdeos de alta resoluÁ„o n„o trazem vantagens nesse tipo de aplicaÁ„o. J· a mudanÁa da cena alterou o resultado. Nas amostras do tr·fego no sentido centro o percentual de acerto foi superior a 95\%, enquanto que as imagens do outro sentido n„o ultrapassaram os 90\%. 
+% Percebe-se que para uma mesma cena, a varia√ß√£o da resolu√ß√£o do v√≠deo n√£o afeta de forma siginificativa o percentual de acerto, mostrando que v√≠deos de alta resolu√ß√£o n√£o trazem vantagens nesse tipo de aplica√ß√£o. J√° a mudan√ßa da cena alterou o resultado. Nas amostras do tr√°fego no sentido centro o percentual de acerto foi superior a 95\%, enquanto que as imagens do outro sentido n√£o ultrapassaram os 90\%. 
 
-Analisando os vÌdeos È possÌvel identificar v·rios veÌculos de grande porte trafegando no sentido Pampulha, muitos saindo da F·brica da Coca-Cola ali localizada. Esses objetos com ·rea muito grande causam problemas na etapa de subtraÁ„o de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detecÁ„o de \textit{blobs} e gerando oclus„o em veÌculos menores. 
+Analisando os v√≠deos √© poss√≠vel identificar v√°rios ve√≠culos de grande porte trafegando no sentido Pampulha, muitos saindo da F√°brica da Coca-Cola ali localizada. Esses objetos com √°rea muito grande causam problemas na etapa de subtra√ß√£o de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detec√ß√£o de \textit{blobs} e gerando oclus√£o em ve√≠culos menores. 
 
-% Esse tipo de tr·fego na cena fez com que o resultado da contagem autom·tica ficasse sempre abaixo da referÍncia em todas as amostras sentido Pampulha, justificando o percentual de acerto baixo.
+% Esse tipo de tr√°fego na cena fez com que o resultado da contagem autom√°tica ficasse sempre abaixo da refer√™ncia em todas as amostras sentido Pampulha, justificando o percentual de acerto baixo.
 
 \begin{figure}[ht]
   \begin{center}
@@ -109,23 +109,23 @@ Analisando os vÌdeos È possÌvel identificar v·rios veÌculos de grande porte traf
       \label{fig:problema_veiculo_junto}
     \end{subfigure}
   \end{center}
-  \caption{Problemas encontrados no processamento de imagens. (a) A operaÁ„o de subtraÁ„o de \textit{background} fica comprometida quando veÌculos com ·rea muito grande aparecem na cena. (b) VeÌculos prÛximos s„o detectados como um ˙nico objeto, definindo apenas um \textit{keypoint}.}
+  \caption{Problemas encontrados no processamento de imagens. (a) A opera√ß√£o de subtra√ß√£o de \textit{background} fica comprometida quando ve√≠culos com √°rea muito grande aparecem na cena. (b) Ve√≠culos pr√≥ximos s√£o detectados como um √∫nico objeto, definindo apenas um \textit{keypoint}.}
   \label{fig:problemas}
 \end{figure}
 
-Outro tipo de problema acontece na etapa de detecÁ„o de \textit{blobs}, ilustrado na Figura \ref{fig:problema_veiculo_junto}. Nessa situaÁ„o, dois veÌculos prÛximos foram identificados como um ˙nico objeto e apenas um \textit{keypoint} foi definido. Portanto, apenas um \textit{tracker} foi criado e um ˙nico veÌculo contado nesse caso.
+Outro tipo de problema acontece na etapa de detec√ß√£o de \textit{blobs}, ilustrado na Figura \ref{fig:problema_veiculo_junto}. Nessa situa√ß√£o, dois ve√≠culos pr√≥ximos foram identificados como um √∫nico objeto e apenas um \textit{keypoint} foi definido. Portanto, apenas um \textit{tracker} foi criado e um √∫nico ve√≠culo contado nesse caso.
 
-Para avaliar o desempenho computacional do mÈtodo adotado, mediu-se o tempo de execuÁ„o do algoritmo para cada uma das amostras, como mostra a Tabela \ref{tab:resultados_tempo}. Percebe-se que a resoluÁ„o do vÌdeo est· diretamente relacionada ao tempo gasto no processamento. Os vÌdeos em HD foram processados com mais de trÍs vezes o tempo de processamento dos vÌdeos em VGA, inviabilizando a utilizaÁ„o dessa configuraÁ„o em aplicaÁıes de tempo real. Os vÌdeos redimensionados, com resoluÁ„o $ 640\times 360 $, gastaram menos tempo de processamento do que sua prÛpria duraÁ„o, indicando que a contagem em tempo real nesse caso seria vi·vel.
+Para avaliar o desempenho computacional do m√©todo adotado, mediu-se o tempo de execu√ß√£o do algoritmo para cada uma das amostras, como mostra a Tabela \ref{tab:resultados_tempo}. Percebe-se que a resolu√ß√£o do v√≠deo est√° diretamente relacionada ao tempo gasto no processamento. Os v√≠deos em HD foram processados com mais de tr√™s vezes o tempo de processamento dos v√≠deos em VGA, inviabilizando a utiliza√ß√£o dessa configura√ß√£o em aplica√ß√µes de tempo real. Os v√≠deos redimensionados, com resolu√ß√£o $ 640\times 360 $, gastaram menos tempo de processamento do que sua pr√≥pria dura√ß√£o, indicando que a contagem em tempo real nesse caso seria vi√°vel.
 
-Com intuito de manter o algoritmo simples e o mais genÈrico possÌvel, os \textit{frames} s„o processados por completo, sem considerar regiıes de interesse. A definiÁ„o de regiıes de interesse, tambÈm conhecidas como ROI's\footnote{\textit{Region of interest}}, È um recurso muito utilizado em vis„o computacional. Quando usado, apenas as porÁıes da imagem que contenham informaÁıes relevantes s„o consideradas no processamento, reduzindo o tempo e o custo computacional.
+Com intuito de manter o algoritmo simples e o mais gen√©rico poss√≠vel, os \textit{frames} s√£o processados por completo, sem considerar regi√µes de interesse. A defini√ß√£o de regi√µes de interesse, tamb√©m conhecidas como ROI's\footnote{\textit{Region of interest}}, √© um recurso muito utilizado em vis√£o computacional. Quando usado, apenas as por√ß√µes da imagem que contenham informa√ß√µes relevantes s√£o consideradas no processamento, reduzindo o tempo e o custo computacional.
 
 \begin{table}[ht]
-  \caption{Tempo real gasto na execuÁ„o do mÈtodo de contagem.}
+  \caption{Tempo real gasto na execu√ß√£o do m√©todo de contagem.}
   \label{tab:resultados_tempo}
   \begin{center}
     \begin{tabular}{lccc}
     \toprule
-    \textbf{Nome do vÌdeo} & \textbf{ResoluÁ„o} & \textbf{DuraÁ„o} & \textbf{Tempo gasto} \\
+    \textbf{Nome do v√≠deo} & \textbf{Resolu√ß√£o} & \textbf{Dura√ß√£o} & \textbf{Tempo gasto} \\
     \midrule
       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\

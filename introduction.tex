@@ -1,72 +1,72 @@
 % !TEX root = pfc.tex
 
-O tráfego de veículos representa um fenômeno de grande importância socioeconômica, principalmente nos grandes centros urbanos cujos deslocamentos, no menor tempo possível, são uma necessidade cotidiana. Projetar sistemas viários que absorvam toda a frota veicular desses grandes centros e minimizam os congestionamentos exige ferramentas cujo desenvolvimento ainda representa objeto de estudo para diversos grupos de pesquisadores.
+O trÃ¡fego de veÃ­culos representa um fenÃ´meno de grande importÃ¢ncia socioeconÃ´mica, principalmente nos grandes centros urbanos cujos deslocamentos, no menor tempo possÃ­vel, sÃ£o uma necessidade cotidiana. Projetar sistemas viÃ¡rios que absorvam toda a frota veicular desses grandes centros e minimizam os congestionamentos exige ferramentas cujo desenvolvimento ainda representa objeto de estudo para diversos grupos de pesquisadores.
 
-Vários fatores interferem na qualidade do tráfego, sendo o principal o crescente número de veículos nos centros urbanos. Segundo \cite{fenabrave:2013:online} - Federação Nacional da Distribuição de Veículos Automotores, as vendas de veículos cresceram cerca de 381\% entre janeiro de 2003 e janeiro de 2011. A facilitação ao crédito pessoal, os longos financiamentos oferecidos pelas concessionárias e a redução do IPI (Imposto sobre Produtos Industrializados) incentivaram o consumo de carros no Brasil, explicando essa tendência ascendente no número de automóveis.
+VÃ¡rios fatores interferem na qualidade do trÃ¡fego, sendo o principal o crescente nÃºmero de veÃ­culos nos centros urbanos. Segundo \cite{fenabrave:2013:online} - FederaÃ§Ã£o Nacional da DistribuiÃ§Ã£o de VeÃ­culos Automotores, as vendas de veÃ­culos cresceram cerca de 381\% entre janeiro de 2003 e janeiro de 2011. A facilitaÃ§Ã£o ao crÃ©dito pessoal, os longos financiamentos oferecidos pelas concessionÃ¡rias e a reduÃ§Ã£o do IPI (Imposto sobre Produtos Industrializados) incentivaram o consumo de carros no Brasil, explicando essa tendÃªncia ascendente no nÃºmero de automÃ³veis.
 
 % \begin{figure}[tb]
 %   \begin{center}
 %     \includegraphics[scale=0.8]{imgs/emplacamentos.png}
 %   \end{center}
-%   \caption{Crescimento mensal no número de emplacamentos de veículos comerciais leves no período 1997 a 2011 \citep{fenabrave:2013:online}.} 
+%   \caption{Crescimento mensal no nÃºmero de emplacamentos de veÃ­culos comerciais leves no perÃ­odo 1997 a 2011 \citep{fenabrave:2013:online}.} 
 %   \label{fig:fenabreve}
 % \end{figure}
 
-A falta de planejamento urbano e o crescente aumento de veículos, a péssima qualidade do transporte público no Brasil e o excessivo número de acidentes de trânsito são umas das principais causas de congestionamentos. Nos últimos anos, milhões de pessoas perderam tempo e dinheiro devido a problemas relacionados ao trânsito \citep{pamela:2012:masther}. Diante desse fato, a administração pública deve priorizar o assunto mobilidade, como tem sido feito nas principais regiões metropolitanas brasileiras. Através de pesquisas pode-se levantar dados que contribuem para análise e simulação do tráfego. Informações como fluxo de veículos, volume de tráfego e matriz O/D (origem/destino) são de grande relevância no estudo dessa área, formando uma base teórica sólida para ser utilizada na resolução de problemas dessa natureza.
+A falta de planejamento urbano e o crescente aumento de veÃ­culos, a pÃ©ssima qualidade do transporte pÃºblico no Brasil e o excessivo nÃºmero de acidentes de trÃ¢nsito sÃ£o umas das principais causas de congestionamentos. Nos Ãºltimos anos, milhÃµes de pessoas perderam tempo e dinheiro devido a problemas relacionados ao trÃ¢nsito \citep{pamela:2012:masther}. Diante desse fato, a administraÃ§Ã£o pÃºblica deve priorizar o assunto mobilidade, como tem sido feito nas principais regiÃµes metropolitanas brasileiras. AtravÃ©s de pesquisas pode-se levantar dados que contribuem para anÃ¡lise e simulaÃ§Ã£o do trÃ¡fego. InformaÃ§Ãµes como fluxo de veÃ­culos, volume de trÃ¡fego e matriz O/D (origem/destino) sÃ£o de grande relevÃ¢ncia no estudo dessa Ã¡rea, formando uma base teÃ³rica sÃ³lida para ser utilizada na resoluÃ§Ã£o de problemas dessa natureza.
 
-% Na área de simulação do tráfego existem várias empresas atuantes: \cite{vissim:2013:online} é atualmente a líder mundial de mercado em simulação de fluxo de tráfego multi-modal de microregiões. Outras companhias, \cite{arcady:2013:online} e \cite{citilabs:2013:online}, também fornecem produtos com capacidades de predição, simulação de congestionamentos, atrasos, acidentes, além de gerar relatórios detalhados e animações 2D e 3D. SUMO - \textit{Simulation of Urban MObility} é uma alternativa \textit{open source}\footnote{O termo código aberto, ou \textit{open source} em inglês, foi criado pela OSI e refere-se a \textit{software} livre. Mais informações em \url{http://opensource.org}} e gratuita para simulação do tráfego, diferente dos produtos proprietários e de alto custo citados anteriormente \citep{SUMO2011}.
+% Na Ã¡rea de simulaÃ§Ã£o do trÃ¡fego existem vÃ¡rias empresas atuantes: \cite{vissim:2013:online} Ã© atualmente a lÃ­der mundial de mercado em simulaÃ§Ã£o de fluxo de trÃ¡fego multi-modal de microregiÃµes. Outras companhias, \cite{arcady:2013:online} e \cite{citilabs:2013:online}, tambÃ©m fornecem produtos com capacidades de prediÃ§Ã£o, simulaÃ§Ã£o de congestionamentos, atrasos, acidentes, alÃ©m de gerar relatÃ³rios detalhados e animaÃ§Ãµes 2D e 3D. SUMO - \textit{Simulation of Urban MObility} Ã© uma alternativa \textit{open source}\footnote{O termo cÃ³digo aberto, ou \textit{open source} em inglÃªs, foi criado pela OSI e refere-se a \textit{software} livre. Mais informaÃ§Ãµes em \url{http://opensource.org}} e gratuita para simulaÃ§Ã£o do trÃ¡fego, diferente dos produtos proprietÃ¡rios e de alto custo citados anteriormente \citep{SUMO2011}.
 
-Segundo \cite{dnit:2011:online}, o PNCT - Plano Nacional de Contagem de Trânsito vem armazenando nos últimos anos importantes dados de volume de tráfego e já possui uma significativa série histórica desses dados. A informação coletada é de grande importância pois seus resultados são subsídios básicos para estudos econômicos, projetos rodoviários e planejamento de tráfego, além do papel essencial no estabelecimento de critérios para o cumprimento das seguintes finalidades:
+Segundo \cite{dnit:2011:online}, o PNCT - Plano Nacional de Contagem de TrÃ¢nsito vem armazenando nos Ãºltimos anos importantes dados de volume de trÃ¡fego e jÃ¡ possui uma significativa sÃ©rie histÃ³rica desses dados. A informaÃ§Ã£o coletada Ã© de grande importÃ¢ncia pois seus resultados sÃ£o subsÃ­dios bÃ¡sicos para estudos econÃ´micos, projetos rodoviÃ¡rios e planejamento de trÃ¡fego, alÃ©m do papel essencial no estabelecimento de critÃ©rios para o cumprimento das seguintes finalidades:
 
 \begin{itemize}
-  \item Planejar o sistema rodoviário;
-  \item Programar necessidades e prioridades de melhorias no sistema rodoviário;
-  \item Estabelecer as tendências de tráfego no futuro;
-  \item Avaliar o fluxo existente de tráfego em relação ao sistema rodoviário atual;
+  \item Planejar o sistema rodoviÃ¡rio;
+  \item Programar necessidades e prioridades de melhorias no sistema rodoviÃ¡rio;
+  \item Estabelecer as tendÃªncias de trÃ¡fego no futuro;
+  \item Avaliar o fluxo existente de trÃ¡fego em relaÃ§Ã£o ao sistema rodoviÃ¡rio atual;
   \item Justificar e planejar o policiamento;
-  \item Estudos de localização de postos de pesagem, socorro médico emergencial, etc.;
-  \item Projetar pavimento, obras de arte, seção transversal e outros elementos de rodovia \citep{dnit:2011:online}. 
+  \item Estudos de localizaÃ§Ã£o de postos de pesagem, socorro mÃ©dico emergencial, etc.;
+  \item Projetar pavimento, obras de arte, seÃ§Ã£o transversal e outros elementos de rodovia \citep{dnit:2011:online}. 
 \end{itemize}
 
-Existem métodos manuais e automáticos para realização das contagens volumétrica e classificatória, que normalmente são de alto custo financeiro. De acordo com a forma de instalação dos equipamentos de contagem, tais métodos podem ser invasivos ou não-invasivos. Os métodos invasivos necessitam de instalações junto ou sob a camada asfáltica. Já os métodos não-invasivos normalmente utilizam câmeras, sensores ou instalações sobre o solo \citep{goldner:2009:misc}.
+Existem mÃ©todos manuais e automÃ¡ticos para realizaÃ§Ã£o das contagens volumÃ©trica e classificatÃ³ria, que normalmente sÃ£o de alto custo financeiro. De acordo com a forma de instalaÃ§Ã£o dos equipamentos de contagem, tais mÃ©todos podem ser invasivos ou nÃ£o-invasivos. Os mÃ©todos invasivos necessitam de instalaÃ§Ãµes junto ou sob a camada asfÃ¡ltica. JÃ¡ os mÃ©todos nÃ£o-invasivos normalmente utilizam cÃ¢meras, sensores ou instalaÃ§Ãµes sobre o solo \citep{goldner:2009:misc}.
 
-Este trabalho tem como propósito desenvolver um método computacional de simples implementação, configuração, instalação e operação, capaz de realizar a contagem volumétrica de veículos de forma não-invasiva e que possa ser utilizado como uma alternativa de baixo custo financeiro, se comparado aos sitemas de contagem volumétrica convencionais.
+Este trabalho tem como propÃ³sito desenvolver um mÃ©todo computacional de simples implementaÃ§Ã£o, configuraÃ§Ã£o, instalaÃ§Ã£o e operaÃ§Ã£o, capaz de realizar a contagem volumÃ©trica de veÃ­culos de forma nÃ£o-invasiva e que possa ser utilizado como uma alternativa de baixo custo financeiro, se comparado aos sitemas de contagem volumÃ©trica convencionais.
 
 \section{Objetivos} % (fold)
 \label{sec:objetivos}
 
-O objetivo principal do trabalho é desenvolver um sistema de visão computacional que auxilie na análise das condições do tráfego urbano. São os objetivos específicos deste estudo:
+O objetivo principal do trabalho Ã© desenvolver um sistema de visÃ£o computacional que auxilie na anÃ¡lise das condiÃ§Ãµes do trÃ¡fego urbano. SÃ£o os objetivos especÃ­ficos deste estudo:
 \begin{itemize}
-  \item Entender a utilização de um sistema de visão para problemas de transporte;
-  \item Realizar a contagem volumétrica dos veículos através de um método não-invasivo de simples implementação;
-  \item Analisar as condições do tráfego urbano através de imagens coletadas por uma câmera digital.
+  \item Entender a utilizaÃ§Ã£o de um sistema de visÃ£o para problemas de transporte;
+  \item Realizar a contagem volumÃ©trica dos veÃ­culos atravÃ©s de um mÃ©todo nÃ£o-invasivo de simples implementaÃ§Ã£o;
+  \item Analisar as condiÃ§Ãµes do trÃ¡fego urbano atravÃ©s de imagens coletadas por uma cÃ¢mera digital.
 \end{itemize}
 
 % section objetivos (end)
 
-\section{Apresentação da Empresa} % (fold)
+\section{ApresentaÃ§Ã£o da Empresa} % (fold)
 \label{sec:apresenta_o_da_empresa}
 
-TODO: não é mais empresa
+TODO: nÃ£o Ã© mais empresa
 
-% A NunesCV é uma startup que foi criada no início de 2013 e desenvolve soluções e produtos de tecnologia para o setor de serviços. A empresa desenvolve sistemas baseados em visão computacional, como um produto para leitura automática de cartões de ponto utilizando tecnologia própria de Reconhecimento Ótico de Caracteres (OCR).
+% A NunesCV Ã© uma startup que foi criada no inÃ­cio de 2013 e desenvolve soluÃ§Ãµes e produtos de tecnologia para o setor de serviÃ§os. A empresa desenvolve sistemas baseados em visÃ£o computacional, como um produto para leitura automÃ¡tica de cartÃµes de ponto utilizando tecnologia prÃ³pria de Reconhecimento Ã“tico de Caracteres (OCR).
 
-% Outro tipo de aplicação desenvolvida pela empresa é um sistema de gerenciamento remoto de uma rede de mídia indoor, que são televisões instaladas em pontos comerciais estratégicos anunciando informações úteis para os usuários. Cada ponto pode ter o conteúdo atualizado em tempo real via Internet, além de informar se a televisão está ligada e se o conteúdo está correto. A empresa desenvolve o software para um sistema embutido que controla o aparelho, o sistema web de gerenciamento e atualização de conteúdo e especifica o hardware necessário para o funcionamento do sistema.
+% Outro tipo de aplicaÃ§Ã£o desenvolvida pela empresa Ã© um sistema de gerenciamento remoto de uma rede de mÃ­dia indoor, que sÃ£o televisÃµes instaladas em pontos comerciais estratÃ©gicos anunciando informaÃ§Ãµes Ãºteis para os usuÃ¡rios. Cada ponto pode ter o conteÃºdo atualizado em tempo real via Internet, alÃ©m de informar se a televisÃ£o estÃ¡ ligada e se o conteÃºdo estÃ¡ correto. A empresa desenvolve o software para um sistema embutido que controla o aparelho, o sistema web de gerenciamento e atualizaÃ§Ã£o de conteÃºdo e especifica o hardware necessÃ¡rio para o funcionamento do sistema.
 
 % section apresenta_o_da_empresa (end)
 
-\section{Organização do Texto} % (fold)
+\section{OrganizaÃ§Ã£o do Texto} % (fold)
 \label{sec:organiza_o_do_texto}
 
-A monografia está dividida em seis capítulos:
+A monografia estÃ¡ dividida em seis capÃ­tulos:
 
 \begin{itemize}
-  \item Capítulo \ref{cha:introdu_o} é introdutório e são apresentados alguns pontos que motivam e justificam o desenvolvimento do projeto, além de uma listagem dos objetivos específicos que definem o escopo do mesmo.
-  \item Capítulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego} apresenta as tecnologias de contagem volumétrica e classificatória existentes. É também apresentado uma pesquisa bibliográfica sobre sistemas de visão computacional inseridos no contexto da Engenharia de Transporte.
-  \item Capítulo \ref{cha:vis_o_computacional} introduz a teoria de visão computacional, contextualizando o leitor. Trata-se de uma apresentação da tecnologia com foco em conceitos e técnicas de processamento de imagens.
-  \item Capítulo \ref{cha:metodologia} apresenta a metodologia para contagem volumétrica automática de veículos. As técnicas utilizadas, a sequência de operações, as imagens de processamento, as condições de captura e a estrutura do software são mostrados e explicados.
-  \item Capítulo \ref{cha:testes_e_resultados} apresenta os resultados e a validação das contagens. Além disso, uma análise comparativa entre os resultados obtidos pelas imagens fornecidas pela BHTRANS e capturadas por uma câmera doméstica.
-  \item Capítulo \ref{cha:considera_es_finais} são feitas as conclusões e as considerações finais do trabalho, bem como recomendações para trabalhos futuros.
+  \item CapÃ­tulo \ref{cha:introdu_o} Ã© introdutÃ³rio e sÃ£o apresentados alguns pontos que motivam e justificam o desenvolvimento do projeto, alÃ©m de uma listagem dos objetivos especÃ­ficos que definem o escopo do mesmo.
+  \item CapÃ­tulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego} apresenta as tecnologias de contagem volumÃ©trica e classificatÃ³ria existentes. Ã‰ tambÃ©m apresentado uma pesquisa bibliogrÃ¡fica sobre sistemas de visÃ£o computacional inseridos no contexto da Engenharia de Transporte.
+  \item CapÃ­tulo \ref{cha:vis_o_computacional} introduz a teoria de visÃ£o computacional, contextualizando o leitor. Trata-se de uma apresentaÃ§Ã£o da tecnologia com foco em conceitos e tÃ©cnicas de processamento de imagens.
+  \item CapÃ­tulo \ref{cha:metodologia} apresenta a metodologia para contagem volumÃ©trica automÃ¡tica de veÃ­culos. As tÃ©cnicas utilizadas, a sequÃªncia de operaÃ§Ãµes, as imagens de processamento, as condiÃ§Ãµes de captura e a estrutura do software sÃ£o mostrados e explicados. Os mÃ©todos para anÃ¡lise dos resultados 
+  \item CapÃ­tulo \ref{cha:testes_e_resultados} apresenta os resultados e a validaÃ§Ã£o das contagens. SÃ£o utilizadas 
+  \item CapÃ­tulo \ref{cha:considera_es_finais} sÃ£o feitas as conclusÃµes e as consideraÃ§Ãµes finais do trabalho, bem como recomendaÃ§Ãµes para trabalhos futuros.
 \end{itemize}
 
 

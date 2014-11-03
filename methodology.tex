@@ -1,25 +1,25 @@
 % !TEX root = pfc.tex
 
-Como visto no CapÌtulo \ref{cha:vis_o_computacional}, existem diversas tÈcnicas de processamento digital de imagens que viabilizam a construÁ„o de sistemas de vis„o computacional. A SeÁ„o \ref{sec:aplica_es_de_vis_o_computacional} descreve exemplos de sistemas de vis„o computacional voltados para o monitoramento do tr·fego, deixando claro o alto nÌvel de complexidade dessas aplicaÁıes do ponto de vista de desenvolvimento. S„o trabalhos com Ûtimos resultados, mas de elevada complexidade algorÌtmica, exigindo um conhecimento profundo na ·rea para um entendimento completo das metodologias propostas.
+Como visto no Cap√≠tulo \ref{cha:vis_o_computacional}, existem diversas t√©cnicas de processamento digital de imagens que viabilizam a constru√ß√£o de sistemas de vis√£o computacional. A Se√ß√£o \ref{sec:aplica_es_de_vis_o_computacional} descreve exemplos de sistemas de vis√£o computacional voltados para o monitoramento do tr√°fego, deixando claro o alto n√≠vel de complexidade dessas aplica√ß√µes do ponto de vista de desenvolvimento. S√£o trabalhos com √≥timos resultados, mas de elevada complexidade algor√≠tmica, exigindo um conhecimento profundo na √°rea para um entendimento completo das metodologias propostas.
 
-Este trabalho se diferencia dos demais por adotar uma metodologia simplificada, utilizando algoritmos de processamento de imagem j· implementados pela biblioteca OpenCV 2.4.4 \citep{opencv_library}, diminuindo a complexidade da soluÁ„o. Nas seÁıes a seguir, o fluxo de processos È descrito e detalhado, bem como as caracterÌsticas de captura e cena especificadas.
+Este trabalho se diferencia dos demais por adotar uma metodologia simplificada, utilizando algoritmos de processamento de imagem j√° implementados pela biblioteca OpenCV 2.4.4 \citep{opencv_library}, diminuindo a complexidade da solu√ß√£o. Nas se√ß√µes a seguir, o fluxo de processos √© descrito e detalhado, bem como as caracter√≠sticas de captura e cena especificadas.
 
-\section{CaracterÌsticas de captura} % (fold)
+\section{Caracter√≠sticas de captura} % (fold)
 \label{sec:caracter_sticas_de_captura}
 
-A captura das imagens do tr·fego foram feitas com a c‚mera que equipa um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, com as seguintes especificaÁıes:
+A captura das imagens do tr√°fego foram feitas com a c√¢mera que equipa um aparelho celular Samsung OMNIA W GT-I8350 \citep{omnia:2013:online}, com as seguintes especifica√ß√µes:
 
 \begin{itemize}
   \item CPU: 1,4 GHz
-  \item MemÛria: 8 GB
+  \item Mem√≥ria: 8 GB
   \item Sistema operacional: Windows Phone 7.8
-  \item C‚mera: 5.0 Megapixel
-  \item GravaÁ„o de vÌdeos HD 720p @30fps\footnote{\textit{Frames per second}, ou frames por secundo.}
+  \item C√¢mera: 5.0 Megapixel
+  \item Grava√ß√£o de v√≠deos HD 720p @30fps\footnote{\textit{Frames per second}, ou frames por secundo.}
 \end{itemize}
 
-Inicialmente, as imagens foram capturadas e salvas na memÛria interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todas as imagens foram capturadas durante o dia, em condiÁıes de iluminaÁ„o est·vel e boa luminosidade. Portanto, o mÈtodo proposto neste trabalho n„o est· validado para grandes variaÁıes de iluminaÁ„o ou cenas com pouca luz.
+Inicialmente, as imagens foram capturadas e salvas na mem√≥ria interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todas as imagens foram capturadas durante o dia, em condi√ß√µes de ilumina√ß√£o est√°vel e boa luminosidade. Portanto, o m√©todo proposto neste trabalho n√£o est√° validado para grandes varia√ß√µes de ilumina√ß√£o ou cenas com pouca luz.
 
-Em sistemas de monitoramento do tr·fego que utilizam c‚meras È muito comum a ocorrÍncia de oclus„o, ou seja, dependendo do ‚ngulo de captura, alguns veÌculos n„o aparecem em parte ou por completo nas imagens. Alguns sistemas autom·ticos de contagem mais complexos tratam o problema de oclus„o utilizando modelos para a forma dos veÌculos e calibraÁ„o de c‚mera \citep{song:2005}. O mÈtodo de contagem desenvolvido neste trabalho n„o considera a possibilidade de oclus„o e, com intuito de minimizar esse efeito, buscou-se um ‚ngulo de captura superior e frontal ‡ via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posiÁ„o de captura e a cena obtida.
+Em sistemas de monitoramento do tr√°fego que utilizam c√¢meras √© muito comum a ocorr√™ncia de oclus√£o, ou seja, dependendo do √¢ngulo de captura, alguns ve√≠culos n√£o aparecem em parte ou por completo nas imagens. Alguns sistemas autom√°ticos de contagem mais complexos tratam o problema de oclus√£o utilizando modelos para a forma dos ve√≠culos e calibra√ß√£o de c√¢mera \citep{song:2005}. O m√©todo de contagem desenvolvido neste trabalho n√£o considera a possibilidade de oclus√£o e, com intuito de minimizar esse efeito, buscou-se um √¢ngulo de captura superior e frontal √† via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posi√ß√£o de captura e a cena obtida.
 
 \begin{figure}[ht]
   \begin{center}
@@ -38,7 +38,7 @@ Em sistemas de monitoramento do tr·fego que utilizam c‚meras È muito comum a oco
       \label{fig:original_frame}
     \end{subfigure}
   \end{center}
-  \caption{(a) Posicionamento da c‚mera para captura de imagens. A ·rea em destaque simboliza o campo de vis„o obtido na posiÁ„o escolhida. (b) Cena capturada na Avenida Presidente Carlos Luz.}
+  \caption{(a) Posicionamento da c√¢mera para captura de imagens. A √°rea em destaque simboliza o campo de vis√£o obtido na posi√ß√£o escolhida. (b) Cena capturada na Avenida Presidente Carlos Luz.}
   \label{fig:cena}
 \end{figure}
 
@@ -47,24 +47,24 @@ Em sistemas de monitoramento do tr·fego que utilizam c‚meras È muito comum a oco
 \section{Fluxo de processos} % (fold)
 \label{sec:fluxo_de_processos}
 
-O mÈtodo aqui apresentado pode ser dividido em seis etapas globais: entrada de dados, prÈ-processamento, subtraÁ„o de \textit{background}, binarizaÁ„o, detecÁ„o de \textit{blobs} e rastreamento e contagem. A Figura \ref{fig:general_process} representa o fluxograma global do processo.
+O m√©todo aqui apresentado pode ser dividido em seis etapas globais: entrada de dados, pr√©-processamento, subtra√ß√£o de \textit{background}, binariza√ß√£o, detec√ß√£o de \textit{blobs} e rastreamento e contagem. A Figura \ref{fig:general_process} representa o fluxograma global do processo.
 
-Para cada etapa de processamento de imagens existe o cÛdigo \verb!C++! correspondente ‡s operaÁıes realizadas pelas mesma, com o objetivo de mostrar a simplicidade de uso da biblioteca OpenCV. O resultado obtido em cada etapa È apresentado por meio de imagens intermedi·rias do processo. Na ˙ltima etapa, o fluxograma da Figura \ref{fig:fluxograma_contagem} descreve o algoritmo implementado para rastreamento e contagem dos veÌculos.
+Para cada etapa de processamento de imagens existe o c√≥digo \verb!C++! correspondente √†s opera√ß√µes realizadas pelas mesma, com o objetivo de mostrar a simplicidade de uso da biblioteca OpenCV. O resultado obtido em cada etapa √© apresentado por meio de imagens intermedi√°rias do processo. Na √∫ltima etapa, o fluxograma da Figura \ref{fig:fluxograma_contagem} descreve o algoritmo implementado para rastreamento e contagem dos ve√≠culos.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.9]{imgs/general_process.pdf}
   \end{center}
-  \caption{Fluxograma com a representaÁ„o global do mÈtodo de contagem.}
+  \caption{Fluxograma com a representa√ß√£o global do m√©todo de contagem.}
   \label{fig:general_process}
 \end{figure}
 
-De forma resumida, o mÈtodo proposto considera o vÌdeo como um conjunto de imagens sequenciais, obtidas uma a uma na etapa de entrada de dados. Em seguida, cada imagem, chamada tambÈm de quadro ou \textit{frame} de vÌdeo, passa por uma etapa de prÈ-processamento, respons·vel pela convers„o para escala de cinza e uma filtragem linear. O resultado È usado para criaÁ„o de um modelo do plano de fundo da cena e que, por meio de uma subtraÁ„o do quadro atual, consegue-se isolar os objetos em movimento que encontram-se em primeiro plano. Na etapa de binarizaÁ„o, um limiar de intensidade de cor segmenta a imagem em regiıes brancas, que s„o os objetos em movimento, e pretas, que representam o plano de fundo. Posteriormente, os objetos brancos em movimento s„o detectados como componentes conectados ou \textit{blobs}, e seu centro È tido como ponto chave para a etapa de rastreamento e contagem. Por ˙ltimo, um algoritmo considera os pontos chave, ou \textit{keypoints}, para realizar o rastreamento e contagem dos veÌculos.
+De forma resumida, o m√©todo proposto considera o v√≠deo como um conjunto de imagens sequenciais, obtidas uma a uma na etapa de entrada de dados. Em seguida, cada imagem, chamada tamb√©m de quadro ou \textit{frame} de v√≠deo, passa por uma etapa de pr√©-processamento, respons√°vel pela convers√£o para escala de cinza e uma filtragem linear. O resultado √© usado para cria√ß√£o de um modelo do plano de fundo da cena e que, por meio de uma subtra√ß√£o do quadro atual, consegue-se isolar os objetos em movimento que encontram-se em primeiro plano. Na etapa de binariza√ß√£o, um limiar de intensidade de cor segmenta a imagem em regi√µes brancas, que s√£o os objetos em movimento, e pretas, que representam o plano de fundo. Posteriormente, os objetos brancos em movimento s√£o detectados como componentes conectados ou \textit{blobs}, e seu centro √© tido como ponto chave para a etapa de rastreamento e contagem. Por √∫ltimo, um algoritmo considera os pontos chave, ou \textit{keypoints}, para realizar o rastreamento e contagem dos ve√≠culos.
 
 \subsection{Entrada de dados} % (fold)
 \label{sub:entrada_de_dados}
 
-A obtenÁ„o dos dados em um sistema de vis„o computacional pode ser feita em tempo real ou a partir de imagens j· capturadas previamente. No trabalho em quest„o, esse processo se d· por meio de vÌdeos j· salvos em disco, atravÈs do trecho de cÛdigo \verb!C++! a seguir:
+A obten√ß√£o dos dados em um sistema de vis√£o computacional pode ser feita em tempo real ou a partir de imagens j√° capturadas previamente. No trabalho em quest√£o, esse processo se d√° por meio de v√≠deos j√° salvos em disco, atrav√©s do trecho de c√≥digo \verb!C++! a seguir:
 
 \begin{lstlisting}
 #include <iostream>
@@ -92,24 +92,24 @@ int main(int argc, char const *argv[])
 }
 \end{lstlisting}
 
-A classe \verb!cv::VideoCapture! da OpenCV faz todo o trabalho de obtenÁ„o dos \textit{frames}, abstraindo um arquivo de vÌdeo por uma sequÍncia de imagens, obtidas uma a uma na linha: \verb!capture >> frame!. A Figura \ref{fig:frame_in} representa um \textit{frame} do vÌdeo, usado para exemplificar o resultado do processamento de cada etapa subsequente. 
+A classe \verb!cv::VideoCapture! da OpenCV faz todo o trabalho de obten√ß√£o dos \textit{frames}, abstraindo um arquivo de v√≠deo por uma sequ√™ncia de imagens, obtidas uma a uma na linha: \verb!capture >> frame!. A Figura \ref{fig:frame_in} representa um \textit{frame} do v√≠deo, usado para exemplificar o resultado do processamento de cada etapa subsequente. 
 
-Vale ressaltar que a biblioteca OpenCV utiliza objetos do tipo \verb!cv::Mat! para armazenar em memÛria os dados de uma imagem, sendo este tambÈm o tipo de entrada e saÌda para a maioria das funÁıes de processamento de imagem.
+Vale ressaltar que a biblioteca OpenCV utiliza objetos do tipo \verb!cv::Mat! para armazenar em mem√≥ria os dados de uma imagem, sendo este tamb√©m o tipo de entrada e sa√≠da para a maioria das fun√ß√µes de processamento de imagem.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/frame.png}
   \end{center}
-  \caption{\textit{Frame} obtido a partir do vÌdeo de entrada.}
+  \caption{\textit{Frame} obtido a partir do v√≠deo de entrada.}
   \label{fig:frame_in}
 \end{figure}
 
 % subsection entrada_de_dados (end)
 
-\subsection{PrÈ-processamento} % (fold)
+\subsection{Pr√©-processamento} % (fold)
 \label{sub:pr_processamento}
 
-A principal funÁ„o da etapa de prÈ-processamento È a convers„o da imagem de entrada para \textit{grayscale}, uma vez que informaÁıes de cor n„o s„o relevantes nas etapas seguintes e o processamento de imagens em escala de cinza, que possuem apenas um canal, È mais r·pido. No cÛdigo, a convers„o È feita pela chamada da funÁ„o \verb!cv::cvtColor!, passando como par‚metros as imagens de entrada e saÌda, e o \textit{flag} \verb!CV_BGR2GRAY!, que indica o tipo de operaÁ„o desejada.
+A principal fun√ß√£o da etapa de pr√©-processamento √© a convers√£o da imagem de entrada para \textit{grayscale}, uma vez que informa√ß√µes de cor n√£o s√£o relevantes nas etapas seguintes e o processamento de imagens em escala de cinza, que possuem apenas um canal, √© mais r√°pido. No c√≥digo, a convers√£o √© feita pela chamada da fun√ß√£o \verb!cv::cvtColor!, passando como par√¢metros as imagens de entrada e sa√≠da, e o \textit{flag} \verb!CV_BGR2GRAY!, que indica o tipo de opera√ß√£o desejada.
 
 \begin{lstlisting}
   ...
@@ -124,22 +124,22 @@ A principal funÁ„o da etapa de prÈ-processamento È a convers„o da imagem de entr
   ...  
 \end{lstlisting}
 
-Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na SeÁ„o \ref{sec:filtragem_linear}, com o objetivo de atenuar ruÌdos oriundos do processo de captura e provocar um efeito suave de borramento na imagem. A chamada da funÁ„o \verb!cv::GaussianBlur! realiza a operaÁ„o de filtragem, que È parametrizada pelas imagens de entrada e saÌda, o tamanho do \textit{kernel} utilizado como elemento de convoluÁ„o e o desvio padr„o nas direÁıes X e Y. O resultado desse procedimento È ilustrado na Figura \ref{fig:pre_processamento}.
+Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na Se√ß√£o \ref{sec:filtragem_linear}, com o objetivo de atenuar ru√≠dos oriundos do processo de captura e provocar um efeito suave de borramento na imagem. A chamada da fun√ß√£o \verb!cv::GaussianBlur! realiza a opera√ß√£o de filtragem, que √© parametrizada pelas imagens de entrada e sa√≠da, o tamanho do \textit{kernel} utilizado como elemento de convolu√ß√£o e o desvio padr√£o nas dire√ß√µes X e Y. O resultado desse procedimento √© ilustrado na Figura \ref{fig:pre_processamento}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/gray.png}
   \end{center}
-  \caption{Resultado da etapa de prÈ-processamento, uma imagem filtrada em escala de cinza.}
+  \caption{Resultado da etapa de pr√©-processamento, uma imagem filtrada em escala de cinza.}
   \label{fig:pre_processamento}
 \end{figure}
 
 % subsection pr_processamento (end)
 
-\subsection{SubtraÁ„o de \textit{background}} % (fold)
+\subsection{Subtra√ß√£o de \textit{background}} % (fold)
 \label{sub:subtra_o_de_background}
 
-A subtraÁ„o de \textit{background} È a operaÁ„o mais complexa e custosa, do ponto de vista computacional, entre todas as etapas de processamento de imagens do trabalho em quest„o, mas o seu uso, a partir da implementaÁ„o da OpenCV, È extremamente simples. Internamente, a OpenCV constrÛi um modelo adaptativo de mistura de gaussianas para subtraÁ„o de \textit{background} com detecÁ„o de sombras, baseado em \cite{zivkovic:2004} e \cite{zivkovic:2006}. Nesse mÈtodo, cada pÌxel È modelado como uma mistura de gaussianas e, em cada iteraÁ„o, a probabilidade do pixel pertencer ao plano de fundo È calculada.
+A subtra√ß√£o de \textit{background} √© a opera√ß√£o mais complexa e custosa, do ponto de vista computacional, entre todas as etapas de processamento de imagens do trabalho em quest√£o, mas o seu uso, a partir da implementa√ß√£o da OpenCV, √© extremamente simples. Internamente, a OpenCV constr√≥i um modelo adaptativo de mistura de gaussianas para subtra√ß√£o de \textit{background} com detec√ß√£o de sombras, baseado em \cite{zivkovic:2004} e \cite{zivkovic:2006}. Nesse m√©todo, cada p√≠xel √© modelado como uma mistura de gaussianas e, em cada itera√ß√£o, a probabilidade do pixel pertencer ao plano de fundo √© calculada.
 
 \begin{lstlisting}
   ...
@@ -153,26 +153,26 @@ A subtraÁ„o de \textit{background} È a operaÁ„o mais complexa e custosa, do pont
   ...
 \end{lstlisting}
 
-No cÛdigo \verb!C++!, essa operaÁ„o pode ser realizada em duas linhas: a declaraÁ„o do objeto \verb!model! da classe \verb!cv::BackgroundSubtractorMOG2! e a extraÁ„o da imagem de \textit{foreground}, ou imagem de primeiro plano, com a chamada \verb!model(gray, foreground)!. O resultado È mostrado na Figura \ref{fig:foreground}, onde os pixels pretos representam o plano de fundo, os brancos os objetos em movimento do primeiro plano e os pixels cinza suas sombras.
+No c√≥digo \verb!C++!, essa opera√ß√£o pode ser realizada em duas linhas: a declara√ß√£o do objeto \verb!model! da classe \verb!cv::BackgroundSubtractorMOG2! e a extra√ß√£o da imagem de \textit{foreground}, ou imagem de primeiro plano, com a chamada \verb!model(gray, foreground)!. O resultado √© mostrado na Figura \ref{fig:foreground}, onde os pixels pretos representam o plano de fundo, os brancos os objetos em movimento do primeiro plano e os pixels cinza suas sombras.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/foreground.png}
   \end{center}
-  \caption{DetecÁ„o do \textit{foreground} na etapa de subtraÁ„o de fundo.}
+  \caption{Detec√ß√£o do \textit{foreground} na etapa de subtra√ß√£o de fundo.}
   \label{fig:foreground}
 \end{figure}
 
 % subsection subtra_o_de_background (end)
 
-\subsection{BinarizaÁ„o} % (fold)
+\subsection{Binariza√ß√£o} % (fold)
 \label{sub:binariza_o}
 
-Em vis„o computacional, imagens bin·rias s„o aquelas que possuem apenas dois valores de intensidade, normalmente 0 (preto) e 255 (branco). Geralmente, os pixels branco pertencem aos objetos de interesse da cena, que no escopo desse trabalho fazem parte dos veÌculos em movimento. A etapa de binarizaÁ„o È respons·vel por segmentar as regiıes de interesse da cena para que, nas prÛximas etapas, sejam detectadas e rastreadas.
+Em vis√£o computacional, imagens bin√°rias s√£o aquelas que possuem apenas dois valores de intensidade, normalmente 0 (preto) e 255 (branco). Geralmente, os pixels branco pertencem aos objetos de interesse da cena, que no escopo desse trabalho fazem parte dos ve√≠culos em movimento. A etapa de binariza√ß√£o √© respons√°vel por segmentar as regi√µes de interesse da cena para que, nas pr√≥ximas etapas, sejam detectadas e rastreadas.
 
-A imagem de primeiro plano obtida na etapa anterior (SubseÁ„o \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels branco sozinhos n„o definem muito bem um veÌculo, mas o conjuntos dos pixels branco e cinza sim. Ent„o, È feita uma operaÁ„o de limiarizaÁ„o, tambÈm conhecida por \textit{thresholding} (SeÁ„o \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso È feito pela chamada da funÁ„o \verb! cv::threshold!, parametrizada pelas imagens de entrada e saÌda, um valor de limiar baixo, que garante a elevaÁ„o ‡ branco de praticamente todos os tons de cinza, e o tipo de limiarizaÁ„o a ser aplicada, nesse caso bin·ria. 
+A imagem de primeiro plano obtida na etapa anterior (Subse√ß√£o \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels branco sozinhos n√£o definem muito bem um ve√≠culo, mas o conjuntos dos pixels branco e cinza sim. Ent√£o, √© feita uma opera√ß√£o de limiariza√ß√£o, tamb√©m conhecida por \textit{thresholding} (Se√ß√£o \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso √© feito pela chamada da fun√ß√£o \verb! cv::threshold!, parametrizada pelas imagens de entrada e sa√≠da, um valor de limiar baixo, que garante a eleva√ß√£o √† branco de praticamente todos os tons de cinza, e o tipo de limiariza√ß√£o a ser aplicada, nesse caso bin√°ria. 
 
-Percebe-se na Figura \ref{fig:bin} que a operaÁ„o de \textit{thresholding} segmentou corretamente os veÌculos. No entanto, para detecÁ„o de objetos em vis„o computacional, È interessante que as regiıes de interesse sejam uniformes e n„o contenham orifÌcios. Nesse tipo de situaÁ„o È comum o uso de operaÁıes morfolÛgicas, capazes de alterar a forma dos objetos segmentados em imagens bin·rias. Como o objetivo È uniformizar a regi„o de segmentaÁ„o dos objetos, deve-se aplicar uma operaÁ„o de fechamento, que diminui orifÌcios e descontinuidades nas regiıes de interesse, alongando os segmentos de cor branca pelas imperfeiÁıes de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na regi„o dos objetos segmentados.
+Percebe-se na Figura \ref{fig:bin} que a opera√ß√£o de \textit{thresholding} segmentou corretamente os ve√≠culos. No entanto, para detec√ß√£o de objetos em vis√£o computacional, √© interessante que as regi√µes de interesse sejam uniformes e n√£o contenham orif√≠cios. Nesse tipo de situa√ß√£o √© comum o uso de opera√ß√µes morfol√≥gicas, capazes de alterar a forma dos objetos segmentados em imagens bin√°rias. Como o objetivo √© uniformizar a regi√£o de segmenta√ß√£o dos objetos, deve-se aplicar uma opera√ß√£o de fechamento, que diminui orif√≠cios e descontinuidades nas regi√µes de interesse, alongando os segmentos de cor branca pelas imperfei√ß√µes de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na regi√£o dos objetos segmentados.
 
 \begin{lstlisting}
   ...
@@ -190,7 +190,7 @@ Percebe-se na Figura \ref{fig:bin} que a operaÁ„o de \textit{thresholding} segme
   ...  
 \end{lstlisting}
 
-As operaÁıes morfolÛgicas, assim como os filtros, tambÈm utilizam um elemento estrutural que percorre toda a imagem. Nesse caso, utilizou-se um \textit{kernel} elÌptico, que È a forma que mais se aproxima de um veÌculo na imagem binarizada. A criaÁ„o desse elemento se d· pela chamada da funÁ„o \verb!cv::getStructuringElement!, que recebe como par‚metro a forma e o tamanho desejados. A operaÁ„o de fechamento propriamente dita È feita pelo mÈtodo \verb!cv::morphologyEx!, parametrizado pelas imagens de entrada e saÌda, o tipo de operaÁ„o morfolÛgica, o elemento estrutural, o ponto de ancoragem com o \textit{kernel} (\verb!cv::Point(-1,-1)!  representa o centro) e o n˙mero de iteraÁıes.
+As opera√ß√µes morfol√≥gicas, assim como os filtros, tamb√©m utilizam um elemento estrutural que percorre toda a imagem. Nesse caso, utilizou-se um \textit{kernel} el√≠ptico, que √© a forma que mais se aproxima de um ve√≠culo na imagem binarizada. A cria√ß√£o desse elemento se d√° pela chamada da fun√ß√£o \verb!cv::getStructuringElement!, que recebe como par√¢metro a forma e o tamanho desejados. A opera√ß√£o de fechamento propriamente dita √© feita pelo m√©todo \verb!cv::morphologyEx!, parametrizado pelas imagens de entrada e sa√≠da, o tipo de opera√ß√£o morfol√≥gica, o elemento estrutural, o ponto de ancoragem com o \textit{kernel} (\verb!cv::Point(-1,-1)!  representa o centro) e o n√∫mero de itera√ß√µes.
 
 \begin{figure}[ht]
   \begin{center}
@@ -209,18 +209,18 @@ As operaÁıes morfolÛgicas, assim como os filtros, tambÈm utilizam um elemento es
       \label{fig:morph}
     \end{subfigure}
   \end{center}
-  \caption{Resultado da etapa de binarizaÁ„o. (a) Imagem binarizada utilizando um limiar simples; (b) OperaÁ„o morfolÛgica de fechamento.}
+  \caption{Resultado da etapa de binariza√ß√£o. (a) Imagem binarizada utilizando um limiar simples; (b) Opera√ß√£o morfol√≥gica de fechamento.}
   \label{fig:bin_morph}
 \end{figure}
 
 % subsection binariza_o (end)
 
-\subsection{DetecÁ„o de \textit{blobs}} % (fold)
+\subsection{Detec√ß√£o de \textit{blobs}} % (fold)
 \label{sub:detec_o_de_blobs}
 
-Uma vez segmentados, os objetos de interesse s„o detectados nessa etapa como \textit{blobs}, que s„o regiıes de pontos com valor 255 (branco), conectados entre si, definidas pelo seu ponto central e di‚metro. A biblioteca OpenCV utiliza a entidade \verb!cv::KeyPoint! para represent·-los. Nesse caso, a principal funÁ„o dos \textit{keypoints} È definir a posiÁ„o de cada objeto segmentado, para que na prÛxima etapa esses pontos sejam rastreados.
+Uma vez segmentados, os objetos de interesse s√£o detectados nessa etapa como \textit{blobs}, que s√£o regi√µes de pontos com valor 255 (branco), conectados entre si, definidas pelo seu ponto central e di√¢metro. A biblioteca OpenCV utiliza a entidade \verb!cv::KeyPoint! para represent√°-los. Nesse caso, a principal fun√ß√£o dos \textit{keypoints} √© definir a posi√ß√£o de cada objeto segmentado, para que na pr√≥xima etapa esses pontos sejam rastreados.
 
-A OpenCV disponibiliza uma interface abstrata para detecÁ„o de \textit{keypoints}, chamada \verb!cv::FeatureDetector!. Uma de suas especializaÁıes È a classe \verb!cv::SimpleBlobDetector!, capaz de extrair \textit{blobs} de uma imagem. Em sua contruÁ„o, a classe \verb!cv::SimpleBlobDetector! recebe uma estrutura de par‚metros de filtragem, respons·veis por descartar pontos que n„o atendam as especificaÁıes desejadas. O mÈtodo proposto habilita apenas dois tipos de filtro: de cor, que considera apenas \textit{blobs} brancos, e ·rea, que abrange regiıes com ·rea mÌnima de 500 pixels e m·xima de 80000.
+A OpenCV disponibiliza uma interface abstrata para detec√ß√£o de \textit{keypoints}, chamada \verb!cv::FeatureDetector!. Uma de suas especializa√ß√µes √© a classe \verb!cv::SimpleBlobDetector!, capaz de extrair \textit{blobs} de uma imagem. Em sua contru√ß√£o, a classe \verb!cv::SimpleBlobDetector! recebe uma estrutura de par√¢metros de filtragem, respons√°veis por descartar pontos que n√£o atendam as especifica√ß√µes desejadas. O m√©todo proposto habilita apenas dois tipos de filtro: de cor, que considera apenas \textit{blobs} brancos, e √°rea, que abrange regi√µes com √°rea m√≠nima de 500 pixels e m√°xima de 80000.
 
 \begin{lstlisting}
   ...
@@ -246,15 +246,15 @@ A OpenCV disponibiliza uma interface abstrata para detecÁ„o de \textit{keypoints
     ...  
 \end{lstlisting}
 
-Uma vez criado, o objeto \verb!detector!, atravÈs do mÈtodo \verb!detect!, recebe como par‚metro a imagem binarizada da Figura \ref{fig:morph} e retorna um vetor de \textit{keypoints}, contendo todos os \textit{blobs} detectados naquele \textit{frame}. A Figura \ref{fig:keypoints} ilustra os pontos detectados, representados pelos cÌrculos em vermelho. 
+Uma vez criado, o objeto \verb!detector!, atrav√©s do m√©todo \verb!detect!, recebe como par√¢metro a imagem binarizada da Figura \ref{fig:morph} e retorna um vetor de \textit{keypoints}, contendo todos os \textit{blobs} detectados naquele \textit{frame}. A Figura \ref{fig:keypoints} ilustra os pontos detectados, representados pelos c√≠rculos em vermelho. 
 
-Esta È a ˙ltima operaÁ„o que envolve processamento de imagem. Com a posiÁ„o e o tamanho dos \textit{blobs} detectados, definidos por um vetor de \textit{keypoints}, È possÌvel criar um algoritmo de rastreamento que garanta que cada objeto seja contado apenas uma vez, como descrito logo a seguir na SubseÁ„o \ref{sub:rastreamento_e_contagem}.
+Esta √© a √∫ltima opera√ß√£o que envolve processamento de imagem. Com a posi√ß√£o e o tamanho dos \textit{blobs} detectados, definidos por um vetor de \textit{keypoints}, √© poss√≠vel criar um algoritmo de rastreamento que garanta que cada objeto seja contado apenas uma vez, como descrito logo a seguir na Subse√ß√£o \ref{sub:rastreamento_e_contagem}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/keypoints.png}
   \end{center}
-  \caption{Resultado da etapa de detecÁ„o de \textit{blobs}.}
+  \caption{Resultado da etapa de detec√ß√£o de \textit{blobs}.}
   \label{fig:keypoints}
 \end{figure}
 
@@ -263,22 +263,22 @@ Esta È a ˙ltima operaÁ„o que envolve processamento de imagem. Com a posiÁ„o e o 
 \subsection{Rastreamento e contagem} % (fold)
 \label{sub:rastreamento_e_contagem}
 
-Assim como em todas as etapas anteriores, buscou-se a implementaÁ„o de um mÈtodo simples de rastreamento e contagem, mas que fosse capaz de obter bons resultados. O algoritmo utiliza o vetor de \textit{keypoints}, obtido na etapa anterior, e uma m·scara bin·ria, que define a regi„o de contagem. Um objeto sÛ È contabilizado quando o \textit{keypoint} que o define entra na regi„o de contagem, definida pelos pixels branco da Figura \ref{fig:bin_mask}.
+Assim como em todas as etapas anteriores, buscou-se a implementa√ß√£o de um m√©todo simples de rastreamento e contagem, mas que fosse capaz de obter bons resultados. O algoritmo utiliza o vetor de \textit{keypoints}, obtido na etapa anterior, e uma m√°scara bin√°ria, que define a regi√£o de contagem. Um objeto s√≥ √© contabilizado quando o \textit{keypoint} que o define entra na regi√£o de contagem, definida pelos pixels branco da Figura \ref{fig:bin_mask}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/bin_mask.png}
   \end{center}
-  \caption{M·scara bin·ria que define a regi„o de contagem do algoritmo.}
+  \caption{M√°scara bin√°ria que define a regi√£o de contagem do algoritmo.}
   \label{fig:bin_mask}
 \end{figure}
 
-O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, È feito por um perseguidor, denominado \textit{tracker}. Um \textit{tracker} È um objeto circular, definido por sua posiÁ„o e raio. Um \textit{keypoint} est· contido em um \textit{tracker} se a dist‚ncia entre eles for menor que o raio do \textit{trakcer}, ou seja, se o \textit{keypoint} pertencer ‡ ·rea definida pelo \textit{trakcer}. N· Figura \ref{fig:trackers}, o \textit{tracker} È representado pelos cÌrculos azuis. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, alÈm de ingressar na regi„o de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} v·lidos, para que na prÛxima iteraÁ„o esses dados sirvam como validaÁ„o para a operaÁ„o de contagem.
+O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, √© feito por um perseguidor, denominado \textit{tracker}. Um \textit{tracker} √© um objeto circular, definido por sua posi√ß√£o e raio. Um \textit{keypoint} est√° contido em um \textit{tracker} se a dist√¢ncia entre eles for menor que o raio do \textit{trakcer}, ou seja, se o \textit{keypoint} pertencer √† √°rea definida pelo \textit{trakcer}. N√° Figura \ref{fig:trackers}, o \textit{tracker} √© representado pelos c√≠rculos azuis. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, al√©m de ingressar na regi√£o de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} v√°lidos, para que na pr√≥xima itera√ß√£o esses dados sirvam como valida√ß√£o para a opera√ß√£o de contagem.
 
-O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado È gerado uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obtÈm-se todos os \textit{trackers} que o contenham. Nesse momento, trÍs situaÁıes podem ser identificadas:
+O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado √© gerado uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obt√©m-se todos os \textit{trackers} que o contenham. Nesse momento, tr√™s situa√ß√µes podem ser identificadas:
 
 \begin{enumerate}
-  \item Ainda n„o existe nenhum \textit{tracker} que contenha \textit{keypoint};
+  \item Ainda n√£o existe nenhum \textit{tracker} que contenha \textit{keypoint};
   \item Existe apenas um \textit{tracker} que contenha \textit{keypoint};
   \item Existe mais de um \textit{tracker} que contenha \textit{keypoint}.
 \end{enumerate}
@@ -288,27 +288,27 @@ O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algori
   \begin{center}
     \includegraphics[scale=0.85]{imgs/fluxograma_contagem.pdf}
   \end{center}
-  \caption{Fluxograma do algoritmo de rastreamento e contagem de veÌculos.}
+  \caption{Fluxograma do algoritmo de rastreamento e contagem de ve√≠culos.}
   \label{fig:fluxograma_contagem}
 \end{figure}
 
-O primeiro caso acontece quando um \textit{keypoint} acabou de ser detectado na cena. Um \textit{tracker} para rastre·-lo È criado na mesma posiÁ„o de \textit{keypoint} e inserido na lista interna de \textit{trackers}, a menos que o \textit{keypoint} encontre-se na ·rea de contagem. Ou seja, n„o faz sentido rastrear objetos que surgiram subtamente dentro da ·rea de contagem.
+O primeiro caso acontece quando um \textit{keypoint} acabou de ser detectado na cena. Um \textit{tracker} para rastre√°-lo √© criado na mesma posi√ß√£o de \textit{keypoint} e inserido na lista interna de \textit{trackers}, a menos que o \textit{keypoint} encontre-se na √°rea de contagem. Ou seja, n√£o faz sentido rastrear objetos que surgiram subtamente dentro da √°rea de contagem.
 
-Na situaÁ„o 2, o \textit{tracker} encontrado indica que o \textit{keypoint} j· estava sendo rastreado nas iteraÁıes anteriores. A posiÁ„o do \textit{tracker} representa exatamente a posiÁ„o do objeto na ˙ltima iteraÁ„o. Logo, se o \textit{tracker} encontra-se \textbf{fora} da ·rea de contagem e o \textit{keypoint} \textbf{dentro}, significa que o objeto acabou de entrar em uma condiÁ„o v·lida de contagem, ou seja, ingressou na regi„o de contagem definida pela m·scara bin·ria, e mais um veÌculo È contabilizado. Uma vez contado, o \textit{tracker} daquele objeto È removido da lista de \textit{trackers}, uma vez que n„o È mais necess·rio rastre·-lo. Caso a condiÁ„o de contagem n„o seja atendida, a posiÁ„o do \textit{tracker} È atualizada para a mesma de \textit{keypoint}.
+Na situa√ß√£o 2, o \textit{tracker} encontrado indica que o \textit{keypoint} j√° estava sendo rastreado nas itera√ß√µes anteriores. A posi√ß√£o do \textit{tracker} representa exatamente a posi√ß√£o do objeto na √∫ltima itera√ß√£o. Logo, se o \textit{tracker} encontra-se \textbf{fora} da √°rea de contagem e o \textit{keypoint} \textbf{dentro}, significa que o objeto acabou de entrar em uma condi√ß√£o v√°lida de contagem, ou seja, ingressou na regi√£o de contagem definida pela m√°scara bin√°ria, e mais um ve√≠culo √© contabilizado. Uma vez contado, o \textit{tracker} daquele objeto √© removido da lista de \textit{trackers}, uma vez que n√£o √© mais necess√°rio rastre√°-lo. Caso a condi√ß√£o de contagem n√£o seja atendida, a posi√ß√£o do \textit{tracker} √© atualizada para a mesma de \textit{keypoint}.
 
-A situaÁ„o 3 acontece quando um \textit{keypoint} est· contido em mais de \textit{tracker}, devido ‡ proximidade de dois ou mais objetos detectados na cena. Esse caso È tratado da mesma forma que na situaÁ„o 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais prÛximo de \textit{keypoint}.
+A situa√ß√£o 3 acontece quando um \textit{keypoint} est√° contido em mais de \textit{tracker}, devido √† proximidade de dois ou mais objetos detectados na cena. Esse caso √© tratado da mesma forma que na situa√ß√£o 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais pr√≥ximo de \textit{keypoint}.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[scale=0.5]{imgs/trackers.png}
   \end{center}
-  \caption{Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a regi„o de contagem.}
+  \caption{Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a regi√£o de contagem.}
   \label{fig:trackers}
 \end{figure}
 
-Depois de percorrer todos os \textit{keypoints}, o algoritmo remove da lista os \textit{trackers} que n„o contenham ao menos um \textit{keypoint}. Isso È necess·rio pois a detecÁ„o de objetos n„o È perfeita, ou seja, se em algum \textit{frame} um objeto j· anteriormente rastreado n„o for detectado como um \textit{keypoint}, aparece na lista de \textit{trackers} um elemento que n„o contÈm um \textit{keypoint}, configurando uma condiÁ„o inv·lida.
+Depois de percorrer todos os \textit{keypoints}, o algoritmo remove da lista os \textit{trackers} que n√£o contenham ao menos um \textit{keypoint}. Isso √© necess√°rio pois a detec√ß√£o de objetos n√£o √© perfeita, ou seja, se em algum \textit{frame} um objeto j√° anteriormente rastreado n√£o for detectado como um \textit{keypoint}, aparece na lista de \textit{trackers} um elemento que n√£o cont√©m um \textit{keypoint}, configurando uma condi√ß√£o inv√°lida.
 
-A Figura \ref{fig:trackers} ilustra um veÌculo que entrou na regi„o de contagem, teve seu \textit{tracker} removido e foi contabilizado corretamente. Percebe-se tambÈm que qualquer objeto em movimento È detectado e rastreado, como uma pessoa caminhando. No entanto, somente objetos que possuam um \textit{keypoint} contido por um \textit{tracker} e que entrem na regi„o de contagem s„o contabilizados.
+A Figura \ref{fig:trackers} ilustra um ve√≠culo que entrou na regi√£o de contagem, teve seu \textit{tracker} removido e foi contabilizado corretamente. Percebe-se tamb√©m que qualquer objeto em movimento √© detectado e rastreado, como uma pessoa caminhando. No entanto, somente objetos que possuam um \textit{keypoint} contido por um \textit{tracker} e que entrem na regi√£o de contagem s√£o contabilizados.
 
 % subsection rastreamento_e_contagem (end)
 
@@ -317,7 +317,7 @@ A Figura \ref{fig:trackers} ilustra um veÌculo que entrou na regi„o de contagem,
 \section{Estrutura do \textit{software}} % (fold)
 \label{sec:estrutura_do_software}
 
-Para que o mÈtodo aqui proposto pudesse ser testado e validado foi desenvolvido um \textit{software} multiplataforma na linguagem  \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho computacional, f·cil implementaÁ„o e a possibilidade de utilizar os conceitos de programaÁ„o orientada a objetos. A Figura \ref{fig:uml} ilustra a estrutura e o relacionamento entre classes atravÈs de um diagrama UML\footnote{\textit{Unified Modeling Language} - um conjunto padronizado de diagramas com notaÁ„o formalmente definida, adotado na ·rea de engenharia de software em um esforÁo para facilitar a concepÁ„o de sistemas orientados a objetos \citep{aguiar2008thesis}.}.
+Para que o m√©todo aqui proposto pudesse ser testado e validado foi desenvolvido um \textit{software} multiplataforma na linguagem  \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho computacional, f√°cil implementa√ß√£o e a possibilidade de utilizar os conceitos de programa√ß√£o orientada a objetos. A Figura \ref{fig:uml} ilustra a estrutura e o relacionamento entre classes atrav√©s de um diagrama UML\footnote{\textit{Unified Modeling Language} - um conjunto padronizado de diagramas com nota√ß√£o formalmente definida, adotado na √°rea de engenharia de software em um esfor√ßo para facilitar a concep√ß√£o de sistemas orientados a objetos \citep{aguiar2008thesis}.}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -327,30 +327,30 @@ Para que o mÈtodo aqui proposto pudesse ser testado e validado foi desenvolvido 
   \label{fig:uml}
 \end{figure}
 
-A classe \verb!VideoProcessor! È a classe central do sistema. Ela È respons·vel por abrir e ler o arquivo de vÌdeo atravÈs do objeto \verb!capture! do tipo \verb!cv::VideoCapture!; interfacear com a classe abstrata \verb!FrameProcessor! atravÈs da chamada do mÈtodo \verb!process!; e executar o algoritmo de rastreamento e contagem implementado pela classe \verb!Counter!.
+A classe \verb!VideoProcessor! √© a classe central do sistema. Ela √© respons√°vel por abrir e ler o arquivo de v√≠deo atrav√©s do objeto \verb!capture! do tipo \verb!cv::VideoCapture!; interfacear com a classe abstrata \verb!FrameProcessor! atrav√©s da chamada do m√©todo \verb!process!; e executar o algoritmo de rastreamento e contagem implementado pela classe \verb!Counter!.
 
-A classe abstrata \verb!FrameProcessor! define uma interface cuja funÁ„o È receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as operaÁıes descritas nas seguintes subseÁıes: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as operaÁıes de vis„o computacional e atravÈs do mÈtodo \verb!keypoints! retorna os pontos que pontencialmente representam veÌculos em movimento.
+A classe abstrata \verb!FrameProcessor! define uma interface cuja fun√ß√£o √© receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as opera√ß√µes descritas nas seguintes subse√ß√µes: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as opera√ß√µes de vis√£o computacional e atrav√©s do m√©todo \verb!keypoints! retorna os pontos que pontencialmente representam ve√≠culos em movimento.
 
-A classe \verb!Counter! implementa o algoritmo descrito na subseÁ„o \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma m·scara bin·ria que define a regi„o de contagem e uma lista interna de \textit{trackers}, o mÈtodo \verb!count! retorna quantos eventos de contagem ocorrem para cada iteraÁ„o.
+A classe \verb!Counter! implementa o algoritmo descrito na subse√ß√£o \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma m√°scara bin√°ria que define a regi√£o de contagem e uma lista interna de \textit{trackers}, o m√©todo \verb!count! retorna quantos eventos de contagem ocorrem para cada itera√ß√£o.
 
-A classe \verb!Circle! È utilizada pela classe \verb!Tracker! para representar computacionalmente um cÌrculo com centro e raio definidos. J· a classe \verb!Tracker! È utilizada na forma de lista pela classe \verb!Counter!, na implementaÁ„o do algoritmo de rastreamento e contagem.
+A classe \verb!Circle! √© utilizada pela classe \verb!Tracker! para representar computacionalmente um c√≠rculo com centro e raio definidos. J√° a classe \verb!Tracker! √© utilizada na forma de lista pela classe \verb!Counter!, na implementa√ß√£o do algoritmo de rastreamento e contagem.
 
-O cÛdigo dessa aplicaÁ„o pode ser encontrado no seguinte repositÛrio: \url{https://github.com/arthurbailao/potential-ironman}.
+O c√≥digo dessa aplica√ß√£o pode ser encontrado no seguinte reposit√≥rio: \url{https://github.com/arthurbailao/potential-ironman}.
 
 % section estrutura_do_software (end)
 
-\section{AvaliaÁ„o dos resultados} % (fold)
+\section{Avalia√ß√£o dos resultados} % (fold)
 \label{sec:avalia_o_dos_resultados}
 
-TODO: escrever alguma coisa aqui, nem que seja citar as subseÁıes a seguir.
+TODO: escrever alguma coisa aqui, nem que seja citar as subse√ß√µes a seguir.
 
-\subsection{Matriz de confus„o} % (fold)
+\subsection{Matriz de confus√£o} % (fold)
 \label{sub:matriz_de_confus_o}
 
-A matriz de confus„o contÈm informaÁıes sobre classificaÁıes reais e preditas feitas por um classificador, como mostrado na Tabela \ref{tab:matriz_de_confusao}. Ela permite que a partir de seus elementos diversas medidas de desempenho sejam calculadas.
+A matriz de confus√£o cont√©m informa√ß√µes sobre classifica√ß√µes reais e preditas feitas por um classificador, como mostrado na Tabela \ref{tab:matriz_de_confusao}. Ela permite que a partir de seus elementos diversas medidas de desempenho sejam calculadas.
 
 \begin{table}[ht]
-  \caption{Matriz de confus„o para um classificador de duas classes.}
+  \caption{Matriz de confus√£o para um classificador de duas classes.}
   \label{tab:matriz_de_confusao}
   \begin{center}
     \begin{tabular}{l|l|c|c|}
@@ -368,20 +368,22 @@ A matriz de confus„o contÈm informaÁıes sobre classificaÁıes reais e preditas fe
   \end{center}
 \end{table}
 
-Um verdadeiro positivo (VP) È um evento predito como pertencente ‡ classe positiva, sendo este realmente pertencente ‡ classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence ‡ classe positiva. Analogamente, o verdadeiro negativo (VN) È um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
+Um verdadeiro positivo (VP) √© um evento predito como pertencente √† classe positiva, sendo este realmente pertencente √† classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence √† classe positiva. Analogamente, o verdadeiro negativo (VN) √© um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
 
-No contexto desse trabalho È necess·rio analisar os eventos em janelas de tempo. Isso garante que, para cada janela, pelo menos um tipo de evento obrigatoriamente ocorra. Esse intervalo corresponde ao tempo mÈdio em que um veÌculo leva para percorrer a cena, ou seja, est· diretamente atrelado ‡ velocidade mÈdia dos veÌculos na via. Dessa forma, os elementos da matriz de confus„o podem ser descritos como:
+% Para evitar o vies estatistico na montagem da matriz de confusao ao caracterizar as quatro possibilidades establece-se uma janela de tempo baseada no tempo m√©dio em que um veiculo leva para percorrer toda a cena, dada uma determinada condi√ß√£o de tr√°fego. A contagem pura e simples, sem considerar esta janela de tempo, levaria √† n√£o considera√ß√£o dos eventos VN.
+
+No contexto desse trabalho √© necess√°rio analisar os eventos em janelas de tempo. Isso garante que, para cada janela, pelo menos um tipo de evento obrigatoriamente ocorra. Esse intervalo corresponde ao tempo m√©dio em que um ve√≠culo leva para percorrer a cena, ou seja, est√° diretamente atrelado √† velocidade m√©dia dos ve√≠culos na via. Dessa forma, os elementos da matriz de confus√£o podem ser descritos como:
 
 \begin{itemize}
-  \item Verdadeiro positivo (VP): mais um veÌculo foi contabilizado quando o mesmo adentrou a regi„o de contagem em uma janela de tempo;
-  \item Falso negativo (FN): mais um veÌculo n„o foi contabilizado quando o mesmo adentrou a regi„o de contagem em uma janela de tempo;
-  \item Verdadeiro negativo (VN): mais um veÌculo n„o foi contabilizado quando nenhum veÌculo adentrou a regi„o de contagem em uma janela de tempo;
-  \item Falso positivo (FP): mais um veÌculo foi contabilizado quando nenhum veÌculo adentrou a regi„o de contagem em uma janela de tempo.
+  \item Verdadeiro positivo (VP): mais um ve√≠culo foi contabilizado quando o mesmo adentrou a regi√£o de contagem em uma janela de tempo;
+  \item Falso negativo (FN): mais um ve√≠culo n√£o foi contabilizado quando o mesmo adentrou a regi√£o de contagem em uma janela de tempo;
+  \item Verdadeiro negativo (VN): mais um ve√≠culo n√£o foi contabilizado quando nenhum ve√≠culo adentrou a regi√£o de contagem em uma janela de tempo;
+  \item Falso positivo (FP): mais um ve√≠culo foi contabilizado quando nenhum ve√≠culo adentrou a regi√£o de contagem em uma janela de tempo.
 \end{itemize}
 
-Vale ressaltar que dentro de uma janela de tempo pode acontecer um ou mais eventos, sejam eles do mesmo tipo ou n„o. A ˙nica restriÁ„o È que, para cada janela, no mÌnimo um evento deve obrigatoriamente acontecer.
+Vale ressaltar que dentro de uma janela de tempo pode acontecer um ou mais eventos, sejam eles do mesmo tipo ou n√£o. A √∫nica restri√ß√£o √© que, para cada janela, no m√≠nimo um evento deve obrigatoriamente acontecer. Na pr√°tica o evento verdadeiro negativo VN ocorre apenas quando nenhum dos outros tr√™s eventos acontece.
 
-Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confus„o. S„o elas: Especificidade (EquaÁ„o \ref{eq:especificidade}), Valor Preditivo Negativo (EquaÁ„o \ref{eq:valor_preditivo_negativo}), Precis„o (EquaÁ„o \ref{eq:precisao}), \textit{Recall} (EquaÁ„o \ref{eq:recall}), Acur·cia (EquaÁ„o \ref{eq:acuracia}) e \textit{F-Measure} (EquaÁ„o \ref{eq:f_measure}) \citep{powers07evaluation}.
+Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confus√£o. S√£o elas: Especificidade (Equa√ß√£o \ref{eq:especificidade}), Valor Preditivo Negativo (Equa√ß√£o \ref{eq:valor_preditivo_negativo}), Precis√£o (Equa√ß√£o \ref{eq:precisao}), \textit{Recall} (Equa√ß√£o \ref{eq:recall}), Acur√°cia (Equa√ß√£o \ref{eq:acuracia}) e \textit{F-Measure} (Equa√ß√£o \ref{eq:f_measure}) \citep{powers07evaluation}.
 
 \begin{equation}
   \label{eq:especificidade}
@@ -415,12 +417,12 @@ Algumas medidas de desempenho podem ser calculadas a partir dos elementos da mat
 
 % subsection matriz_de_confus_o (end)
 
-\subsection{Õndice Kappa (K)} % (fold)
+\subsection{√çndice Kappa (K)} % (fold)
 \label{sub:_ndice_kappa_}
 
-O Ìndice Kappa È utilizado como uma medida apropriada da exatid„o por representar inteiramente a matriz de confus„o. Ele toma todos os elementos da matriz ao invÈs de apenas aqueles que retratam a quantidade de classificaÁıes verdadeiras, o que ocorre quando se calcula a exatid„o global da classificaÁ„o \citep{Jnl605963009}.
+O √≠ndice Kappa √© utilizado como uma medida apropriada da exatid√£o por representar inteiramente a matriz de confus√£o. Ele toma todos os elementos da matriz ao inv√©s de apenas aqueles que retratam a quantidade de classifica√ß√µes verdadeiras, o que ocorre quando se calcula a exatid√£o global da classifica√ß√£o \citep{Jnl605963009}.
 
-O Ìndice Kappa pode ser encontrado com base na EquaÁ„o \ref{eq:kappa}:
+O √≠ndice Kappa pode ser encontrado com base na Equa√ß√£o \ref{eq:kappa}:
 
 \begin{equation}
   \label{eq:kappa}
@@ -443,18 +445,18 @@ O Ìndice Kappa pode ser encontrado com base na EquaÁ„o \ref{eq:kappa}:
 
 \noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
 
-O nÌvel de exatid„o obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
+O n√≠vel de exatid√£o obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
 
 \begin{table}[ht]
-  \caption{NÌvel de exatid„o de uma contagem, conforme o valor do Ìndice Kappa.}
+  \caption{N√≠vel de exatid√£o de uma contagem, conforme o valor do √≠ndice Kappa.}
   \label{tab:indice_kappa}
   \begin{center}
     \begin{tabular}{cc}
     \toprule
-    \textbf{Õndice Kappa (K)} & \textbf{Qualidade} \\
+    \textbf{√çndice Kappa (K)} & \textbf{Qualidade} \\
     \midrule
       $K < 0.2$ & Ruim \\
-      $0.2 \leq K < 0.4$ & Razo·vel \\
+      $0.2 \leq K < 0.4$ & Razo√°vel \\
       $0.4 \leq K < 0.6$ & Bom \\
       $0.6 \leq K < 0.8$ & Muito bom \\
       $K \geq 0.8$ & Excelente \\

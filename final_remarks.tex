@@ -1,31 +1,31 @@
 % !TEX root = pfc.tex
 
-Baseado nos estudos das tÈcnicas de processamento de imagens e trabalhos de vis„o computacional com objetivos semelhantes, foi criado um mÈtodo de simples implementaÁ„o que realiza a segmentaÁ„o e o acompanhamento de objetos, tornando assim possÌvel a contagem volumÈtrica dos mesmos. Em todas as amostras, mostradas na Tabela \ref{tab:resultados_contagem}, a contagem realizada se mostrou satisfatÛria.
+% Baseado nos estudos das t√©cnicas de processamento de imagens e trabalhos de vis√£o computacional com objetivos semelhantes, foi criado um m√©todo de simples implementa√ß√£o que realiza a segmenta√ß√£o e o acompanhamento de objetos, tornando assim poss√≠vel a contagem volum√©trica dos mesmos. Em todas as amostras, mostradas na Tabela \ref{tab:resultados_contagem}, a contagem realizada se mostrou satisfat√≥ria.
 
-O desempenho do algoritmo para as amostras em HD foi baixo, inviabilizando a execuÁ„o em tempo real. No ambiente de testes utilizado, descrito na SeÁ„o \ref{sec:testes}, apenas os vÌdeos com resoluÁ„o $640\times 360$ poderiam ser utilizados para processamento em tempo real. Com um poder de processamento maior, provavelmente seria possÌvel realizar a contagem em tempo real nos vÌdeos com resoluÁ„o $640\times 480$.
+O desempenho do algoritmo para as amostras em HD foi baixo, inviabilizando a execu√ß√£o em tempo real. No ambiente de testes utilizado, descrito na Se√ß√£o \ref{sec:testes}, apenas os v√≠deos com resolu√ß√£o $640\times 360$ poderiam ser utilizados para processamento em tempo real. Com um poder de processamento maior, provavelmente seria poss√≠vel realizar a contagem em tempo real nos v√≠deos com resolu√ß√£o $640\times 480$.
 
-Embora j· existam diversos mÈtodos para a realizaÁ„o de contagem volumÈtrica de veÌculos, como descrito no CapÌtulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles s„o muito caros e causam transtornos na via durante sua instalaÁ„o e manutenÁ„o. O trabalho em quest„o propıe um mÈtodo n„o-invasivo, de baixo custo e simples implementaÁ„o, capaz de obter mediÁıes de boa precis„o.
+Embora j√° existam diversos m√©todos para a realiza√ß√£o de contagem volum√©trica de ve√≠culos, como descrito no Cap√≠tulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles s√£o muito caros e causam transtornos na via durante sua instala√ß√£o e manuten√ß√£o. O trabalho em quest√£o prop√µe um m√©todo n√£o-invasivo, de baixo custo e simples implementa√ß√£o, capaz de obter medi√ß√µes de boa precis√£o.
 
-\section{LimitaÁıes} % (fold)
+\section{Limita√ß√µes} % (fold)
 \label{sec:pontos_negativos_do_m_todo}
 
-V·rios aspectos de alteraÁ„o din‚mica da cena interferiram no processamento digital. O algoritmo de subtraÁ„o de \textit{background}, por exemplo, apresentou problemas quando veÌculos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. AlÈm disso, movimentaÁıes na c‚meras causadas por trepidaÁıes da passarela quando veÌculos de grande porte transitavam na via, tambÈm geraram ruÌdos na subtraÁ„o de \textit{background}, comprometendo as etapas subsequentes.
+V√°rios aspectos de altera√ß√£o din√¢mica da cena interferiram no processamento digital. O algoritmo de subtra√ß√£o de \textit{background}, por exemplo, apresentou problemas quando ve√≠culos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Al√©m disso, movimenta√ß√µes na c√¢meras causadas por trepida√ß√µes da passarela quando ve√≠culos de grande porte transitavam na via, tamb√©m geraram ru√≠dos na subtra√ß√£o de \textit{background}, comprometendo as etapas subsequentes.
 
-Como n„o foi desenvolvido um mÈtodo para identificar se o objeto em movimento È um veiculo ou n„o, alguns elementos indesej·veis foram considerados na contagem. Ao mesmo tempo, devido ‡ proximidade, a detecÁ„o de \textit{blobs} falhou e alguns veÌculos n„o foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
+Como n√£o foi desenvolvido um m√©todo para identificar se o objeto em movimento √© um veiculo ou n√£o, alguns elementos indesej√°veis foram considerados na contagem. Ao mesmo tempo, devido √† proximidade, a detec√ß√£o de \textit{blobs} falhou e alguns ve√≠culos n√£o foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
 
 % section pontos_negativos_do_m_todo (end)
 
 \section{Trabalhos futuros} % (fold)
 
-Como possÌveis trabalhos futuros, podem ser apontados:
+Como poss√≠veis trabalhos futuros, podem ser apontados:
 
 \begin{itemize}
-  \item Minimizar o prejuÌzo causado pela movimentaÁ„o da c‚mera pelo uso de pontos fiduciais;
-  \item DefiniÁ„o de uma uma regi„o de interesse baseada na ·rea com maior movimentaÁ„o nas imagens;
-  \item Desenvolvimento de um mÈtodo para contagem de veÌculos no perÌodo noturno ou em locais com baixa iluminaÁ„o;
-  \item CriaÁ„o de tÈcnicas para classificaÁ„o de veÌculos quanto ao tamanho;
-  \item Contagem de veÌculos em cruzamentos, com deslocamentos em v·rias direÁıes e sentidos;
-  \item EstimaÁ„o do volume do tr·fego em vias congestionadas.
+  \item Minimizar o preju√≠zo causado pela movimenta√ß√£o da c√¢mera pelo uso de pontos fiduciais;
+  \item Defini√ß√£o de uma uma regi√£o de interesse baseada na √°rea com maior movimenta√ß√£o nas imagens;
+  \item Desenvolvimento de um m√©todo para contagem de ve√≠culos no per√≠odo noturno ou em locais com baixa ilumina√ß√£o;
+  \item Cria√ß√£o de t√©cnicas para classifica√ß√£o de ve√≠culos quanto ao tamanho;
+  \item Contagem de ve√≠culos em cruzamentos, com deslocamentos em v√°rias dire√ß√µes e sentidos;
+  \item Estima√ß√£o do volume do tr√°fego em vias congestionadas.
 \end{itemize}
 
 \label{sec:trabalhos_futuros}
