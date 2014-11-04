@@ -14,7 +14,9 @@ Todos os vídeos foram capturados por um aparelho celular Samsung OMNIA W GT-I83
   \item VGA: gerando vídeos com resolução $640\times 480$, e \textit{framerate} de 29 FPS.
 \end{itemize}
 
-\noindent Uma terceira resolução foi obtida a partir dos vídeos em HD, aplicando uma operação para redimensioná-los com altura e largura a metade do valor original. Essas variações de cena e resolução foram feitas com o objetivo de avaliar o comportamento do método em diferentes condições. Assim, será possível identificar o impacto de cada variável no resultado final. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
+Com intuito de equiparar as resoluções dos vídeos gerados a partir das duas configurações de captura, as amostras em HD foram redimensionadas para ter altura e largura metade do valor original, resultando em vídeos com resolução $640\times 360$. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
+
+% \noindent Uma terceira resolução foi obtida a partir dos vídeos em HD, aplicando uma operação para redimensioná-los com altura e largura a metade do valor original. Essas variações de cena e resolução foram feitas com o objetivo de avaliar o comportamento do método em diferentes condições. Assim, será possível identificar o impacto de cada variável no resultado final. A Tabela \ref{tab:videos_teste} lista as amostras utilizadas.
 
 \begin{figure}[ht]
   \begin{center}
@@ -41,17 +43,17 @@ Todos os vídeos foram capturados por um aparelho celular Samsung OMNIA W GT-I83
   \caption{Vídeos utilizados nos testes.}
   \label{tab:videos_teste}
   \begin{center}
-    \begin{tabular}{lcccc}
+    \begin{tabular}{clcccc}
     \toprule
-    \textbf{Nome do vídeo} & \textbf{Formato} & \textbf{Resolução} & \textbf{Duração} & \textbf{FPS} \\
+    \textbf{Nº} & \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{FPS} \\
     \midrule
-      carlos\_luz\_centro\_vga & mp4 & $ 640\times 480 $ & 00:05:23 & 29 \\
-      carlos\_luz\_centro\_hd\_resized & mpeg & $ 640\times 360 $ & 00:05:25 & 29 \\
-      carlos\_luz\_centro\_hd & mp4 & $ 1280\times 720 $ & 00:05:29 & 29 \\
-      carlos\_luz\_pampulha\_vga\_1 & mp4 & $ 640\times 480 $ & 00:05:43 & 29 \\
-      carlos\_luz\_pampulha\_vga\_2 & mp4 & $ 640\times 480 $ & 00:05:19 & 29 \\
-      carlos\_luz\_pampulha\_hd\_2\_resized & mpeg & $ 640\times 360 $ & 00:06:19 & 29 \\
-      carlos\_luz\_pampulha\_hd\_2 & mp4 & $ 1280\times 720 $ & 00:06:21 & 29 \\
+      1 & carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 29 \\
+      2 & carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 29 \\
+      % carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 29 \\
+      3 & carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 & 29 \\
+      4 & carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 29 \\
+      5 & carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 29 \\
+      % carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 29 \\
     \bottomrule
     \end{tabular}
   \end{center}
@@ -61,8 +63,53 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 
 % section testes (end)
 
-\section{Resultados finais} % (fold)
-\label{sec:resultados_finais}
+\section{Resultados e discussão} % (fold)
+\label{sec:resultados_e_discuss_o}
+
+\begin{table}[ht]
+  \caption{Matriz de confusão e Índice Kappa (K).}
+  \label{tab:matrix_result}
+  \begin{center}
+    \begin{tabular}{c|cccc|cccccc|cc}
+    \toprule
+    \textbf{Nº} & \textbf{VP} & \textbf{VN} & \textbf{FP} & \textbf{FN} & \textbf{E} & \textbf{VPN} & \textbf{P} & \textbf{R} & \textbf{FM} & \textbf{A} & \textbf{K} & \textbf{Qual.} \\
+    \midrule
+      1 & 92 & 35 & 2 & 6 & 0.95 & 0.85 & 0.98 & 0.94 & 0.96 & 0.94 & 0.86 & Excelente\\
+      2 & 76 & 34 & 6 & 10 & 0.85 & 0.77 & 0.93 & 0.88 & 0.90 & 0.87 & 0.71 & Muito bom\\
+      3 & 107 & 19 & 1 & 26 & 0.95 & 0.42 & 0.99 & 0.80 & 0.89 & 0.82 & 0.49 & Bom \\
+      4 & 87 & 28 & 8 & 22 & 0.78 & 0.56 & 0.92 & 0.80 & 0.85 & 0.79 & 0.51 & Bom \\
+      5 & 94 & 37 & 2 & 15 & 0.95 & 0.71 & 0.98 & 0.86 & 0.92 & 0.89 & 0.73 & Muito bom\\
+    \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_grande.png}
+      \end{center}
+      \caption{}
+      \label{fig:problema_veiculo_grande}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_junto.png}
+      \end{center}
+      \caption{}
+      \label{fig:problema_veiculo_junto}
+    \end{subfigure}
+  \end{center}
+  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena. (b) Veículos próximos são detectados como um único objeto, definindo apenas um \textit{keypoint}.}
+  \label{fig:problemas}
+\end{figure}
+
+% section resultados_e_discuss_o (end)
+
+% \section{Resultados finais} % (fold)
+% \label{sec:resultados_finais}
+
 
 % Na Tabela \ref{tab:resultados_contagem} são apresentados os resultados obtidos pela contagem via métodos manual e automático, indicando o percentual de acerto para cada amostra. É importante destacar que o resultado da contagem automática representa o total de veículos identificados na amostra, incluindo falsos positivos e descartando objetos detectados ou rastreados incorretamente. Portanto, os percentuais de acerto são medições estatísticas, que representam apenas o desvio existente entre o valor real e o valor medido.
 
@@ -88,82 +135,35 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 
 % Percebe-se que para uma mesma cena, a variação da resolução do vídeo não afeta de forma siginificativa o percentual de acerto, mostrando que vídeos de alta resolução não trazem vantagens nesse tipo de aplicação. Já a mudança da cena alterou o resultado. Nas amostras do tráfego no sentido centro o percentual de acerto foi superior a 95\%, enquanto que as imagens do outro sentido não ultrapassaram os 90\%. 
 
-Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada. Esses objetos com área muito grande causam problemas na etapa de subtração de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detecção de \textit{blobs} e gerando oclusão em veículos menores. 
+% Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada. Esses objetos com área muito grande causam problemas na etapa de subtração de \textit{background}, como mostrado na Figura \ref{fig:problema_veiculo_grande}, interferindo por alguns \textit{frames} no processo de detecção de \textit{blobs} e gerando oclusão em veículos menores. 
 
 % Esse tipo de tráfego na cena fez com que o resultado da contagem automática ficasse sempre abaixo da referência em todas as amostras sentido Pampulha, justificando o percentual de acerto baixo.
 
-\begin{figure}[ht]
-  \begin{center}
-    \begin{subfigure}[b]{.49\textwidth}
-      \begin{center}
-        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_grande.png}
-      \end{center}
-      \caption{}
-      \label{fig:problema_veiculo_grande}
-    \end{subfigure}
-    \begin{subfigure}[b]{.49\textwidth}
-      \begin{center}
-        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_junto.png}
-      \end{center}
-      \caption{}
-      \label{fig:problema_veiculo_junto}
-    \end{subfigure}
-  \end{center}
-  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena. (b) Veículos próximos são detectados como um único objeto, definindo apenas um \textit{keypoint}.}
-  \label{fig:problemas}
-\end{figure}
 
-Outro tipo de problema acontece na etapa de detecção de \textit{blobs}, ilustrado na Figura \ref{fig:problema_veiculo_junto}. Nessa situação, dois veículos próximos foram identificados como um único objeto e apenas um \textit{keypoint} foi definido. Portanto, apenas um \textit{tracker} foi criado e um único veículo contado nesse caso.
+% Outro tipo de problema acontece na etapa de detecção de \textit{blobs}, ilustrado na Figura \ref{fig:problema_veiculo_junto}. Nessa situação, dois veículos próximos foram identificados como um único objeto e apenas um \textit{keypoint} foi definido. Portanto, apenas um \textit{tracker} foi criado e um único veículo contado nesse caso.
 
-Para avaliar o desempenho computacional do método adotado, mediu-se o tempo de execução do algoritmo para cada uma das amostras, como mostra a Tabela \ref{tab:resultados_tempo}. Percebe-se que a resolução do vídeo está diretamente relacionada ao tempo gasto no processamento. Os vídeos em HD foram processados com mais de três vezes o tempo de processamento dos vídeos em VGA, inviabilizando a utilização dessa configuração em aplicações de tempo real. Os vídeos redimensionados, com resolução $ 640\times 360 $, gastaram menos tempo de processamento do que sua própria duração, indicando que a contagem em tempo real nesse caso seria viável.
+% Para avaliar o desempenho computacional do método adotado, mediu-se o tempo de execução do algoritmo para cada uma das amostras, como mostra a Tabela \ref{tab:resultados_tempo}. Percebe-se que a resolução do vídeo está diretamente relacionada ao tempo gasto no processamento. Os vídeos em HD foram processados com mais de três vezes o tempo de processamento dos vídeos em VGA, inviabilizando a utilização dessa configuração em aplicações de tempo real. Os vídeos redimensionados, com resolução $ 640\times 360 $, gastaram menos tempo de processamento do que sua própria duração, indicando que a contagem em tempo real nesse caso seria viável.
 
-Com intuito de manter o algoritmo simples e o mais genérico possível, os \textit{frames} são processados por completo, sem considerar regiões de interesse. A definição de regiões de interesse, também conhecidas como ROI's\footnote{\textit{Region of interest}}, é um recurso muito utilizado em visão computacional. Quando usado, apenas as porções da imagem que contenham informações relevantes são consideradas no processamento, reduzindo o tempo e o custo computacional.
+% Com intuito de manter o algoritmo simples e o mais genérico possível, os \textit{frames} são processados por completo, sem considerar regiões de interesse. A definição de regiões de interesse, também conhecidas como ROI's\footnote{\textit{Region of interest}}, é um recurso muito utilizado em visão computacional. Quando usado, apenas as porções da imagem que contenham informações relevantes são consideradas no processamento, reduzindo o tempo e o custo computacional.
 
-\begin{table}[ht]
-  \caption{Tempo real gasto na execução do método de contagem.}
-  \label{tab:resultados_tempo}
-  \begin{center}
-    \begin{tabular}{lccc}
-    \toprule
-    \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{Tempo gasto} \\
-    \midrule
-      carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
-      carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\
-      carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 00:17:48 \\
-      carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 & 00:06:04 \\
-      carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 00:05:33 \\
-      carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 00:05:38 \\
-      carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 00:19:00 \\
-    \bottomrule
-    \end{tabular}
-  \end{center}
-\end{table}
+% \begin{table}[ht]
+%   \caption{Tempo real gasto na execução do método de contagem.}
+%   \label{tab:resultados_tempo}
+%   \begin{center}
+%     \begin{tabular}{lccc}
+%     \toprule
+%     \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{Tempo gasto} \\
+%     \midrule
+%       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
+%       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\
+%       carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 00:17:48 \\
+%       carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 & 00:06:04 \\
+%       carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 00:05:33 \\
+%       carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 00:05:38 \\
+%       carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 00:19:00 \\
+%     \bottomrule
+%     \end{tabular}
+%   \end{center}
+% \end{table}
 
 % section resultados_finais (end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

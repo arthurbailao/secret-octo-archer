@@ -342,7 +342,7 @@ O código dessa aplicação pode ser encontrado no seguinte repositório: \url{h
 \section{Avaliação dos resultados} % (fold)
 \label{sec:avalia_o_dos_resultados}
 
-TODO: escrever alguma coisa aqui, nem que seja citar as subseções a seguir.
+Para avaliar o método de rastreamento e contagem de veículos aqui proposto foram utilizadas algumas métricas já conhecidas na literatura. Nas subseções a seguir são descritas as métricas de análise de resultados usadas nesse trabalho.
 
 \subsection{Matriz de confusão} % (fold)
 \label{sub:matriz_de_confus_o}
@@ -370,9 +370,7 @@ A matriz de confusão contém informações sobre classificações reais e predi
 
 Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
 
-% Para evitar o vies estatistico na montagem da matriz de confusao ao caracterizar as quatro possibilidades establece-se uma janela de tempo baseada no tempo médio em que um veiculo leva para percorrer toda a cena, dada uma determinada condição de tráfego. A contagem pura e simples, sem considerar esta janela de tempo, levaria à não consideração dos eventos VN.
-
-No contexto desse trabalho é necessário analisar os eventos em janelas de tempo. Isso garante que, para cada janela, pelo menos um tipo de evento obrigatoriamente ocorra. Esse intervalo corresponde ao tempo médio em que um veículo leva para percorrer a cena, ou seja, está diretamente atrelado à velocidade média dos veículos na via. Dessa forma, os elementos da matriz de confusão podem ser descritos como:
+Para evitar o viés estatístico na montagem da matriz de confusão ao caracterizar as quatro possibilidades, estabelece-se uma janela de tempo baseada no tempo médio em que um veículo leva para percorrer toda a cena, dada uma determinada condição de tráfego. A contagem pura e simples, sem considerar esta janela de tempo, levaria à não consideração dos eventos vendadeiro negativo VN. Dessa forma, os elementos da matriz de confusão podem ser descritos como:
 
 \begin{itemize}
   \item Verdadeiro positivo (VP): mais um veículo foi contabilizado quando o mesmo adentrou a região de contagem em uma janela de tempo;
