@@ -66,8 +66,12 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 \section{Resultados e discussão} % (fold)
 \label{sec:resultados_e_discuss_o}
 
+A Tabela \ref{tab:matrix_result} mostra o resultado da contagem dos eventos da matriz de confusão e os índices de desempenho calculados a partir deles, incluindo o índice Kappa (K). 
+
+Pode-se observar que nas amostras 1 e 2, que são imagens da Av. Carlos Luz no sentido Centro, a qualidade ficou entre muito bom e excelente, segundo a escala definida na Tabela \ref{tab:indice_kappa}; já  nas amostras 3, 4 e 5, que se referem à mesma via no sentido Pampulha, a qualidade ficou entre bom e muito bom. Essa variação na qualidade da classificação entre as vias acontece principalmente pelas características do tráfego de cada sentido. Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada 
+
 \begin{table}[ht]
-  \caption{Matriz de confusão e Índice Kappa (K).}
+  \caption{Resultado obtido da contagem nas amostras de teste, índices de desempenho e índice Kappa (K).}
   \label{tab:matrix_result}
   \begin{center}
     \begin{tabular}{c|cccc|cccccc|cc}
@@ -88,6 +92,27 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
   \begin{center}
     \begin{subfigure}[b]{.49\textwidth}
       \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/veiculo_grande.png}
+      \end{center}
+      \caption{}
+      \label{fig:veiculo_grande}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_junto.png}
+      \end{center}
+      \caption{}
+      \label{fig:mesma_cor}
+    \end{subfigure}
+  \end{center}
+  \caption{Tipo de tráfego encontrado nas vias. (a) Veículos muito grandes causam problemas como oclusão e vibrações na passarela. (b) Quando a cor de um veículo é muito próxima da cor do \textit{background}, problemas na detecção do objeto podem acontecer. }
+  \label{fig:tipo_de_trafego}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
         \includegraphics[width=1\linewidth]{imgs/problema_veiculo_grande.png}
       \end{center}
       \caption{}
@@ -101,7 +126,7 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
       \label{fig:problema_veiculo_junto}
     \end{subfigure}
   \end{center}
-  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena. (b) Veículos próximos são detectados como um único objeto, definindo apenas um \textit{keypoint}.}
+  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena. (b) Veículos próximos são detectados como um único objeto, gerando eventos falso negativo FN.}
   \label{fig:problemas}
 \end{figure}
 
