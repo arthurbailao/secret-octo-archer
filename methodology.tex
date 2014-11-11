@@ -19,7 +19,7 @@ A captura das imagens do tráfego foram feitas com a câmera que equipa um apare
 
 Inicialmente, as imagens foram capturadas e salvas na memória interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todas as imagens foram capturadas durante o dia, em condições de iluminação estável e boa luminosidade. Portanto, o método proposto neste trabalho não está validado para grandes variações de iluminação ou cenas com pouca luz.
 
-Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a ocorrência de oclusão, ou seja, dependendo do ângulo de captura, alguns veículos não aparecem em parte ou por completo nas imagens. Alguns sistemas automáticos de contagem mais complexos tratam o problema de oclusão utilizando modelos para a forma dos veículos e calibração de câmera \citep{song:2005}. O método de contagem desenvolvido neste trabalho não considera a possibilidade de oclusão e, com intuito de minimizar esse efeito, buscou-se um ângulo de captura superior e frontal à via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey. A Figura \ref{fig:cena} ilustra a posição de captura e a cena obtida.
+Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a ocorrência de oclusão, ou seja, dependendo do ângulo de captura, alguns veículos não aparecem em parte ou por completo nas imagens. Alguns sistemas automáticos de contagem mais complexos tratam o problema de oclusão utilizando modelos para a forma dos veículos e calibração de câmera \citep{song:2005}. O método de contagem desenvolvido neste trabalho não considera a possibilidade de oclusão e, com intuito de minimizar esse efeito, buscou-se um ângulo de captura superior e frontal à via. Portanto, as imagens foram capturadas na passarela para pedestres localizada na Avenida Presidente Carlos Luz 3001, Pampulha, Belo Horizonte - MG, nas proximidades do Shopping Del Rey, em ambos os sentidos. A Figura \ref{fig:cena} ilustra a posição de captura e a cena obtida.
 
 \begin{figure}[ht]
   \begin{center}
@@ -38,9 +38,19 @@ Em sistemas de monitoramento do tráfego que utilizam câmeras é muito comum a 
       \label{fig:original_frame}
     \end{subfigure}
   \end{center}
-  \caption{(a) Posicionamento da câmera para captura de imagens. A área em destaque simboliza o campo de visão obtido na posição escolhida. (b) Cena capturada na Avenida Presidente Carlos Luz.}
+  \caption{(a) Posicionamento da câmera para captura de imagens. A área em destaque simboliza o campo de visão obtido na posição escolhida. (b) Cena capturada na Avenida Presidente Carlos Luz no sentido Pampulha.}
   \label{fig:cena}
 \end{figure}
+
+Nas imagens capturadas pode-se perceber vários veículos de grande porte trafegando na via, como ônibus e caminhões. Esse tipo de tráfego é ainda mais comum no sentido Pampulha com presença da Fábrica da Coca-Cola ali localizada. Quando veículos grandes entram em cena é possível observar dois fenômenos que podem interferir no método de rastreamento proposto: a oclusão de veículos menores que trafegam na via no mesmo momento e a vibração da passarela quando ônibus e caminhões estão saindo de cena. Como a câmera está afixada na passarela, a vibração gera a movimentação da câmera, resultando em uma variação momentânea de enquadramento. Esse efeito, quando ocorre em um grau mais acentuado, pode causar problemas na etapa de subtração de \textit{background}, descrita a seguir na Subseção \ref{sub:subtra_o_de_background}. No entanto, tratar esse tipo de situação elevaria significativamente a complexidade do método, contrariando os objetivos inicialmente definidos.
+
+Portanto, o método de rastreamento e contagem proposto por esse trabalho assume as seguintes premissas:
+
+\begin{itemize}
+   \item A cena possui boa iluminação, com pouca variação ao longo do tempo;
+   \item Não existem oclusões parciais ou totais entre veículos;
+   \item A câmera não sofre grandes vibrações ou movimentações.
+ \end{itemize} 
 
 % section caracter_sticas_de_captura (end)
 
