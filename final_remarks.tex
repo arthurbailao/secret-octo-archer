@@ -2,16 +2,24 @@
 
 % Baseado nos estudos das técnicas de processamento de imagens e trabalhos de visão computacional com objetivos semelhantes, foi criado um método de simples implementação que realiza a segmentação e o acompanhamento de objetos, tornando assim possível a contagem volumétrica dos mesmos. Em todas as amostras, mostradas na Tabela \ref{tab:resultados_contagem}, a contagem realizada se mostrou satisfatória.
 
-O desempenho do algoritmo para as amostras em HD foi baixo, inviabilizando a execução em tempo real. No ambiente de testes utilizado, descrito na Seção \ref{sec:testes}, apenas os vídeos com resolução $640\times 360$ poderiam ser utilizados para processamento em tempo real. Com um poder de processamento maior, provavelmente seria possível realizar a contagem em tempo real nos vídeos com resolução $640\times 480$.
+% O desempenho do algoritmo para as amostras em HD foi baixo, inviabilizando a execução em tempo real. No ambiente de testes utilizado, descrito na Seção \ref{sec:testes}, apenas os vídeos com resolução $640\times 360$ poderiam ser utilizados para processamento em tempo real. Com um poder de processamento maior, provavelmente seria possível realizar a contagem em tempo real nos vídeos com resolução $640\times 480$.
 
-Embora já existam diversos métodos para a realização de contagem volumétrica de veículos, como descrito no Capítulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles são muito caros e causam transtornos na via durante sua instalação e manutenção. O trabalho em questão propõe um método não-invasivo, de baixo custo e simples implementação, capaz de obter medições de boa precisão.
+Ferramentas para análise do tráfego e planejamento viário ainda são objetos de estudo de diversos grupos de pesquisadores. O uso de tecnologias de simples implementação, instalação e baixo custo justificam e motivam a realização de trabalhos como esse.
+
+O objetivo principal é desenvolver um método de contagem volumétrica que auxilie na análise das condições do tráfego urbano. Isso deve ser feito de maneira simples, utilizando ferramentas de visão computacional já consolidadas. Ao final, através da análise dos resultados e índices de desempenho, determinar a qualidade do método.
+
+O método proposto pode ser dividido em seis etapas: entrada de dados, pré-processamento, subtração de \textit{background}, binarização, detecção de \textit{blobs} e rastreamento e contagem. As cinco primeiras utilizam operações de visão computacional para extrair das imagens a posição e tamanho dos objetos em movimento. A última etapa utiliza esses pontos para implementar o rastreamento e contagem dos veículos em cena.
+
+Em todas as amostras de teste o método obteve um alto índice de Precisão, superior a $0.92$. No entanto, a contagem volumétrica da via no sentido Centro obteve Acurácia e índice Kappa superiores à contagem no sentido Pampulha, onde o fluxo de ônibus e caminhões é maior.
+
+% Embora já existam diversos métodos para a realização de contagem volumétrica de veículos, como descrito no Capítulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles são muito caros e causam transtornos na via durante sua instalação e manutenção. O trabalho em questão propõe um método não-invasivo, de baixo custo e simples implementação, capaz de obter medições de boa precisão.
 
 \section{Limitações} % (fold)
 \label{sec:pontos_negativos_do_m_todo}
 
-Vários aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background}, por exemplo, apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Além disso, movimentações na câmeras causadas por trepidações da passarela quando veículos de grande porte transitavam na via, também geraram ruídos na subtração de \textit{background}, comprometendo as etapas subsequentes.
+Aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background} apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Nesses casos, o modelo do \textit{background} muda subtamente na presença de um veículo de tamanho desproporcional à cena, gerando imperfeições na segmentação do \textit{foreground}. Além disso, movimentações na câmeras causadas por trepidações da passarela, também geraram ruídos na subtração de \textit{background}, comprometendo as etapas subsequentes.
 
-Como não foi desenvolvido um método para identificar se o objeto em movimento é um veiculo ou não, alguns elementos indesejáveis foram considerados na contagem. Ao mesmo tempo, devido à proximidade, a detecção de \textit{blobs} falhou e alguns veículos não foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
+% Ainda com relação às movimentações da câmera, alguns elementos indesejáveis foram considerados na contagem. Ao mesmo tempo, devido à proximidade, a detecção de \textit{blobs} falhou e alguns veículos não foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
 
 % section pontos_negativos_do_m_todo (end)
 
