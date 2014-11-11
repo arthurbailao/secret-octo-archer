@@ -341,7 +341,7 @@ A classe \verb!VideoProcessor! é a classe central do sistema. Ela é responsáv
 
 A classe abstrata \verb!FrameProcessor! define uma interface cuja função é receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as operações descritas nas seguintes subseções: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as operações de visão computacional e através do método \verb!keypoints! retorna os pontos que pontencialmente representam veículos em movimento.
 
-A classe \verb!Counter! implementa o algoritmo descrito na subseção \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma máscara binária que define a região de contagem e uma lista interna de \textit{trackers}, o método \verb!count! retorna quantos eventos de contagem ocorrem para cada iteração.
+A classe \verb!Counter! implementa o algoritmo descrito na Subseção \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma máscara binária que define a região de contagem e uma lista interna de \textit{trackers}, o método \verb!count! retorna quantos eventos de contagem ocorrem para cada iteração.
 
 A classe \verb!Circle! é utilizada pela classe \verb!Tracker! para representar computacionalmente um círculo com centro e raio definidos. Já a classe \verb!Tracker! é utilizada na forma de lista pela classe \verb!Counter!, na implementação do algoritmo de rastreamento e contagem.
 

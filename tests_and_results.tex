@@ -66,11 +66,7 @@ Tanto o desenvolvimento do \textit{software}, quanto os testes, foram feitos em 
 \section{Resultados e discussão} % (fold)
 \label{sec:resultados_e_discuss_o}
 
-Para que o método proposto seja corretamente avalidado é preciso reforçar algumas premissas que foram assumidas, tanto no processo de captura (Seção \ref{sec:caracter_sticas_de_captura}) quanto nas simplificações nas
-
-A Tabela \ref{tab:matrix_result} mostra o resultado da contagem dos eventos da matriz de confusão e os índices de desempenho calculados a partir deles, incluindo o índice Kappa (K). 
-
-Pode-se observar que nas amostras 1 e 2, que são imagens da Av. Carlos Luz no sentido Centro, a qualidade ficou entre muito bom e excelente, segundo a escala definida na Tabela \ref{tab:indice_kappa}; já  nas amostras 3, 4 e 5, que se referem à mesma via no sentido Pampulha, a qualidade ficou entre bom e muito bom. Essa variação na qualidade da classificação entre as vias acontece principalmente pelas características do tráfego de cada sentido. Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, muitos saindo da Fábrica da Coca-Cola ali localizada 
+As cinco amostras listadas na Tabela \ref{tab:videos_teste} foram minuciosamente analisadas e cada um dos elementos da matriz de confusão (VP, VN, FP e FN) foram identificados e quantificados, segundo o método de análise de desempenho definido na Seção \ref{sec:avalia_o_dos_resultados}. Foram utilizados exatos $6000$ \textit{frames} de cada amostra de vídeo (cerca de 3 minutos e 20 segundos) para a construção da matriz. A Tabela \ref{tab:matrix_result} mostra o resultado da contagem dos eventos da matriz de confusão e os índices de desempenho calculados a partir deles, incluindo o índice Kappa (K).
 
 \begin{table}[ht]
   \caption{Resultado obtido da contagem nas amostras de teste, índices de desempenho e índice Kappa (K).}
@@ -90,6 +86,14 @@ Pode-se observar que nas amostras 1 e 2, que são imagens da Av. Carlos Luz no s
   \end{center}
 \end{table}
 
+Pode-se observar que em todas as amostras o índice referente à Precisão foi superior a $0.92$. Esse resultado pode ser comprovado pela baixa quantidade de eventos do tipo falso positivo FP na matriz de confusão, ou seja, poucos objetos foram contabilizados como veículos quando na realidade não eram. Isso acontece graças ao algoritmo de rastreamento e contagem proposto na Subseção \ref{sub:rastreamento_e_contagem}, que através de \textit{trackers}, \textit{keypoints} e uma região de contagem garante o correto rastreio dos objetos em movimento, contabilizando apenas os veículos pertencentes ao sentido da via. 
+
+Nas amostras 1 e 2, que são imagens da Av. Carlos Luz no sentido Centro, a qualidade ficou entre muito bom e excelente, segundo escala definida na Tabela \ref{tab:indice_kappa}; já  nas amostras 3, 4 e 5, que se referem à mesma via no sentido Pampulha, a qualidade ficou entre bom e muito bom. Essa variação na qualidade da classificação acontece principalmente pelas características do tráfego de cada sentido da via. 
+
+Analisando os vídeos é possível identificar vários veículos de grande porte trafegando no sentido Pampulha, como mostra a Figura \ref{fig:veiculo_grande}, muitos saindo da Fábrica da Coca-Cola ali localizada, contrariando as premissas previamente definidas na Seção \ref{sec:caracter_sticas_de_captura}. Esse tipo de tráfego gera vibrações na câmera e oclusões, comprometendo os processos de subtração de \textit{background} e detecção de \textit{blobs} (Figuras \ref{fig:problema_veiculo_grande} e \ref{fig:problema_veiculo_junto}, respectivamente). Esses problemas podem ser constatados no aumento do número de eventos do tipo falso negativo FN, ou seja, veículos que não são contabilizados quando deveriam ser, contribuindo para que índices de desempenho como Acurácia e Kappa piorem.
+
+Os eventos falso positivo FP podem ser percebidos quando existe vibrações e movimentação da câmera. A Figura \ref{fig:camera_moveu} ilustra esse fenômeno através das falhas de detecção, criando \textit{keypoints} sobre regiões que não representam veículos em movimento.
+
 \begin{figure}[ht]
   \begin{center}
     \begin{subfigure}[b]{.49\textwidth}
@@ -101,13 +105,13 @@ Pode-se observar que nas amostras 1 e 2, que são imagens da Av. Carlos Luz no s
     \end{subfigure}
     \begin{subfigure}[b]{.49\textwidth}
       \begin{center}
-        \includegraphics[width=1\linewidth]{imgs/problema_veiculo_junto.png}
+        \includegraphics[width=1\linewidth]{imgs/camera_moveu.png}
       \end{center}
       \caption{}
-      \label{fig:mesma_cor}
+      \label{fig:camera_moveu}
     \end{subfigure}
   \end{center}
-  \caption{Tipo de tráfego encontrado nas vias. (a) Veículos muito grandes causam problemas como oclusão e vibrações na passarela. (b) Quando a cor de um veículo é muito próxima da cor do \textit{background}, problemas na detecção do objeto podem acontecer. }
+  \caption{Tipo de tráfego encontrado nas vias. (a) Veículos muito grandes causam problemas como oclusão e vibrações na passarela. (b) Falsas detecções de veículos quando a câmera sofre movimentação.}
   \label{fig:tipo_de_trafego}
 \end{figure}
 
@@ -128,7 +132,7 @@ Pode-se observar que nas amostras 1 e 2, que são imagens da Av. Carlos Luz no s
       \label{fig:problema_veiculo_junto}
     \end{subfigure}
   \end{center}
-  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena. (b) Veículos próximos são detectados como um único objeto, gerando eventos falso negativo FN.}
+  \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena e causam vibração na câmera. (b) Veículos próximos ou em oclusão são detectados como um único objeto, gerando eventos falso negativo FN.}
   \label{fig:problemas}
 \end{figure}
 
