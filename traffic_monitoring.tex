@@ -18,7 +18,7 @@ O volume de veículos, obtido através da contagem, pode ser classificado como \
   \item \textbf{Variações do volume de tráfego}: mudanças no volume em um determinado período, divididas em: variações sazonais ou mensais ao longo do ano; variações diárias ao longo da semana; variações horárias ao longo do dia; e variações dentro da hora.
 \end{itemize}
 
-\cite{goldner:2009:misc} define dois métodos de contagem: \textbf{manual} e \textbf{mecânica}. A contagem manual utiliza recursos humanos, ou seja, pesquisadores observam o fluxo de veículos e manualmente fazem suas anotações. Esse procedimento é vantajoso pela precisão e variedade nas informações de tráfego obtidas, como tipo e tamanho dos veículos, além de proporcionar flexibilidade, simplicidade e rapidez de execução. No entanto, é um método com limitações de cobertura e de alto custo. A contagem mecânica utiliza detectores de tráfego de instalações permanente ou móvel. Possui algumas vantagens, dentre elas: baixo custo operacional, grande amplitude de tempo de cobertura e boa precisão. Por outro lado não fornecesse muitas informações e demanda investimento inicial alto.
+\cite{goldner:2009:misc} define dois métodos de contagem: \textbf{manual} e \textbf{mecânica}. A contagem manual utiliza recursos humanos, ou seja, pesquisadores observam o fluxo de veículos e manualmente fazem suas anotações. Esse procedimento é vantajoso pela precisão e variedade nas informações de tráfego obtidas, como tipo e tamanho dos veículos, além de proporcionar flexibilidade, simplicidade e rapidez de execução. No entanto, é um método com limitações de cobertura e de alto custo. A contagem mecânica utiliza detectores de tráfego de instalações permanente ou móvel. Possui algumas vantagens, dentre elas: baixo custo operacional, grande amplitude de tempo de cobertura e boa precisão. Por outro lado não fornece muitas informações e demanda investimento inicial alto.
 
 A classificação feita por \cite{goldner:2009:misc} peca ao usar o termo contagem mecânica para caracterizar métodos não manuais. Grande parte dos equipamentos de contagem volumétrica são dispositivos eletrônicos, por exemplo sensores micro-ondas, ultra-sônicos e piezoelétricos, descaracterizando o uso dessa nomenclatura. Até mesmo o tubo pneumático, que pode ser considerado um dispositivo mecânico, utiliza sinais elétricos para transmissão dos dados. Por esse motivo, será adotado o termo \textbf{contagem automática} para descrever os métodos de contagem que não dependem diretamente da participação humana durante o processo de obtenção dos dados.
 
@@ -79,7 +79,7 @@ São utilizados para medir volume, direção, presença e velocidade dos veícul
 \subsection{Sensor piezoelétrico} % (fold)
 \label{sub:sensores_piezoel_tricos}
 
-Um material piezoelétrico é capaz de converter energia cinética em energia elétrica. Esses materiais geram uma tensão quando submetidos a choques mecânicos ou vibrações. Portanto, quando um veículo passa sobre um detector, o sensor gera uma tensão proporcional ao peso do veículo. É construído a partir de um cabo piezoelétrico do tipo coaxial, com um núcleo de metal, seguido pelo material piezoelétrico e uma camada externa de metal, como ilustrado na Figura \ref{fig:piezoeletrico}.
+Um material piezoelétrico é capaz de converter energia cinética em energia elétrica. Esses materiais geram uma tensão quando submetidos a choques mecânicos ou vibrações. Portanto, quando um veículo passa sobre um detector, o sensor gera uma tensão que pode ser proporcional ao peso do veículo. É construído a partir de um cabo piezoelétrico do tipo coaxial, com um núcleo de metal, seguido pelo material piezoelétrico e uma camada externa de metal, como ilustrado na Figura \ref{fig:piezoeletrico}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -120,8 +120,8 @@ Esse tipo de equipamento transmite radiação de micro-ondas de baixa energia na
 Esses sensores podem ser de dois tipos:
 
 \begin{itemize}
-  \item \textbf{Doppler}: mede a presença de um veículo em função do movimento relativo entre uma fonte sonora e seu receptor e que, por efeito \textit{Doppler}, varia a frequência recebida na volta. Como é um método baseado em movimento, não considera veículos parados ou em regime de ``anda-pára''.
-  \item \textbf{Radar}: utiliza um sinal de frequência ou fase modulada para calcular o atraso de tempo da onda refletida, obtendo a distância do veículo. Nesse método é possível detectar a presença de veículos parados, além de medir velocidade, monitorar filas e ocupação.
+  \item \textbf{Radar Doppler}: mede a presença de um veículo em função do movimento relativo entre uma fonte sonora e seu receptor e que, por efeito \textit{Doppler}, varia a frequência recebida na volta. Como é um método baseado em movimento, não considera veículos parados ou em regime de ``anda-pára''.
+  \item \textbf{Radar Pulsado}: utiliza um sinal de frequência ou fase modulada para calcular o atraso de tempo da onda refletida, obtendo a distância do veículo. Nesse método é possível detectar a presença de veículos parados, além de medir velocidade, monitorar filas e ocupação.
 \end{itemize}
 
 Os sensores micro-ondas são não-invasivos e não interferem no tráfego de veículos no processo de instalação. Geralmente não apresentam sensibilidade em más condições climáticas e podem ser construídos para suportar múltiplas pistas. No entanto, um dos tipos não é capaz de detectar veículos parados.
@@ -144,7 +144,7 @@ Esses detectores transmitem ondas de pressão de energia sonora acima da frequê
 Existem dois tipos de sensores ultrassônicos:
 
 \begin{itemize}
-  \item \textbf{Pulso ultrassônico}: são emitidos pulsos de energia com largura e período conhecidos. Se o tempo do pulso refletido for menor que o valor conhecido, a presença do veículo é acusada, fornecendo informações de altura, largura, ocupação, volume e classificação.
+  \item \textbf{Pulso ultrassônico}: são emitidos pulsos de energia com largura e período conhecidos. Se o tempo de eco do pulso refletido for menor que o valor conhecido, a presença do veículo é acusada, fornecendo informações de altura, largura, ocupação, volume e classificação.
   \item \textbf{Onda ultrassônica contínua}: usam o princípio  de \textit{Doppler}, que leva em conta a variação da frequência causada pela velocidade relativa entre onda emitida e refletida, para determinar a presença, volume e velocidade veicular.
 \end{itemize}
 
@@ -195,10 +195,11 @@ Apesar de o objetivo do projeto ser a contagem volumétrica via dispositivos mó
 
 O método proposto foi implementado em forma de aplicativo na linguagem Java, utilizando a biblioteca de processamento de imagens JavaCV, que utiliza a maior parte das funções da OpenCV \citep{opencv_library}. Como o trabalho de \cite{feitosa:2012:masther} tem por objetivo a execução em dispositivos móveis, o desempenho do algoritmo é um fator determinante. Por isso, foi necessário que alguns algoritmos de processamento de imagens, já existentes na OpenCV, fossem reimplementados com foco em velocidade de execução, o que elevou muito a complexidade do código. Na etapa de reconhecimento da imagem referência de fundo, por exemplo, seria muito mais simples, do ponto de vista de desenvolvimento, utilizar as funções de subtração de \textit{backgroud} já implementadas na OpenCV. No entanto, por ser um método mais completo e complexo, acarretaria em menor desempenho de execução se comparado à implementação de \cite{feitosa:2012:masther}.
 
-Os testes foram realizados a partir de 15 amostras de vídeos, sendo 14 com resolução $640\times 480$ e apenas 1 com resolução $320\times 240$, e duração média de 09:30 minutos. Para avaliar o desempenho do método, num primeiro momento foi feita uma contagem volumétrica manual dos veículos em cada amostra, para que assim o percentual de acerto do método automático, executado no \textit{laptop}, fosse calculado. Além disso, o tempo de execução de cada amostra foi medido.
+Os testes foram realizados a partir de 15 amostras de vídeos, sendo 14 com resolução $640\times 480$ e apenas 1 com resolução $320\times 240$, e duração média de 09:30 minutos. Para avaliar o desempenho do método, em um primeiro momento foi feita uma contagem volumétrica manual dos veículos em cada amostra, para que assim o percentual de acerto do método automático, executado no \textit{laptop}, fosse calculado. Além disso, o tempo de execução de cada amostra foi medido.
 
-Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado por um dispositivo móvel com sistema operacional Android. Os mesmos testes foram realizados para as 15 amostras e o percentual de acerto permaneceu o mesmo, resultado esperado tendo em vista que os algoritmos de processamento de imagem e visão computacional não mudaram. Nesse novo cenário, o tempo de execução também foi medido. A Tabela \ref{tab:feitosa} lista as medições de cinco amostras.
+Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado por um dispositivo móvel com sistema operacional Android. Os mesmos testes foram realizados para as 15 amostras e o percentual de acerto permaneceu o mesmo, resultado esperado tendo em vista que os algoritmos de processamento de imagem e visão computacional não mudaram. Nesse novo cenário, o tempo de execução também foi medido.
 
+A Tabela \ref{tab:feitosa} lista as medições de cinco amostras, comparando os tempos de execução do algoritmo no celular e \textit{laptop}. Percebe-se em todas as amostras que o tempo gasto pelo algoritmo executado no celular foi maior que o tempo gasto no \textit{laptop}, tendo o mesmo vídeo como entrada. 
 
 \begin{table}[ht]
   \caption{Comparação entre resultados de tempo de execução do método pelo \textit{laptop} e celular \citep{feitosa:2012:masther}.}
@@ -206,7 +207,9 @@ Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado po
   \begin{center}
     \begin{tabular}{ccccc}
     \toprule
-    \textbf{Amostra} & \textbf{\% acerto} & \textbf{Duração} & \textbf{Tempo celular} & \textbf{Tempo \textit{laptop}}\\
+    \multicolumn{2}{c}{} & \multicolumn{3}{c}{\textbf{Tempo (hh:mm:ss)}} \\
+    \cline{3-5}
+    \textbf{Amostra} & \textbf{\% acerto} & \textbf{Duração} & \textbf{Celular} & \textbf{\textit{laptop}}\\
     \midrule
       1 & 90,58 & 00:15:08 & 01:00:56 & 00:03:54\\
       2 & 92,45 & 00:05:15 & 00:19:55 & 00:01:36\\
@@ -218,7 +221,7 @@ Em seguida, o aplicativo desenvolvido em Java foi adaptado para ser executado po
   \end{center}
 \end{table}
 
-Os percentual de acerto obtido nas contagens foi satisfatórios e o aplicativo desenvolvido para executar em um \textit{laptop} foi adaptado e portado para um dispositivo móvel Android com sucesso. No entanto, o tempo de execução do método no dispositivo móvel não foi satisfatório, inviabilizando que essa aplicação funcione em tempo real.
+Os percentual de acerto obtido nas contagens foi satisfatório e o aplicativo desenvolvido para executar em um \textit{laptop} foi adaptado e portado para um dispositivo móvel Android com sucesso. No entanto, o tempo de execução do método no dispositivo móvel não foi satisfatório, inviabilizando que essa aplicação funcione em tempo real.
 
 % subsection contagem_volum_trica_utilizando_dispositivos_m_veis (end)
 

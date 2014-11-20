@@ -14,7 +14,7 @@ A captura das imagens do tráfego foram feitas com a câmera que equipa um apare
   \item Memória: 8 GB
   \item Sistema operacional: Windows Phone 7.8
   \item Câmera: 5.0 Megapixel
-  \item Gravação de vídeos HD 720p @30fps\footnote{\textit{Frames per second}, ou frames por secundo.}
+  \item Gravação de vídeos HD 720p @30fps\footnote{\textit{Frames per second}, ou frames por segundo.}
 \end{itemize}
 
 Inicialmente, as imagens foram capturadas e salvas na memória interna do aparelho, e num segundo momento transferidas para um \textit{Laptop} onde seriam processadas. Todas as imagens foram capturadas durante o dia, em condições de iluminação estável e boa luminosidade. Portanto, o método proposto neste trabalho não está validado para grandes variações de iluminação ou cenas com pouca luz.
@@ -134,7 +134,9 @@ A principal função da etapa de pré-processamento é a conversão da imagem de
   ...  
 \end{lstlisting}
 
-Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na Seção \ref{sec:filtragem_linear}, com o objetivo de atenuar ruídos oriundos do processo de captura e provocar um efeito suave de borramento na imagem. A chamada da função \verb!cv::GaussianBlur! realiza a operação de filtragem, que é parametrizada pelas imagens de entrada e saída, o tamanho do \textit{kernel} utilizado como elemento de convolução e o desvio padrão nas direções X e Y. O resultado desse procedimento é ilustrado na Figura \ref{fig:pre_processamento}.
+Em seguida, utiliza-se uma filtragem linear gaussiana, descrita na Seção \ref{sec:filtragem_linear}, com o objetivo de atenuar ruídos oriundos do processo de captura e provocar um efeito suave de borramento na imagem. Esse processo diminui as componentes de alta frequência presentes entre um \textit{frame} e outro, que podem interferir na etapa de subtração de \textit{background} descrita a seguir na Subseção \ref{sub:subtra_o_de_background}. 
+
+A chamada da função \verb!cv::GaussianBlur! realiza a operação de filtragem, que é parametrizada pelas imagens de entrada e saída, o tamanho do \textit{kernel} utilizado como elemento de convolução e o desvio padrão nas direções X e Y. O resultado desse procedimento é ilustrado na Figura \ref{fig:pre_processamento}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -178,9 +180,9 @@ No código \verb!C++!, essa operação pode ser realizada em duas linhas: a decl
 \subsection{Binarização} % (fold)
 \label{sub:binariza_o}
 
-Em visão computacional, imagens binárias são aquelas que possuem apenas dois valores de intensidade, normalmente 0 (preto) e 255 (branco). Geralmente, os pixels branco pertencem aos objetos de interesse da cena, que no escopo desse trabalho fazem parte dos veículos em movimento. A etapa de binarização é responsável por segmentar as regiões de interesse da cena para que, nas próximas etapas, sejam detectadas e rastreadas.
+Em visão computacional, imagens binárias são aquelas que possuem apenas dois valores de intensidade, normalmente 0 (preto) e 255 (branco). Geralmente, os pixels brancos pertencem aos objetos de interesse da cena, que no escopo desse trabalho fazem parte dos veículos em movimento. A etapa de binarização é responsável por segmentar as regiões de interesse da cena para que, nas próximas etapas, sejam detectadas e rastreadas.
 
-A imagem de primeiro plano obtida na etapa anterior (Subseção \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels branco sozinhos não definem muito bem um veículo, mas o conjuntos dos pixels branco e cinza sim. Então, é feita uma operação de limiarização, também conhecida por \textit{thresholding} (Seção \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso é feito pela chamada da função \verb! cv::threshold!, parametrizada pelas imagens de entrada e saída, um valor de limiar baixo, que garante a elevação à branco de praticamente todos os tons de cinza, e o tipo de limiarização a ser aplicada, nesse caso binária. 
+A imagem de primeiro plano obtida na etapa anterior (Subseção \ref{sub:subtra_o_de_background}) possui pixels cinza, que representam as sombras dos objetos. Analisando a Figura \ref{fig:foreground}, percebe-se que os pixels brancos sozinhos não definem muito bem um veículo, mas o conjuntos dos pixels branco e cinza sim. Então, é feita uma operação de limiarização, também conhecida por \textit{thresholding} (Seção \ref{sec:limiariza_o}), com intuito de elevar o valor de todos os pixels cinza para branco. Isso é feito pela chamada da função \verb! cv::threshold!, parametrizada pelas imagens de entrada e saída, um valor de limiar baixo, que garante a elevação à branco de praticamente todos os tons de cinza, e o tipo de limiarização a ser aplicada, nesse caso binária. 
 
 Percebe-se na Figura \ref{fig:bin} que a operação de \textit{thresholding} segmentou corretamente os veículos. No entanto, para detecção de objetos em visão computacional, é interessante que as regiões de interesse sejam uniformes e não contenham orifícios. Nesse tipo de situação é comum o uso de operações morfológicas, capazes de alterar a forma dos objetos segmentados em imagens binárias. Como o objetivo é uniformizar a região de segmentação dos objetos, deve-se aplicar uma operação de fechamento, que diminui orifícios e descontinuidades nas regiões de interesse, alongando os segmentos de cor branca pelas imperfeições de cor preta. A Figura \ref{fig:morph} mostra uma melhor uniformidade na região dos objetos segmentados.
 
@@ -228,7 +230,7 @@ As operações morfológicas, assim como os filtros, também utilizam um element
 \subsection{Detecção de \textit{blobs}} % (fold)
 \label{sub:detec_o_de_blobs}
 
-Uma vez segmentados, os objetos de interesse são detectados nessa etapa como \textit{blobs}, que são regiões de pontos com valor 255 (branco), conectados entre si, definidas pelo seu ponto central e diâmetro. A biblioteca OpenCV utiliza a entidade \verb!cv::KeyPoint! para representá-los. Nesse caso, a principal função dos \textit{keypoints} é definir a posição de cada objeto segmentado, para que na próxima etapa esses pontos sejam rastreados.
+Uma vez segmentados, os objetos de interesse são detectados nessa etapa como \textit{blobs}, que são regiões de pontos com valor 255 (branco), conectados entre si, definidas pelo seu ponto central e diâmetro. A biblioteca OpenCV utiliza a entidade \verb!cv::KeyPoint! para representá-los. Nesse caso, a principal função dos \textit{keypoints} é definir a posição e tamanho de cada objeto segmentado, para que na próxima etapa esses pontos sejam rastreados pelos \textit{trackers}.
 
 A OpenCV disponibiliza uma interface abstrata para detecção de \textit{keypoints}, chamada \verb!cv::FeatureDetector!. Uma de suas especializações é a classe \verb!cv::SimpleBlobDetector!, capaz de extrair \textit{blobs} de uma imagem. Em sua contrução, a classe \verb!cv::SimpleBlobDetector! recebe uma estrutura de parâmetros de filtragem, responsáveis por descartar pontos que não atendam as especificações desejadas. O método proposto habilita apenas dois tipos de filtro: de cor, que considera apenas \textit{blobs} brancos, e área, que abrange regiões com área mínima de 500 pixels e máxima de 80000.
 
@@ -256,7 +258,7 @@ A OpenCV disponibiliza uma interface abstrata para detecção de \textit{keypoin
     ...  
 \end{lstlisting}
 
-Uma vez criado, o objeto \verb!detector!, através do método \verb!detect!, recebe como parâmetro a imagem binarizada da Figura \ref{fig:morph} e retorna um vetor de \textit{keypoints}, contendo todos os \textit{blobs} detectados naquele \textit{frame}. A Figura \ref{fig:keypoints} ilustra os pontos detectados, representados pelos círculos em vermelho. 
+Uma vez criado, o objeto \verb!detector!, através do método \verb!detect!, recebe como parâmetro a imagem binarizada da Figura \ref{fig:morph} e retorna um vetor de \textit{keypoints}, contendo todos os \textit{blobs} detectados naquele \textit{frame}. A Figura \ref{fig:keypoints} ilustra os pontos detectados, representados pelos pequenos círculos indicados. 
 
 Esta é a última operação que envolve processamento de imagem. Com a posição e o tamanho dos \textit{blobs} detectados, definidos por um vetor de \textit{keypoints}, é possível criar um algoritmo de rastreamento que garanta que cada objeto seja contado apenas uma vez, como descrito logo a seguir na Subseção \ref{sub:rastreamento_e_contagem}.
 
@@ -273,26 +275,46 @@ Esta é a última operação que envolve processamento de imagem. Com a posiçã
 \subsection{Rastreamento e contagem} % (fold)
 \label{sub:rastreamento_e_contagem}
 
-Assim como em todas as etapas anteriores, buscou-se a implementação de um método simples de rastreamento e contagem, mas que fosse capaz de obter bons resultados. O algoritmo utiliza o vetor de \textit{keypoints}, obtido na etapa anterior, e uma máscara binária, que define a região de contagem. Um objeto só é contabilizado quando o \textit{keypoint} que o define entra na região de contagem, definida pelos pixels branco da Figura \ref{fig:bin_mask}.
+Assim como em todas as etapas anteriores, buscou-se a implementação de um método simples de rastreamento e contagem, mas que fosse capaz de obter bons resultados. O algoritmo utiliza o vetor de \textit{keypoints}, obtido na etapa anterior, e uma máscara binária, que define a região de contagem. Um objeto só é contabilizado quando o \textit{keypoint} que o define entra na região de contagem, definida pelos pixels brancos da Figura \ref{fig:bin_mask}.
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[scale=0.5]{imgs/bin_mask.png}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/trackers.png}
+      \end{center}
+      \caption{}
+      \label{fig:trackers}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+      \begin{center}
+        \includegraphics[width=1\linewidth]{imgs/bin_mask.png}
+      \end{center}
+      \caption{}
+      \label{fig:bin_mask}
+    \end{subfigure}
   \end{center}
-  \caption{Máscara binária que define a região de contagem do algoritmo.}
-  \label{fig:bin_mask}
+  \caption{(a) Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a região de contagem. (b) Máscara binária que define a região de contagem do algoritmo.}
+  \label{fig:resultado_contagem}
 \end{figure}
 
-O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, é feito por um perseguidor, denominado \textit{tracker}. Um \textit{tracker} é um objeto circular, definido por sua posição e raio. Um \textit{keypoint} está contido em um \textit{tracker} se a distância entre eles for menor que o raio do \textit{trakcer}, ou seja, se o \textit{keypoint} pertencer à área definida pelo \textit{trakcer}. Ná Figura \ref{fig:trackers}, o \textit{tracker} é representado pelos círculos azuis. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, além de ingressar na região de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} válidos, para que na próxima iteração esses dados sirvam como validação para a operação de contagem.
+% \begin{figure}[ht]
+%   \begin{center}
+%     \includegraphics[scale=0.5]{imgs/bin_mask.png}
+%   \end{center}
+%   \caption{Máscara binária que define a região de contagem do algoritmo.}
+%   \label{fig:bin_mask}
+% \end{figure}
 
-O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado é gerado uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obtém-se todos os \textit{trackers} que o contenham. Nesse momento, três situações podem ser identificadas:
+O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, é feito por um rastreador, denominado \textit{tracker}. Um \textit{tracker} é um objeto circular, definido por sua posição e raio. Um \textit{keypoint} está contido em um \textit{tracker} se a distância entre eles for menor que o raio do \textit{tracker}, ou seja, se o \textit{keypoint} pertencer à área definida pelo \textit{tracker}. Na Figura \ref{fig:trackers}, o \textit{tracker} é representado pelos círculos. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, além de ingressar na região de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} válidos, para que na próxima iteração esses dados sirvam como validação para a operação de contagem.
+
+O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado é gerada uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obtêm-se todos os \textit{trackers} que o contenham. Nesse momento, três situações podem ser identificadas:
 
 \begin{enumerate}
   \item Ainda não existe nenhum \textit{tracker} que contenha \textit{keypoint};
   \item Existe apenas um \textit{tracker} que contenha \textit{keypoint};
   \item Existe mais de um \textit{tracker} que contenha \textit{keypoint}.
 \end{enumerate}
-
 
 \begin{figure}[ht]
   \begin{center}
@@ -308,17 +330,17 @@ Na situação 2, o \textit{tracker} encontrado indica que o \textit{keypoint} j�
 
 A situação 3 acontece quando um \textit{keypoint} está contido em mais de \textit{tracker}, devido à proximidade de dois ou mais objetos detectados na cena. Esse caso é tratado da mesma forma que na situação 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais próximo de \textit{keypoint}.
 
-\begin{figure}[ht]
-  \begin{center}
-    \includegraphics[scale=0.5]{imgs/trackers.png}
-  \end{center}
-  \caption{Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a região de contagem.}
-  \label{fig:trackers}
-\end{figure}
+% \begin{figure}[ht]
+%   \begin{center}
+%     \includegraphics[scale=0.5]{imgs/trackers.png}
+%   \end{center}
+%   \caption{Resultado da etapa de rastreamento e contagem, ilustrando \textit{trackers}, \textit{keypoints} e a região de contagem.}
+%   \label{fig:trackers}
+% \end{figure}
 
 Depois de percorrer todos os \textit{keypoints}, o algoritmo remove da lista os \textit{trackers} que não contenham ao menos um \textit{keypoint}. Isso é necessário pois a detecção de objetos não é perfeita, ou seja, se em algum \textit{frame} um objeto já anteriormente rastreado não for detectado como um \textit{keypoint}, aparece na lista de \textit{trackers} um elemento que não contém um \textit{keypoint}, configurando uma condição inválida.
 
-A Figura \ref{fig:trackers} ilustra um veículo que entrou na região de contagem, teve seu \textit{tracker} removido e foi contabilizado corretamente. Percebe-se também que qualquer objeto em movimento é detectado e rastreado, como uma pessoa caminhando. No entanto, somente objetos que possuam um \textit{keypoint} contido por um \textit{tracker} e que entrem na região de contagem são contabilizados.
+A Figura \ref{fig:trackers} ilustra um veículo que entrou na região de contagem, teve seu \textit{tracker} removido e foi contabilizado corretamente. Percebe-se também que outros objetos em movimento são detectados e rastreados, como uma pessoa caminhando. No entanto, somente objetos que possuam um \textit{keypoint} contido por um \textit{tracker} e que entrem na região de contagem são contabilizados.
 
 % subsection rastreamento_e_contagem (end)
 
@@ -327,7 +349,7 @@ A Figura \ref{fig:trackers} ilustra um veículo que entrou na região de contage
 \section{Estrutura do \textit{software}} % (fold)
 \label{sec:estrutura_do_software}
 
-Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido um \textit{software} multiplataforma na linguagem  \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho computacional, fácil implementação e a possibilidade de utilizar os conceitos de programação orientada a objetos. A Figura \ref{fig:uml} ilustra a estrutura e o relacionamento entre classes através de um diagrama UML\footnote{\textit{Unified Modeling Language} - um conjunto padronizado de diagramas com notação formalmente definida, adotado na área de engenharia de software em um esforço para facilitar a concepção de sistemas orientados a objetos \citep{aguiar2008thesis}.}.
+Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido um \textit{software} multiplataforma na linguagem  \verb!C++! \citep{cplusplus:2013:online}, com intuito de obter um bom desempenho computacional, fácil implementação e a possibilidade de utilizar os conceitos de programação orientada a objetos. A Figura \ref{fig:uml} ilustra a estrutura e o relacionamento entre classes através de um diagrama de classes na notação UML\footnote{\textit{Unified Modeling Language} - um conjunto padronizado de diagramas com notação formalmente definida, adotado na área de engenharia de software em um esforço para facilitar a concepção de sistemas orientados a objetos \citep{aguiar2008thesis}.}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -339,11 +361,11 @@ Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido
 
 A classe \verb!VideoProcessor! é a classe central do sistema. Ela é responsável por abrir e ler o arquivo de vídeo através do objeto \verb!capture! do tipo \verb!cv::VideoCapture!; interfacear com a classe abstrata \verb!FrameProcessor! através da chamada do método \verb!process!; e executar o algoritmo de rastreamento e contagem implementado pela classe \verb!Counter!.
 
-A classe abstrata \verb!FrameProcessor! define uma interface cuja função é receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as operações descritas nas seguintes subseções: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as operações de visão computacional e através do método \verb!keypoints! retorna os pontos que pontencialmente representam veículos em movimento.
+A classe abstrata \verb!FrameProcessor! define uma interface cuja função é receber uma imagem de entrada, executar algum processamento sobre ela e disponibilizar o resultado. A classe \verb!KeypointsExtractor! implementa essa interface abstrata com as operações descritas nas seguintes subseções: \nameref{sub:entrada_de_dados}, \nameref{sub:pr_processamento}, \nameref{sub:subtra_o_de_background}, \nameref{sub:binariza_o} e \nameref{sub:detec_o_de_blobs}. Ou seja, essa classe concentra todas as operações de visão computacional e, através do método \verb!keypoints!, retorna os pontos que pontencialmente representam veículos em movimento.
 
-A classe \verb!Counter! implementa o algoritmo descrito na Subseção \nameref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma máscara binária que define a região de contagem e uma lista interna de \textit{trackers}, o método \verb!count! retorna quantos eventos de contagem ocorrem para cada iteração.
+A classe \verb!Counter! implementa o algoritmo descrito na Subseção \ref{sub:rastreamento_e_contagem}. Utilizando os \textit{keypoints}, uma máscara binária que define a região de contagem e uma lista interna de \textit{trackers}, o método \verb!count! retorna quantos eventos de contagem ocorrem para cada iteração.
 
-A classe \verb!Circle! é utilizada pela classe \verb!Tracker! para representar computacionalmente um círculo com centro e raio definidos. Já a classe \verb!Tracker! é utilizada na forma de lista pela classe \verb!Counter!, na implementação do algoritmo de rastreamento e contagem.
+A classe \verb!Circle! é utilizada pela classe \verb!Tracker! para representar um círculo com centro e raio definidos. Já a classe \verb!Tracker! é utilizada na forma de lista pela classe \verb!Counter!, na implementação do algoritmo de rastreamento e contagem.
 
 O código dessa aplicação pode ser encontrado no seguinte repositório: \url{https://github.com/arthurbailao/potential-ironman}.
 
@@ -378,7 +400,7 @@ A matriz de confusão contém informações sobre classificações reais e predi
   \end{center}
 \end{table}
 
-Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente da classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe positiva predito de forma incorreta.
+Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente à classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe negativa predito de forma incorreta.
 
 Para evitar o viés estatístico na montagem da matriz de confusão ao caracterizar as quatro possibilidades, estabelece-se uma janela de tempo baseada no tempo médio em que um veículo leva para percorrer toda a cena, dada uma determinada condição de tráfego. A contagem pura e simples, sem considerar esta janela de tempo, levaria à não consideração dos eventos vendadeiro negativo VN. Dessa forma, os elementos da matriz de confusão podem ser descritos como:
 
@@ -391,7 +413,7 @@ Para evitar o viés estatístico na montagem da matriz de confusão ao caracteri
 
 Vale ressaltar que dentro de uma janela de tempo pode acontecer um ou mais eventos, sejam eles do mesmo tipo ou não. A única restrição é que, para cada janela, no mínimo um evento deve obrigatoriamente acontecer. Na prática o evento verdadeiro negativo VN ocorre apenas quando nenhum dos outros três eventos acontece.
 
-Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confusão. São elas: Especificidade (Equação \ref{eq:especificidade}), Valor Preditivo Negativo (Equação \ref{eq:valor_preditivo_negativo}), Precisão (Equação \ref{eq:precisao}), \textit{Recall} (Equação \ref{eq:recall}), Acurácia (Equação \ref{eq:acuracia}) e \textit{F-Measure} (Equação \ref{eq:f_measure}) \citep{powers07evaluation}.
+Algumas medidas de desempenho podem ser calculadas a partir dos elementos da matriz de confusão. São elas: Especificidade E (Equação \ref{eq:especificidade}), Valor Preditivo Negativo VPN (Equação \ref{eq:valor_preditivo_negativo}), Precisão P (Equação \ref{eq:precisao}), \textit{Recall} R (Equação \ref{eq:recall}), Acurácia A (Equação \ref{eq:acuracia}) e \textit{F-Measure} FM (Equação \ref{eq:f_measure}) \citep{powers07evaluation}.
 
 \begin{equation}
   \label{eq:especificidade}
@@ -441,7 +463,7 @@ O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 
 \begin{equation}
   \label{eq:theta_1}
-  \theta_{1}=\dfrac{VP+VN}{VP+FP+FN+VN}\text{,}
+  \theta_{1}=\dfrac{VP+VN}{VP+FP+FN+VN}
 \end{equation}
 
 \noindent e

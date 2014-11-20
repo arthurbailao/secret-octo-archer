@@ -43,17 +43,17 @@ Com intuito de equiparar as resoluções dos vídeos gerados a partir das duas c
   \caption{Vídeos utilizados nos testes.}
   \label{tab:videos_teste}
   \begin{center}
-    \begin{tabular}{clcccc}
+    \begin{tabular}{clccc}
     \toprule
-    \textbf{Nº} & \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{FPS} \\
+    \textbf{Nº} & \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração (hh:mm:ss)} \\
     \midrule
-      1 & carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 29 \\
-      2 & carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 29 \\
-      % carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 29 \\
-      3 & carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 & 29 \\
-      4 & carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 29 \\
-      5 & carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 29 \\
-      % carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 29 \\
+      1 & carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 \\
+      2 & carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 \\
+      % carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 \\
+      3 & carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 \\
+      4 & carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 \\
+      5 & carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 \\
+      % carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 \\
     \bottomrule
     \end{tabular}
   \end{center}
@@ -135,6 +135,10 @@ Os eventos falso positivo FP podem ser percebidos quando existe vibrações e mo
   \caption{Problemas encontrados no processamento de imagens. (a) A operação de subtração de \textit{background} fica comprometida quando veículos com área muito grande aparecem na cena e causam vibração na câmera. (b) Veículos próximos ou em oclusão são detectados como um único objeto, gerando eventos falso negativo FN.}
   \label{fig:problemas}
 \end{figure}
+
+Uma alternativa para minimizar o prejuízo causado pela movimentação da câmera seria a utilização de pontos fiduciais para estabilizar a cena. Pontos fiduciais são pontos de controle sobre um objeto que definem regiões características com propriedades interessantes à detecção \citep{2012fiduciais}. Nesse caso, a movimentação da câmera poderia ser compensada utilizando a posição de pontos fiduciais fixos na cena, como por exemplo postes ou árvores.
+
+Os problemas de oclusão parcial, que ocorrem principalmente na presença de veículos grandes na cena, poderiam ser minimizados utilizando outra técnica para detecção de veículos em movimento. Uma alternativa seria o rastreamento utilizando \textit{features} específicas que caracterizam o objeto (placas e faróis). Dessa forma, mesmo em oclusão parcial seria possível detectar os veículos cujas \textit{features} principais aparecem nas imagens. 
 
 % section resultados_e_discuss_o (end)
 

@@ -10,14 +10,16 @@ O objetivo principal é desenvolver um método de contagem volumétrica que auxi
 
 O método proposto pode ser dividido em seis etapas: entrada de dados, pré-processamento, subtração de \textit{background}, binarização, detecção de \textit{blobs} e rastreamento e contagem. As cinco primeiras utilizam operações de visão computacional para extrair das imagens a posição e tamanho dos objetos em movimento. A última etapa utiliza esses pontos para implementar o rastreamento e contagem dos veículos em cena.
 
-Em todas as amostras de teste o método obteve um alto índice de Precisão, superior a $0.92$. No entanto, a contagem volumétrica da via no sentido Centro obteve Acurácia e índice Kappa superiores à contagem no sentido Pampulha, onde o fluxo de ônibus e caminhões é maior.
+A metodologia proposta deve ser utilizada assumindo as seguintes premissas: a cena possui boa iluminação, com pouca variação ao longo do tempo; não existem oclusões parciais ou totais entre veículos; a câmera não sofre grandes vibrações ou movimentações.
+
+Em todas as amostras de teste o método obteve um alto índice de Precisão, superior a $0.92$, sendo capaz de realizar a contagem volumétrica de veículos utilizando uma metodologia simples. No entanto, a contagem volumétrica da via no sentido Centro obteve Acurácia e índice Kappa superiores à contagem no sentido Pampulha, onde o fluxo de ônibus e caminhões é maior e contrariando as premissas previamente definidas.
 
 % Embora já existam diversos métodos para a realização de contagem volumétrica de veículos, como descrito no Capítulo \ref{cha:contagem_de_ve_culos_e_monitoramento_do_tr_fego}, geralmente eles são muito caros e causam transtornos na via durante sua instalação e manutenção. O trabalho em questão propõe um método não-invasivo, de baixo custo e simples implementação, capaz de obter medições de boa precisão.
 
 \section{Limitações} % (fold)
 \label{sec:pontos_negativos_do_m_todo}
 
-Aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background} apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Nesses casos, o modelo do \textit{background} muda subtamente na presença de um veículo de tamanho desproporcional à cena, gerando imperfeições na segmentação do \textit{foreground}. Além disso, movimentações na câmeras causadas por trepidações da passarela, também geraram ruídos na subtração de \textit{background}, comprometendo as etapas subsequentes.
+Aspectos de alteração dinâmica da cena interferiram no processamento digital. O algoritmo de subtração de \textit{background} apresentou problemas quando veículos de grande porte aparecem nas imagens, como mostra a Figura \ref{fig:problema_veiculo_grande}. Nesses casos, o modelo do \textit{background} muda subitamente na presença de um veículo de tamanho desproporcional à cena, gerando imperfeições na segmentação do \textit{foreground}. Além disso, movimentações na câmera causadas por trepidações da passarela também interferiram na subtração de \textit{background}, comprometendo as etapas subsequentes.
 
 % Ainda com relação às movimentações da câmera, alguns elementos indesejáveis foram considerados na contagem. Ao mesmo tempo, devido à proximidade, a detecção de \textit{blobs} falhou e alguns veículos não foram contabilizados, como mostrado na Figura \ref{fig:problema_veiculo_junto}.
 
@@ -28,10 +30,8 @@ Aspectos de alteração dinâmica da cena interferiram no processamento digital.
 Como possíveis trabalhos futuros, podem ser apontados:
 
 \begin{itemize}
-  \item Desenvolvimento de um método para contagem de veículos no período noturno ou em locais com baixa iluminação;
-  \item Rastrear veículos utilizando \textit{features} e não \textit{blobs}, com o intuito de minimizar os prejuízos causados por oclusões;
-  \item Minimizar o prejuízo causado pela movimentação da câmera pelo uso de pontos fiduciais;
-  \item Definição de uma uma região de interesse baseada na área com maior movimentação nas imagens;
+  \item Desenvolvimento de um método para contagem de veículos no período noturno, em locais com baixa iluminação ou alta variação de luminosidade;
+  % \item Definição de uma região de interesse baseada na área com maior movimentação nas imagens;
   \item Criação de técnicas para classificação de veículos quanto ao tamanho;
   \item Contagem de veículos em cruzamentos, com deslocamentos em várias direções e sentidos;
   \item Estimação do volume do tráfego em vias congestionadas.
