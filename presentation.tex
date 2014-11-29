@@ -54,7 +54,7 @@
 
 \usepackage[utf8x]{inputenc}
 % or whatever
-
+\usepackage{dcolumn}
 \usepackage{times}
 % \usepackage[T1]{fontenc}
 
@@ -69,7 +69,7 @@
 % {Include Only If Paper Has a Subtitle}
 
 \author[Arthur Bailão] % (optional, use only with lots of authors)
-{Arthur Ferreira Bailão}
+{Arthur Ferreira Bailão{\texorpdfstring{\\\footnotesize Orientador: Prof. Hermes Aguiar Magalhães\\Supervisora: Profª. Leise Kelli de Oliveira}{\footnotesize Orientador: Prof. Hermes Aguiar Magalhães Supervisora: Profª. Leise Kelli de Oliveira}}}
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
@@ -104,7 +104,7 @@
 % the beginning of each subsection:
 \AtBeginSubsection[]
 {
-  \begin{frame}<beamer>{Outline}
+  \begin{frame}<beamer>{Sumário}
     \tableofcontents[currentsection,currentsubsection]
   \end{frame}
 }
@@ -122,7 +122,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Outline}
+\begin{frame}{Sumário}
   \tableofcontents
   % You might wish to add the option [pausesections]
 \end{frame}
@@ -144,6 +144,215 @@
 %   you think necessary.
 % - If you omit details that are vital to the proof/implementation,
 %   just say so once. Everybody will be happy with that.
+
+\section{Introdução} % (fold)
+\label{sec:introdu_o}
+
+
+% section introdu_o (end)
+
+\section{Objetivos} % (fold)
+\label{sec:objetivos}
+
+\begin{frame}{Qual o objetivo?}
+  Desenvolver um método de contagem volumétrica que auxilie na análise das condições do tráfego urbano.
+  \pause
+
+  \begin{itemize}
+    \item Contagem volumétrica utilizando um método não-invasivo de \alert{SIMPLES} implementação.
+    \item Utilizar imagens coletadas por uma câmera digital.
+    \item Determinar a qualidade do método.
+    \item Identificar pontos de acerto e erro que podem ser trabalhados.
+  \end{itemize}
+\end{frame}
+
+% section objetivos (end)
+
+\section{Metodologia} % (fold)
+\label{sec:metodologia}
+
+\subsection{Características de captura} % (fold)
+\label{sub:caracter_sticas_de_captura}
+
+% subsection caracter_sticas_de_captura (end)
+
+\subsection{Fluxo de processos} % (fold)
+\label{sub:fluxo_de_processos}
+
+\begin{frame}{Fluxograma global do método de contagem}
+  \begin{center}
+    \includegraphics[scale=0.55]{imgs/general_process.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Entrada de dados}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item Imagens capturadas previamente.
+        \item Os \textit{frames} são obtidos individualmente.
+        \item Abstração de um arquivo de vídeo por uma sequência de imagens.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics[width=\textwidth]{imgs/frame.png}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Pré-processamento}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item<1-> Conversão da imagem de entrada para \textit{grayscale}.
+        \item<2-> Filtragem linear gaussiana.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics<1>[width=\textwidth]{imgs/frame_gray.png}
+        \includegraphics<2>[width=\textwidth]{imgs/gray.png}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Subtração de \textit{background}}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item Operação complexa e de alto custo computacional, mas de simples utilização.
+        \item Modelo adaptativo de mistura de gaussianas com detecção de sombras, baseado em Zivkovic[2004] e Zivkovic \& van der Heijden [2006].
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics[width=\textwidth]{imgs/foreground.png}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Binarização}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item<1-> Segmentar as regiões de interesse.
+        \item<1-> Operação de limiarização ou \textit{thresholding}.
+        \item<2-> Operação morfológica de fechamento.
+        \item<2-> Uniformizar a região de segmentação dos objetos.
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics<1>[width=\textwidth]{imgs/bin.png}
+        \includegraphics<2>[width=\textwidth]{imgs/morph.png}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Detecção de \textit{blobs}}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics[width=\textwidth]{imgs/keypoints.png}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Rastreamento e contagem}
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{}
+        \includegraphics[width=\textwidth]{imgs/trackers.png}
+      \end{block}{}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Rastreamento e contagem}
+  \begin{center}
+    \includegraphics[scale=0.417]{imgs/fluxograma_contagem.pdf}
+  \end{center}
+\end{frame}
+
+% subsection fluxo_de_processos (end)
+
+\subsection{Avaliação dos resultados} % (fold)
+\label{sub:avalia_o_dos_resultados}
+
+\begin{frame}{A Matriz de confusão}
+  
+\end{frame}
+
+\begin{frame}{Como calcular os índices de desempenho}{Precisão (P), \textit{Recall} (R) e Acurácia (A)}
+  \begin{equation}
+    \label{eq:precisao}
+    P=\dfrac{VP}{VP+FP}
+  \end{equation}
+
+  \begin{equation}
+    \label{eq:recall}
+    R=\dfrac{VP}{VP+FN}
+  \end{equation}
+
+  \begin{equation}
+    \label{eq:acuracia}
+    A=\dfrac{VP+VN}{VP+FP+FN+VN}
+  \end{equation}
+\end{frame}
+
+\begin{frame}{Como calcular o índice Kappa (K)}
+  É utilizado como uma medida apropriada da exatidão por representar inteiramente a matriz de confusão.
+
+  \begin{equation}
+    \label{eq:kappa}
+    K=\dfrac{\theta_{1}-\theta_{2}}{1-\theta_{2}}
+  \end{equation}
+
+  \begin{equation*}
+    \label{eq:theta_1}
+    \theta_{1}=\dfrac{VP+VN}{VP+FP+FN+VN}
+  \end{equation*}
+
+  \begin{equation*}
+    \label{eq:theta_2}
+    \theta_{2}=\dfrac{\alpha+\beta}{\gamma^{2}}
+  \end{equation*}
+
+  $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
+
+\end{frame} 
+
+\begin{frame}{Qualidade da contagem}{Índice Kappa (K)}
+  \begin{center}
+    \begin{tabular}{cc}
+    \hline
+    \textbf{Índice Kappa (K)} & \textbf{Qualidade} \\
+    \hline
+      $K < 0.2$ & Ruim \\
+      $0.2 \leq K < 0.4$ & Razoável \\
+      $0.4 \leq K < 0.6$ & Bom \\
+      $0.6 \leq K < 0.8$ & Muito bom \\
+      $K \geq 0.8$ & Excelente \\
+    \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+% subsection avalia_o_dos_resultados (end)
+
+% section metodologia (end)
 
 \section{Motivation}
 
@@ -196,6 +405,15 @@
 \subsection{Previous Work}
 
 \begin{frame}{Make Titles Informative.}
+  % \begin{tabular}{l!{\vrule}cccc}
+  % Class & A & B & C & D \\\hline
+  % X
+  % & 1 & 2 & 3 & 4 \pause\\
+  % Y
+  % & 3 & 4 & 5 & 6 \pause\\
+  % Z
+  % & 5 & 6 & 7 & 8
+  % \end{tabular}
 \end{frame}
 
 \begin{frame}{Make Titles Informative.}
@@ -230,65 +448,65 @@
 
 
 
-\section*{Summary}
+% \section*{Summary}
 
-\begin{frame}{Summary}
+% \begin{frame}{Summary}
 
-  % Keep the summary *very short*.
-  \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
+%   % Keep the summary *very short*.
+%   \begin{itemize}
+%   \item
+%     The \alert{first main message} of your talk in one or two lines.
+%   \item
+%     The \alert{second main message} of your talk in one or two lines.
+%   \item
+%     Perhaps a \alert{third message}, but not more than that.
+%   \end{itemize}
   
-  % The following outlook is optional.
-  \vskip0pt plus.5fill
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
-\end{frame}
+%   % The following outlook is optional.
+%   \vskip0pt plus.5fill
+%   \begin{itemize}
+%   \item
+%     Outlook
+%     \begin{itemize}
+%     \item
+%       Something you haven't solved.
+%     \item
+%       Something else you haven't solved.
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
 
 
 
-% All of the following is optional and typically not needed. 
-\appendix
-\section<presentation>*{\appendixname}
-\subsection<presentation>*{For Further Reading}
+% % All of the following is optional and typically not needed. 
+% \appendix
+% \section<presentation>*{\appendixname}
+% \subsection<presentation>*{For Further Reading}
 
-\begin{frame}[allowframebreaks]
-  \frametitle<presentation>{For Further Reading}
+% \begin{frame}[allowframebreaks]
+%   \frametitle<presentation>{For Further Reading}
     
-  \begin{thebibliography}{10}
+%   \begin{thebibliography}{10}
     
-  \beamertemplatebookbibitems
-  % Start with overview books.
+%   \beamertemplatebookbibitems
+%   % Start with overview books.
 
-  \bibitem{Author1990}
-    A.~Author.
-    \newblock {\em Handbook of Everything}.
-    \newblock Some Press, 1990.
+%   \bibitem{Author1990}
+%     A.~Author.
+%     \newblock {\em Handbook of Everything}.
+%     \newblock Some Press, 1990.
  
     
-  \beamertemplatearticlebibitems
-  % Followed by interesting articles. Keep the list short. 
+%   \beamertemplatearticlebibitems
+%   % Followed by interesting articles. Keep the list short. 
 
-  \bibitem{Someone2000}
-    S.~Someone.
-    \newblock On this and that.
-    \newblock {\em Journal of This and That}, 2(1):50--100,
-    2000.
-  \end{thebibliography}
-\end{frame}
+%   \bibitem{Someone2000}
+%     S.~Someone.
+%     \newblock On this and that.
+%     \newblock {\em Journal of This and That}, 2(1):50--100,
+%     2000.
+%   \end{thebibliography}
+% \end{frame}
 
 \end{document}
 
