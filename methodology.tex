@@ -356,7 +356,7 @@ Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido
   \begin{center}
     \includegraphics[scale=0.55]{imgs/uml_pfc.png}
   \end{center}
-  \caption{Diagrama de classe do \textit{software}.}
+  \caption{Diagrama de classes do \textit{software}.}
   \label{fig:uml}
 \end{figure}
 
@@ -479,13 +479,27 @@ O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
   \theta_{2}=\dfrac{\alpha+\beta}{\gamma^{2}}\text{,}
 \end{equation}
 
-\noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
+\noindent onde
+
+\begin{equation*}
+  \alpha=(VP+FN)(VP+FP)
+\end{equation*}
+
+\begin{equation*}
+  \beta=(VN+FN)(VN+FP)
+\end{equation*}
+
+\begin{equation*}
+  \gamma=VP+VN+FP+FN
+\end{equation*}
+
+% $\alpha=(VP+FN)(VP+FP)$, $\beta=(VN+FN)(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
 
 Na Equação \ref{eq:kappa}, $\theta_{1}$ representa a concordância observada entre a contagem manual e automática através do índice de desempenho Acurácia enquanto $\theta_{2}$ é uma medida da concordância esperada. Portanto, o cálculo do índice Kappa á baseado na diferença entre quanta concordância está realmente presente (concordância observada $\theta_{1}$) em comparação com quanta concordância seria esperada estar presente apenas por acaso (concordância esperada $\theta_{2}$) \citep{Anthony2005}.
 
 O trabalho de \citeauthor{feitosa:2012:masther}, descrito na Subseção \ref{sub:contagem_volum_trica_utilizando_dispositivos_m_veis}, peca em sua análise de resultados. O índice de desempenho utilizado para avaliar o método, chamado de percentual de acerto, não leva em conta a existência de falsos positivos e falsos negativos, gerando uma medida de desempenho com viés estatístico e baixa confiabilidade.
 
-Com intuito de melhor avaliar a qualidade do método proposto neste trabalho, utiliza-se o índice Kappa para tal. O nível de exatidão obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
+Portanto, neste trabalho, o índice Kappa foi utilizado com intuito de melhor avaliar a qualidade do método proposto. O nível de exatidão obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
 
 \begin{table}[ht]
   \caption{Nível de exatidão de uma contagem, conforme o valor do índice Kappa.}
