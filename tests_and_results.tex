@@ -72,21 +72,23 @@ As cinco amostras listadas na Tabela \ref{tab:videos_teste} foram analisadas e c
   \caption{Resultado obtido da contagem nas amostras de teste, índices de desempenho e índice Kappa (K).}
   \label{tab:matrix_result}
   \begin{center}
-    \begin{tabular}{c|cccc|cccccc|cc}
-    \toprule
-    \textbf{Nº} & \textbf{VP} & \textbf{VN} & \textbf{FP} & \textbf{FN} & \textbf{E} & \textbf{VPN} & \textbf{P} & \textbf{R} & \textbf{FM} & \textbf{A} & \textbf{K} & \textbf{Qual.} \\
-    \midrule
-      1 & 92 & 35 & 2 & 6 & 0.95 & 0.85 & 0.98 & 0.94 & 0.96 & 0.94 & 0.86 & Excelente\\
-      2 & 76 & 34 & 6 & 10 & 0.85 & 0.77 & 0.93 & 0.88 & 0.90 & 0.87 & 0.71 & Muito bom\\
-      3 & 107 & 19 & 1 & 26 & 0.95 & 0.42 & 0.99 & 0.80 & 0.89 & 0.82 & 0.49 & Bom \\
-      4 & 87 & 28 & 8 & 22 & 0.78 & 0.56 & 0.92 & 0.80 & 0.85 & 0.79 & 0.51 & Bom \\
-      5 & 94 & 37 & 2 & 15 & 0.95 & 0.71 & 0.98 & 0.86 & 0.92 & 0.89 & 0.73 & Muito bom\\
-    \bottomrule
-    \end{tabular}
+    \resizebox{\textwidth}{!}{
+      \begin{tabular}{c|cccc|cccccc|ccc}
+      \toprule
+      \textbf{Nº} & \textbf{VP} & \textbf{VN} & \textbf{FP} & \textbf{FN} & \textbf{E} & \textbf{VPN} & \textbf{P} & \textbf{R} & \textbf{FM} & \textbf{A} & \textbf{$\theta_{2}$} & \textbf{K} & \textbf{Qualidade} \\
+      \midrule
+        1 & 92 & 35 & 2 & 6 & 0.95 & 0.85 & 0.98 & 0.94 & 0.96 & 0.94 & 0.59 & 0.86 & Excelente\\
+        2 & 76 & 34 & 6 & 10 & 0.85 & 0.77 & 0.93 & 0.88 & 0.90 & 0.87 & 0.56 & 0.71 & Muito bom\\
+        3 & 107 & 19 & 1 & 26 & 0.95 & 0.42 & 0.99 & 0.80 & 0.89 & 0.82 & 0.65 & 0.49 & Bom \\
+        4 & 87 & 28 & 8 & 22 & 0.78 & 0.56 & 0.92 & 0.80 & 0.85 & 0.79 & 0.58 & 0.51 & Bom \\
+        5 & 94 & 37 & 2 & 15 & 0.95 & 0.71 & 0.98 & 0.86 & 0.92 & 0.89 & 0.57 & 0.73 & Muito bom\\
+      \bottomrule
+      \end{tabular}
+    }
   \end{center}
 \end{table}
 
-Pode-se observar que em todas as amostras o índice referente à Precisão foi superior a $0.92$. Esse resultado pode ser comprovado pela baixa quantidade de eventos do tipo falso positivo FP na matriz de confusão, ou seja, poucos objetos foram contabilizados como veículos quando na realidade não eram. Isso acontece graças ao algoritmo de rastreamento e contagem proposto na Subseção \ref{sub:rastreamento_e_contagem}, que através de \textit{trackers}, \textit{keypoints} e uma região de contagem garante o correto rastreio dos objetos em movimento, contabilizando apenas os veículos pertencentes ao sentido da via. 
+Pode-se observar que em todas as amostras o índice referente à Precisão foi superior a $0.92$. Esse resultado pode ser comprovado pela baixa quantidade de eventos do tipo falso positivo FP na matriz de confusão, ou seja, poucos objetos foram contabilizados como veículos quando na realidade não eram. Isso acontece graças ao algoritmo de rastreamento e contagem proposto na Subseção \ref{sub:rastreamento_e_contagem}, que através de \textit{trackers}, \textit{keypoints} e uma região de contagem garante o correto rastreio dos objetos em movimento, contabilizando apenas os veículos pertencentes ao sentido da via.
 
 Nas amostras 1 e 2, que são imagens da Av. Carlos Luz no sentido Centro, a qualidade ficou entre muito bom e excelente, segundo escala definida na Tabela \ref{tab:indice_kappa}; já  nas amostras 3, 4 e 5, que se referem à mesma via no sentido Pampulha, a qualidade ficou entre bom e muito bom. Essa variação na qualidade da classificação acontece principalmente pelas características do tráfego de cada sentido da via. 
 
@@ -138,7 +140,31 @@ Os eventos falso positivo FP podem ser percebidos quando existe vibrações e mo
 
 Uma alternativa para minimizar o prejuízo causado pela movimentação da câmera seria a utilização de pontos fiduciais para estabilizar a cena. Pontos fiduciais são pontos de controle sobre um objeto que definem regiões características com propriedades interessantes à detecção \citep{2012fiduciais}. Nesse caso, a movimentação da câmera poderia ser compensada utilizando a posição de pontos fiduciais fixos na cena, como por exemplo postes ou árvores.
 
-Os problemas de oclusão parcial, que ocorrem principalmente na presença de veículos grandes na cena, poderiam ser minimizados utilizando outra técnica para detecção de veículos em movimento. Uma alternativa seria o rastreamento utilizando \textit{features} específicas que caracterizam o objeto (placas e faróis). Dessa forma, mesmo em oclusão parcial seria possível detectar os veículos cujas \textit{features} principais aparecem nas imagens. 
+Os problemas de oclusão parcial, que ocorrem principalmente na presença de veículos grandes na cena, poderiam ser minimizados utilizando outra técnica para detecção de veículos em movimento. Uma alternativa seria o rastreamento utilizando \textit{features} específicas que caracterizam o objeto (placas e faróis). Dessa forma, mesmo em oclusão parcial seria possível detectar os veículos cujas \textit{features} principais aparecem nas imagens.
+
+\begin{table}[ht]
+  \caption{Comparação entre a duração e o tempo de processamento de cada amostra.}
+  \label{tab:resultados_tempo}
+  \begin{center}
+    \begin{tabular}{cccc}
+    \toprule
+    \multicolumn{2}{c}{} & \multicolumn{2}{c}{\textbf{Tempo (hh:mm:ss)}} \\
+    \cline{3-4}
+    \textbf{Amostra} & \textbf{Resolução} & \textbf{Duração} & \textbf{Processamento} \\
+    \midrule
+      1 & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
+      2 & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\
+      % carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 00:17:48 \\
+      3 & $ 640\times 480 $ & 00:05:43 & 00:06:04 \\
+      4 & $ 640\times 480 $ & 00:05:19 & 00:05:33 \\
+      5 & $ 640\times 360 $ & 00:06:19 & 00:05:38 \\
+      % carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 00:19:00 \\
+    \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
+A Tabela \ref{tab:resultados_tempo} contém um comparativo entre a duração de cada amostra e o tempo de processamento gasto pelo \textit{software} de contagem. Levando em conta o \textit{hardware} utilizado nos testes (Seção \ref{sec:testes}), percebe-se que nas amostras de resolução $640\times 480$ o tempo de processamento foi maior que a duração do vídeo, indicando que a execução da contagem em tempo real não seria possível nessa situação. Já nas amostras de resolução menor, $640\times 360$, o tempo de processamento foi menor que a duração do vídeo, possibilitando a contagem em tempo real.
 
 % section resultados_e_discuss_o (end)
 
@@ -180,25 +206,5 @@ Os problemas de oclusão parcial, que ocorrem principalmente na presença de ve�
 % Para avaliar o desempenho computacional do método adotado, mediu-se o tempo de execução do algoritmo para cada uma das amostras, como mostra a Tabela \ref{tab:resultados_tempo}. Percebe-se que a resolução do vídeo está diretamente relacionada ao tempo gasto no processamento. Os vídeos em HD foram processados com mais de três vezes o tempo de processamento dos vídeos em VGA, inviabilizando a utilização dessa configuração em aplicações de tempo real. Os vídeos redimensionados, com resolução $ 640\times 360 $, gastaram menos tempo de processamento do que sua própria duração, indicando que a contagem em tempo real nesse caso seria viável.
 
 % Com intuito de manter o algoritmo simples e o mais genérico possível, os \textit{frames} são processados por completo, sem considerar regiões de interesse. A definição de regiões de interesse, também conhecidas como ROI's\footnote{\textit{Region of interest}}, é um recurso muito utilizado em visão computacional. Quando usado, apenas as porções da imagem que contenham informações relevantes são consideradas no processamento, reduzindo o tempo e o custo computacional.
-
-% \begin{table}[ht]
-%   \caption{Tempo real gasto na execução do método de contagem.}
-%   \label{tab:resultados_tempo}
-%   \begin{center}
-%     \begin{tabular}{lccc}
-%     \toprule
-%     \textbf{Nome do vídeo} & \textbf{Resolução} & \textbf{Duração} & \textbf{Tempo gasto} \\
-%     \midrule
-%       carlos\_luz\_centro\_vga & $ 640\times 480 $ & 00:05:23 & 00:05:47 \\
-%       carlos\_luz\_centro\_hd\_resized & $ 640\times 360 $ & 00:05:25 & 00:05:16 \\
-%       carlos\_luz\_centro\_hd & $ 1280\times 720 $ & 00:05:29 & 00:17:48 \\
-%       carlos\_luz\_pampulha\_vga\_1 & $ 640\times 480 $ & 00:05:43 & 00:06:04 \\
-%       carlos\_luz\_pampulha\_vga\_2 & $ 640\times 480 $ & 00:05:19 & 00:05:33 \\
-%       carlos\_luz\_pampulha\_hd\_2\_resized & $ 640\times 360 $ & 00:06:19 & 00:05:38 \\
-%       carlos\_luz\_pampulha\_hd\_2 & $ 1280\times 720 $ & 00:06:21 & 00:19:00 \\
-%     \bottomrule
-%     \end{tabular}
-%   \end{center}
-% \end{table}
 
 % section resultados_finais (end)

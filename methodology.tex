@@ -49,7 +49,8 @@ Portanto, o método de rastreamento e contagem proposto por esse trabalho assume
 \begin{itemize}
    \item A cena possui boa iluminação, com pouca variação ao longo do tempo;
    \item Não existem oclusões parciais ou totais entre veículos;
-   \item A câmera não sofre grandes vibrações ou movimentações.
+   \item A câmera não sofre grandes vibrações ou movimentações;
+   \item A contagem volumétrica não é classificatória.
  \end{itemize} 
 
 % section caracter_sticas_de_captura (end)
@@ -306,7 +307,7 @@ Assim como em todas as etapas anteriores, buscou-se a implementação de um mét
 %   \label{fig:bin_mask}
 % \end{figure}
 
-O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, é feito por um rastreador, denominado \textit{tracker}. Um \textit{tracker} é um objeto circular, definido por sua posição e raio. Um \textit{keypoint} está contido em um \textit{tracker} se a distância entre eles for menor que o raio do \textit{tracker}, ou seja, se o \textit{keypoint} pertencer à área definida pelo \textit{tracker}. Na Figura \ref{fig:trackers}, o \textit{tracker} é representado pelos círculos. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, além de ingressar na região de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} válidos, para que na próxima iteração esses dados sirvam como validação para a operação de contagem.
+O rastreamento dos \textit{blobs}, aqui representados por \textit{keypoints}, é feito por um rastreador, denominado \textit{tracker}. Um \textit{tracker} é um objeto circular, definido por sua posição e raio. Um \textit{keypoint} está contido em um \textit{tracker} se a distância entre eles for menor que o raio do \textit{tracker}, ou seja, se o \textit{keypoint} pertencer à área definida pelo \textit{tracker}. Na Figura \ref{fig:trackers}, o \textit{tracker} é representado pelos círculos maiores. Para que um \textit{keypoint} seja contabilizado na contagem ele deve, além de ingressar na região de contagem, ser contido por pelo menos um \textit{tracker}. Internamente, o algoritmo armazena uma lista com todos os \textit{trackers} válidos, para que na próxima iteração esses dados sirvam como validação para a operação de contagem.
 
 O fluxograma da Figura \ref{fig:fluxograma_contagem} ilustra os passos do algoritmo de rastreamento e contagem. Pra cada \textit{frame} processado é gerada uma lista de \textit{keypoints}, que tem seus itens percorridos individualmente. Para cada \textit{keypoint}, obtêm-se todos os \textit{trackers} que o contenham. Nesse momento, três situações podem ser identificadas:
 
@@ -328,7 +329,7 @@ O primeiro caso acontece quando um \textit{keypoint} acabou de ser detectado na 
 
 Na situação 2, o \textit{tracker} encontrado indica que o \textit{keypoint} já estava sendo rastreado nas iterações anteriores. A posição do \textit{tracker} representa exatamente a posição do objeto na última iteração. Logo, se o \textit{tracker} encontra-se \textbf{fora} da área de contagem e o \textit{keypoint} \textbf{dentro}, significa que o objeto acabou de entrar em uma condição válida de contagem, ou seja, ingressou na região de contagem definida pela máscara binária, e mais um veículo é contabilizado. Uma vez contado, o \textit{tracker} daquele objeto é removido da lista de \textit{trackers}, uma vez que não é mais necessário rastreá-lo. Caso a condição de contagem não seja atendida, a posição do \textit{tracker} é atualizada para a mesma de \textit{keypoint}.
 
-A situação 3 acontece quando um \textit{keypoint} está contido em mais de \textit{tracker}, devido à proximidade de dois ou mais objetos detectados na cena. Esse caso é tratado da mesma forma que na situação 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais próximo de \textit{keypoint}.
+A situação 3 acontece quando um \textit{keypoint} está contido em mais de um \textit{tracker}, devido à proximidade de dois ou mais objetos detectados na cena. Esse caso é tratado da mesma forma que na situação 2, adicionando apenas uma etapa inicial que identifica qual o \textit{tracker} mais relevante para \textit{keypoint} dentre os selecionados, ou seja, o \textit{tracker} mais próximo de \textit{keypoint}.
 
 % \begin{figure}[ht]
 %   \begin{center}
@@ -355,7 +356,7 @@ Para que o método aqui proposto pudesse ser testado e validado foi desenvolvido
   \begin{center}
     \includegraphics[scale=0.55]{imgs/uml_pfc.png}
   \end{center}
-  \caption{Diagrama UML do \textit{software}.}
+  \caption{Diagrama de classe do \textit{software}.}
   \label{fig:uml}
 \end{figure}
 
@@ -385,22 +386,25 @@ A matriz de confusão contém informações sobre classificações reais e predi
   \caption{Matriz de confusão para um classificador de duas classes.}
   \label{tab:matriz_de_confusao}
   \begin{center}
-    \begin{tabular}{l|l|c|c|}
+    \begin{tabular}{l|l|c|c|l}
 
-    \multicolumn{2}{c}{} & \multicolumn{2}{c}{Classe verdadeira} \\
+    \multicolumn{2}{c}{} & \multicolumn{2}{c}{Classe verdadeira} & \\
     \cline{3-4}
-    \multicolumn{2}{c|}{} & Positivo & Negativo \\
+    \multicolumn{2}{c|}{} & Positivo & Negativo & \\
     \cline{2-4}
-    \multirow{2}{*}{Classe predita} & Positivo & VP & FP \\
+    \multirow{2}{*}{Classe predita} & Positivo & VP & FP & Positivos previstos\\
     \cline{2-4}
-    & Negativo & FN & VN \\
+    & Negativo & FN & VN & Negativos previstos \\
     \cline{2-4}
+    \multicolumn{2}{c}{} & \multicolumn{1}{c}{Positivos reais} & \multicolumn{1}{c}{Negativos reais} & \\
     
     \end{tabular}
   \end{center}
 \end{table}
 
 Um verdadeiro positivo (VP) é um evento predito como pertencente à classe positiva, sendo este realmente pertencente à classe positiva. Um falso negativo (FN) acontece quando o evento predito como pertencente à classe negativa pertence à classe positiva. Analogamente, o verdadeiro negativo (VN) é um evento da classe negativa predito corretamente e o falso positivo (FP) um evento da classe negativa predito de forma incorreta.
+
+A primeira coluna da matriz representa os eventos verdadeiramente pertencentes à classe positiva (positivos reais) e a segunda coluna os verdadeiramente pertencentes à classe negativa (negativos reais). Analogamente, a primeira linha da matriz de confusão representa os eventos que foram previstos como positivos (positivos previstos) e a segunda linha os previstos como negativos (negativos previstos).
 
 Para evitar o viés estatístico na montagem da matriz de confusão ao caracterizar as quatro possibilidades, estabelece-se uma janela de tempo baseada no tempo médio em que um veículo leva para percorrer toda a cena, dada uma determinada condição de tráfego. A contagem pura e simples, sem considerar esta janela de tempo, levaria à não consideração dos eventos vendadeiro negativo VN. Dessa forma, os elementos da matriz de confusão podem ser descritos como:
 
@@ -445,12 +449,14 @@ Algumas medidas de desempenho podem ser calculadas a partir dos elementos da mat
   FM=\dfrac{2*R*P}{R+P}
 \end{equation}
 
+A Precisão representa a proporção dos eventos positivos previstos que são positivos reais. O índice \textit{Recall} é a proporção dos positivos reais que são previstos como positivos \citep{powers07evaluation}. Seguindo o mesmo raciocínio, Especificidade é a proporção dos eventos negativos reais que são previstos como negativos e Valor Preditivo Negativo a proporção dos eventos negativos previstos que são negativos reais. A Acurácia representa o percentual de eventos acertivos, considerando todos os elementos da matriz de confusão. E o índice \textit{F-Measure} é definido como a média harmônica da Precisão e \textit{Recall}, no qual um valor alto indica valores altos de ambas parcelas \citep{dener:2013}.
+
 % subsection matriz_de_confus_o (end)
 
 \subsection{Índice Kappa (K)} % (fold)
 \label{sub:_ndice_kappa_}
 
-O índice Kappa é utilizado como uma medida apropriada da exatidão por representar inteiramente a matriz de confusão. Ele toma todos os elementos da matriz ao invés de apenas aqueles que retratam a quantidade de classificações verdadeiras, o que ocorre quando se calcula a exatidão global da classificação \citep{Jnl605963009}.
+O índice Kappa é utilizado como uma medida apropriada da exatidão por representar inteiramente a matriz de confusão. Ele toma todos os elementos da matriz ao invés de apenas aqueles que retratam a quantidade de classificações verdadeiras, o que ocorre quando se calcula a exatidão global da classificação \citep{Jnl605963009}. Segundo \cite{Anthony2005}, o índice Kappa é uma medida de concordância entre avaliadores, muito utilizada em estudos da área médica. No contexto desse trabalho ele representa o nível de concordância entre uma contagem manual referência e a contagem automática, gerando uma medida capaz de avaliar a qualidade do método proposto.
 
 O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 
@@ -475,7 +481,11 @@ O índice Kappa pode ser encontrado com base na Equação \ref{eq:kappa}:
 
 \noindent onde $\alpha=(VP+FN)*(VP+FP)$, $\beta=(VN+FN)*(VN+FP)$ e $\gamma=VP+VN+FP+FN$.
 
-O nível de exatidão obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
+Na Equação \ref{eq:kappa}, $\theta_{1}$ representa a concordância observada entre a contagem manual e automática através do índice de desempenho Acurácia enquanto $\theta_{2}$ é uma medida da concordância esperada. Portanto, o cálculo do índice Kappa á baseado na diferença entre quanta concordância está realmente presente (concordância observada $\theta_{1}$) em comparação com quanta concordância seria esperada estar presente apenas por acaso (concordância esperada $\theta_{2}$) \citep{Anthony2005}.
+
+O trabalho de \citeauthor{feitosa:2012:masther}, descrito na Subseção \ref{sub:contagem_volum_trica_utilizando_dispositivos_m_veis}, peca em sua análise de resultados. O índice de desempenho utilizado para avaliar o método, chamado de percentual de acerto, não leva em conta a existência de falsos positivos e falsos negativos, gerando uma medida de desempenho com viés estatístico e baixa confiabilidade.
+
+Com intuito de melhor avaliar a qualidade do método proposto neste trabalho, utiliza-se o índice Kappa para tal. O nível de exatidão obtido pode ser classificado conforme a Tabela \ref{tab:indice_kappa}, seguindo o estabelecido por \citeauthor{landis1977measurement} \citep{landis1977measurement}.
 
 \begin{table}[ht]
   \caption{Nível de exatidão de uma contagem, conforme o valor do índice Kappa.}
